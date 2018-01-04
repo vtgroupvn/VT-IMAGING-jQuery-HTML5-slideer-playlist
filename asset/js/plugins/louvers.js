@@ -11,8 +11,9 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 	audio[0].load();
 	audio[0].play();
 	div_slide.html('');
-	div_slide.show({
-		'margin-top': '0px'
+	div_slide.css({
+		'margin-top': '0px',
+		'display':'block'
 	});
 	var old_height = imaging.find('img').height();
 	imaging.find('img').attr('src', 'none');

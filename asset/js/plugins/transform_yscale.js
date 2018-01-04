@@ -37,7 +37,7 @@ function vt_imaging_plg_transform_yscale(_self, imaging, audio, div_slide)
 	div_slide.show();
 	transform_set = false;
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
-		jQuery(document).trigger("slide_next_complete");
+		jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
 	});
 	rotateYDIV(imaging);
 	_self.clearScreenLoading();

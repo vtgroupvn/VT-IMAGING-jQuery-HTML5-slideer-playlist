@@ -48,11 +48,11 @@ function vt_imaging_plg_transform_swivel(_self, imaging, audio, div_slide)
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
 		imaging.find('img').animate({
 			'height': imaging.height(),
-			'width': imaging.width(),
+			'width': '100%',
 			'opacity': '1'
 		}, 500, function(){
 			imaging.css({opacity: 1});
-			jQuery(document).trigger("slide_next_complete");
+			jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
 		});
 	});
 	rotateDIV(imaging);
