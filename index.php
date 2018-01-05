@@ -43,6 +43,7 @@
 			//[wave, m4terial, default, transform_yscale, transform_swivel,]
 			imaging_list:[
 				{name:'wave', title: 'wave', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},								
+				{name:'laustdeleuran', title: 'laustdeleuran', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'m4terial', title: 'm4terial', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'stefanweck', title: 'stefanweck', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'default', title: 'Description', description: 'Description<br />Description<br />Description<br />Description', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
@@ -67,7 +68,10 @@
 				{name:'nsharmon', title: 'nsharmon', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'jackrugile', title: 'jackrugile', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'podrivo', title: 'podrivo', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'syropian', title: 'syropian', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'}				
+				{name:'syropian', title: 'syropian', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+{name:'HektorW', title: 'HektorW', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},				
+				{name:'nchevobbe', title: 'nchevobbe', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'anshulbansal', title: 'anshulbansal', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'}				
 			],
 			url_plugin_folder:'asset/js/plugins/',
 			player_color: player_color,

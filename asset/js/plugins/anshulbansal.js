@@ -1,7 +1,7 @@
 window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_srekoble'];
+	delete window['vt_imaging_plg_anshulbansal'];
 }
-function vt_imaging_plg_srekoble(_self, imaging, audio, div_slide)
+function vt_imaging_plg_anshulbansal(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
 	/**
@@ -24,6 +24,8 @@ function vt_imaging_plg_srekoble(_self, imaging, audio, div_slide)
 		'display':'inline-block'
 	});
 	div_slide.css({
+		'height': old_height,
+		'width': old_width,
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
@@ -32,9 +34,22 @@ function vt_imaging_plg_srekoble(_self, imaging, audio, div_slide)
 	  .attr({
 		  type: 'text/css', 
 		  rel: 'stylesheet',
-		  href: _self.options.url_plugin_folder+'/libraries/srekoble.css'
+		  href: _self.options.url_plugin_folder+'/libraries/anshulbansal.css'
 	  });
-	div_slide.append('<div class="srekoble-wrap"><ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></div>');
+	div_slide.append('<section id="anshulbansal">'
+  +'<div class="anshulbansal-loader">'
+    +'<div class="anshulbansal-load a"></div>'
+    +'<div class="anshulbansal-load b"></div>'
+    +'<div class="anshulbansal-load c"></div>'
+    +'<div class="anshulbansal-load d"></div>'
+    +'<div class="anshulbansal-load e"></div>'
+    +'<div class="anshulbansal-load f"></div>'
+    +'<div class="anshulbansal-load g"></div>'
+    +'<div class="anshulbansal-load h"></div>'
+    +'<div class="anshulbansal-load i"></div>'
+    +'<div class="anshulbansal-load j"></div>'
+  +'</div>'
++'</section>');
 	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
 	_self.resizeFix();
 	_self.clearScreenLoading();

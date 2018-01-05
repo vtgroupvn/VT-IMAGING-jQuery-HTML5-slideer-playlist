@@ -313,11 +313,13 @@
 				if (self.currently_active_imaging >= self.options.imaging_list.length || self.currently_active_imaging < 0){
 					self.currently_active_imaging = 0;
 				}
-				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from){
+				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from, img_none){
 					self.queue_slide_new_event--;
 					if (trigger_from != 'vt-imaging-app' || self.queue_slide_new_event > 0){return;}
-					self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
-					self.form_imaging_show.find('img').attr('alt', self.getCurrentImage().title);
+					if (img_none == undefined){
+						self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
+						self.form_imaging_show.find('img').attr('alt', self.getCurrentImage().title);
+					}
 					self.form_imaging_titlte.html(self.getCurrentImage().title);
 					self.form_imaging_description.html(self.getCurrentImage().description);
 					self.resizeFix();
