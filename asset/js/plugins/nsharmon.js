@@ -26,7 +26,7 @@ function nsharmon_render() {
   if(iSawTheSin > 2*Math.PI) {
     iSawTheSin -= 2*Math.PI;
   }
-  window.requestAnimFrame(nsharmon_render);
+  request_requestAnimationFrame[request_requestAnimationFrame.length] = window.requestAnimFrame(nsharmon_render);
 }
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_nsharmon'];
@@ -56,7 +56,7 @@ function vt_imaging_plg_nsharmon(_self, imaging, audio, div_slide)
 	_self.resizeFix();
 	div_slide.append('<canvas id="nsharmon" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
 	nsharmon_render();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
+	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

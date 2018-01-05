@@ -76,7 +76,7 @@ function draw_syropian(){
 	ctx.clearRect(0,0,canvas.width, canvas.height);
 	ctx.globalCompositeOperation = 'lighter';
 	//Call our super awesome animation method, because setTimeout is for suckers
-	requestAnimFrame(draw_syropian);
+	request_requestAnimationFrame[request_requestAnimationFrame.length] = requestAnimFrame(draw_syropian);
 	/*var now = new Date().getTime();
 	var dt = now - (time || now);
 	time = now;
@@ -154,7 +154,7 @@ function vt_imaging_plg_syropian(_self, imaging, audio, div_slide)
 	
     //Start the initial loop function for the first time
     vt_imaging_application.loop();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
+	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	div_slide.show();
 	div_slide.css({
 		'background-color':'hsl(195, 100%, 7%)'

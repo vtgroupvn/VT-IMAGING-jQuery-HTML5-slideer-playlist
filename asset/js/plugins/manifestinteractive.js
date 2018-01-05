@@ -52,7 +52,7 @@ function move()
     count = 0;
   }
   
-  requestAnimationFrame(move);
+  request_requestAnimationFrame[request_requestAnimationFrame.length] = requestAnimationFrame(move);
 }
 
 function increase_brightness(hex, percent){
@@ -112,7 +112,7 @@ function vt_imaging_plg_manifestinteractive(_self, imaging, audio, div_slide)
 	  });
 	div_slide.append('<div id="manifestinteractive"></div>');
 	manifestinteractive_load();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
+	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

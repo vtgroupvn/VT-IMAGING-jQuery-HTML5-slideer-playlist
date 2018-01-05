@@ -26,7 +26,7 @@ function m4terial_render(ts) {
 }
 
 function m4terial_drawFrame(ts){
-  requestAnimationFrame(m4terial_drawFrame, canvas);
+  request_requestAnimationFrame[request_requestAnimationFrame.length] = requestAnimationFrame(m4terial_drawFrame, canvas);
   ctx.fillStyle = '#17293a';
   ctx.fillRect(0, 0, W, H);
   m4terial_render(ts);
@@ -74,7 +74,7 @@ function vt_imaging_plg_m4terial(_self, imaging, audio, div_slide)
 	  }  
 	}
 	m4terial_drawFrame();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
+	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

@@ -261,7 +261,7 @@ function vt_imaging_plg_stefanweck(_self, imaging, audio, div_slide)
 	
     //Start the initial loop function for the first time
     vt_imaging_application.loop();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
+	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	div_slide.show();
 	div_slide.css({
 		'background-color':'hsl(195, 100%, 7%)'

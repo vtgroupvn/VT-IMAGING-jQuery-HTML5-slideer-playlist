@@ -3,6 +3,7 @@
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Donate link: http://vt-group.vn/donate.html
 **/
+var request_requestAnimationFrame = new Array();
 (function($){
 	"use strict"
 	jQuery.fn.vt_imaging_spiral_show_loading = function(intervalTime){
@@ -79,6 +80,9 @@
 			if (window['vt_imaging_delete_app'] != undefined){
 				window['vt_imaging_delete_app']();
 				delete window['vt_imaging_delete_app'];
+			}
+			for(var k in request_requestAnimationFrame){
+				//window.requestAnimationFrame(request_requestAnimationFrame[k]);
 			}
 			var time = new Date();
 			if (window['vt_imaging_plg_'+name] == undefined){
