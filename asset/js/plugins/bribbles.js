@@ -10,6 +10,9 @@ function randomIn(min,max)
 {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
+window.vt_imaging_delete_app = function(){
+	delete window['vt_imaging_plg_bribbles'];
+}
 function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
@@ -22,7 +25,6 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	div_slide.html('');
 	div_slide.css({
 		'position': 'relative',
 		'margin-top': '-'+(_self.form_imaging_show.height()+_self.form_imaging_text.outerHeight()+_self.form_imading_audio.height())+'px',
@@ -31,7 +33,8 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 		'display': 'inline-block',
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
-		'overflow':'hidden'
+		'overflow':'hidden',
+		'background-color':'none'
 	});
 	if (_self.options.skin == 1){
 		var element_width = 90, element_height = 48;

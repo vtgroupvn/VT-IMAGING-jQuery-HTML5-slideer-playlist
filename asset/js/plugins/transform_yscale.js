@@ -20,6 +20,9 @@ function startYRotate()
 		clearInterval(transform_rotYINT);
 	}
 }
+window.vt_imaging_delete_app = function(){
+	delete window['vt_imaging_plg_transform_yscale'];
+}
 function vt_imaging_plg_transform_yscale(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
@@ -33,8 +36,9 @@ function vt_imaging_plg_transform_yscale(_self, imaging, audio, div_slide)
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	div_slide.html('');
-	div_slide.show();
+	div_slide.css({
+		'background-color':'none'
+	});
 	transform_set = false;
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
 		jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>HTML5 & jQuery - AUDIO SLIDE PLAYER</title>
-<script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="asset/js/jquery.min.js" ></script>
 <script type="text/javascript" src="asset/js/vt-imaging.js"></script>
 <script type="text/javascript">
 	<?php 
@@ -40,15 +40,34 @@
 				'-moz-border-radius': '6px',
 				'padding': '10px'
 			},
-			imaging_list:[			
+			//[wave, m4terial, default, transform_yscale, transform_swivel,]
+			imaging_list:[
+				{name:'wave', title: 'wave', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},								
+				{name:'m4terial', title: 'm4terial', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'stefanweck', title: 'stefanweck', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'default', title: 'Description', description: 'Description<br />Description<br />Description<br />Description', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
-				{name:'transform_yscale', title: 'Description', description: 'Description', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'transform_swivel', title: 'Description', description: 'Description', thumbnail:'asset/images/3-t.jpg', src: 'asset/images/3.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
-				{name:'bribbles', title: 'Description', description: 'Description', thumbnail:'asset/images/4-t.jpg', src: 'asset/images/4.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'lines', title: 'Description', description: 'Description', thumbnail:'asset/images/5-t.jpg', src: 'asset/images/5.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
-				{name:'louvers', title: 'Description', description: 'Description', thumbnail:'asset/images/6-t.jpg', src: 'asset/images/6.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'broken', title: 'Description', description: 'Description', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'brick', title: 'Description', description: 'Description', thumbnail:'asset/images/4-t.jpg', src: 'asset/images/4.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'transform_yscale', title: 'transform_yscale', description: 'Description', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'transform_swivel', title: 'transform_swivel', description: 'Description', thumbnail:'asset/images/3-t.jpg', src: 'asset/images/3.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
+				{name:'bribbles', title: 'bribbles', description: 'Description', thumbnail:'asset/images/4-t.jpg', src: 'asset/images/4.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'lines', title: 'lines', description: 'Description', thumbnail:'asset/images/5-t.jpg', src: 'asset/images/5.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
+				{name:'louvers', title: 'louvers', description: 'Description', thumbnail:'asset/images/6-t.jpg', src: 'asset/images/6.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'broken', title: 'broken', description: 'Description', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'brick', title: 'brick', description: 'Description', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'zoom_in', title: 'zoom_in', description: 'Description', thumbnail:'asset/images/3-t.jpg', src: 'asset/images/3.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'zoom_out', title: 'zoom_out', description: 'Description', thumbnail:'asset/images/4-t.jpg', src: 'asset/images/4.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'zoom_topleft', title: 'zoom_topleft', description: 'Description', thumbnail:'asset/images/5-t.jpg', src: 'asset/images/5.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},		
+				{name:'zoom_topright', title: 'zoom_topright', description: 'Description', thumbnail:'asset/images/6-t.jpg', src: 'asset/images/6.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},				
+				{name:'zoom_bottomleft', title: 'zoom_bottomleft', description: 'Description', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},				
+				{name:'zoom_bottomright', title: 'zoom_bottomright', description: 'Description', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},			
+				{name:'insidedown', title: 'insidedown', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'manifestinteractive', title: 'manifestinteractive', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'srekoble', title: 'srekoble', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'nobitagit', title: 'nobitagit', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'marcmalignan', title: 'marcmalignan', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'nsharmon', title: 'nsharmon', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'jackrugile', title: 'jackrugile', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'podrivo', title: 'podrivo', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'syropian', title: 'syropian', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'}				
 			],
 			url_plugin_folder:'asset/js/plugins/',
 			player_color: player_color,

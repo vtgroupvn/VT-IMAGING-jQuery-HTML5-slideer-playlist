@@ -3,6 +3,7 @@ jQuery.fn.rotateElement = function(){
 	self.swivel_n=0;
 	self.swivel_rotINT = null;
 	self.sub_rotate = 20;
+	self.rotate_complete = false;
 	self.compile = function()
 	{
 		clearInterval(self.swivel_rotINT);
@@ -27,16 +28,21 @@ jQuery.fn.rotateElement = function(){
 				'height': '100%'
 			}, 500, function(){
 				setTimeout(function(){
-					jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
-					jQuery(self).parent().remove();
+					self.rotate_complete = true;
+					//jQuery(self).hide();
 				}, 1000);
 			});
 			clearInterval(self.swivel_rotINT);
 		}
-	}
+	};
+	self.rotateComplete = function(){
+		return self.rotate_complete;
+	};
 	return self;
 };
-
+window.vt_imaging_delete_app = function(){
+	delete window['vt_imaging_plg_brick'];
+}
 function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
@@ -49,11 +55,6 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	div_slide.html('');
-	div_slide.css({
-		'margin-top': '0px',
-		'display': 'block'
-	});
 	var old_height = imaging.find('img').height();
 	imaging.find('img').attr('src', 'none');
 	imaging.css({
@@ -104,8 +105,25 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 			div_slide.append(elements[i][n]);
 			var rotate = child_element.rotateElement();
 			rotate.compile();
+			elements[i][n].data('rotate_obj', rotate);
 		}
 	}
+	var interValCheck = setInterval(function(){
+		var completed = true;
+		for(var i=0; i < height; i++){
+			for(var n = 0; n < width; n++){
+				var rotate = elements[i][n].data('rotate_obj');
+				if (rotate != undefined){
+					completed = completed & rotate.rotateComplete();
+				}
+			}
+		}
+		if (completed){
+			div_slide.hide();
+			clearInterval(interValCheck);
+			jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);			
+		}
+	}, 100);
 	_self.clearScreenLoading();
 	
 	audio.unbind("ended").bind("ended", function(){

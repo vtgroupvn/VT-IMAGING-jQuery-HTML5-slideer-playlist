@@ -76,8 +76,13 @@
 			skin: 1
 		}, fn_options);
 		self.loadPluginSource = function(name){
+			if (window['vt_imaging_delete_app'] != undefined){
+				window['vt_imaging_delete_app']();
+				delete window['vt_imaging_delete_app'];
+			}
+			var time = new Date();
 			if (window['vt_imaging_plg_'+name] == undefined){
-				jQuery.getScript(self.options.url_plugin_folder+name+'.js').done(function(){
+				jQuery.getScript(self.options.url_plugin_folder+name+'.js?time='+time.getTime()).done(function(){
 					if (window['vt_imaging_plg_'+name] == undefined){
 						jQuery(document).trigger('vt_loaded_plg', ['vt_imaging_plg_default']);
 					}else{
@@ -85,7 +90,7 @@
 					}
 				}).fail(function(){
 					if (window['vt_imaging_plg_default'] == undefined){
-						jQuery.getScript(self.options.url_plugin_folder+'default.js').done(function(){
+						jQuery.getScript(self.options.url_plugin_folder+'default.js?time='+time.getTime()).done(function(){
 							jQuery(document).trigger('vt_loaded_plg', ['vt_imaging_plg_default']);
 						});
 					}
@@ -99,7 +104,7 @@
 				var animate_time = 500;
 				var loadingInterVal = null;
 				for(var n = 0; n < print_array.length; n++){
-					animate_time += sub_interval;console.log(n);
+					animate_time += sub_interval;
 					print_array[n].find('div.louvers-child-element').animate({						
 						width: '100%'
 					}, animate_time, function(){
@@ -116,7 +121,7 @@
 				var animate_time = 500;
 				var loadingInterVal = null;
 				for(var n = 0; n < print_array.length; n++){
-					animate_time += sub_interval;console.log(n);
+					animate_time += sub_interval;
 					print_array[n].find('div.lines-child-element').animate({						
 						width: 'toggle'
 					}, animate_time, function(){
@@ -287,6 +292,7 @@
 		};
 		self.old_active_imaging = 0;
 		self.currently_active_imaging = 0;
+		self.queue_slide_new_event = 0;
 		self.setActiveImaging = function(index){
 			self.old_active_imaging = self.currently_active_imaging;
 			if (index >= self.options.imaging_list.length || index < 0){
@@ -294,6 +300,7 @@
 			}else{
 				self.currently_active_imaging = index;
 			}
+			self.queue_slide_new_event++;
 		};
 		self.getOldImage = function(){
 			return self.options.imaging_list[self.old_active_imaging];
@@ -307,33 +314,20 @@
 					self.currently_active_imaging = 0;
 				}
 				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from){
-					if (trigger_from != 'vt-imaging-app'){return;}
+					self.queue_slide_new_event--;
+					if (trigger_from != 'vt-imaging-app' || self.queue_slide_new_event > 0){return;}
 					self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
 					self.form_imaging_show.find('img').attr('alt', self.getCurrentImage().title);
 					self.form_imaging_titlte.html(self.getCurrentImage().title);
 					self.form_imaging_description.html(self.getCurrentImage().description);
-					self.form_imaging_over_display.css({
-						'height': self.form_imaging_show.height(), 
-						'width': self.form_imaging_show.width(),
-						'cursor': 'pointer',
-						'position': 'absolute',
-						'display': 'inline-block',
-						'top': self.form_imaging_show.position().top,
-						'left': self.form_imaging_show.position().left,
-						'text-align': 'center',
-						'background':'none',
-						'display': 'inline-block',
-						'overflow-x': 'none',
-						'overflow-y': 'none',
-						'overflow':'none',
-						'margin-top': '0px'
-					});
 					self.resizeFix();
 					self.form_imaging_over_display.hide();
 				});
 				self.loadPluginSource(self.options.imaging_list[self.currently_active_imaging].name);
 				jQuery(document).unbind("vt_loaded_plg").on('vt_loaded_plg', function(event, func_name){
 					self.form_imaging_over_display.html('');
+					self.form_imaging_over_display.css({'background':'none'});
+					self.form_imaging_over_display.show();
 					window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
 				});
 				jQuery(self).find('div.imaging-hover').hide();
@@ -369,6 +363,7 @@
 				'width': '100%'
 			});
 			self.form_imading_audio.attr('controls', 'controls');
+			self.form_imading_audio.attr('crossOrigin', 'anonymous');
 			self.form_imaging_audio_source = jQuery('<source />');
 			self.form_imaging_audio_source.attr('src', self.options.imaging_list[self.currently_active_imaging].audio_src);
 			self.form_imaging_audio_source.attr('type', 'audio/mpeg');
@@ -813,7 +808,35 @@
 				self.setActiveImaging(parseInt(jQuery(this).attr('data-imaging-id')));
 				self.loadImaging();
 			});
-		}
+		};
+		self.overlay_resize = function(){
+			if (self.form_imaging_over_display != undefined)
+			{
+				self.form_imaging_over_display.css({
+					'height': self.form_imaging_show.height(), 
+					'width': self.form_imaging_show.width(),
+					'cursor': 'pointer',
+					'position': 'absolute',
+					'display': 'inline-block',
+					'top': self.form_imaging_show.position().top,
+					'left': self.form_imaging_show.position().left,
+					'text-align': 'center',
+					'background':'none',
+					'display': 'inline-block',
+					'overflow-x': 'none',
+					'overflow-y': 'none',
+					'overflow':'none',
+					'margin-top': '0px',
+					'background':''
+				});
+				
+				if (self.getCurrentImage().name == 'stefanweck'){
+					self.form_imaging_over_display.css({
+						'background-color':'hsl(195, 100%, 7%)'
+					});
+				}
+			}
+		};
 		self.resizeFix = function(){
 			self.form_imaging.css({'display':'inline-block'});
 			if (self.options.skin > 1)
@@ -842,6 +865,10 @@
 					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.slide_imaging.outerHeight()+self.form_imading_audio.height()
 				});
 			}
+			self.overlay_resize();
+			jQuery(window).unbind("resize").resize(function(){
+				self.resizeFix();
+			});
 		};
 		self.checkBrowser = function(){
 			var c = navigator.userAgent.search("Chrome");
@@ -890,11 +917,11 @@
 			bg_load.attr('id', 'pre-load');
 			bg_load.css({
 				'position': 'absolute',
-				'width': self.main_form.width(),
+				'width': self.form_imaging_show.width(),
 				'height': self.form_imaging_show.height(),
 				'opacity': 1,
-				'top': self.main_form.offset().top,
-				'left': self.main_form.offset().left
+				'top': self.form_imaging_show.offset().top,
+				'left': self.form_imaging_show.offset().left
 			});
 			if (self.options.skin == 2){
 				bg_load.css({
@@ -902,8 +929,8 @@
 					'width': self.form_imaging_show.width(),
 					'height': self.form_imaging_show.height(),
 					'opacity': 1,
-					'top': self.main_form.offset().top,
-					'left': self.main_form.offset().left+parseInt(self.options.form_imaging_list_width)+17
+					'top': self.form_imaging_show.offset().top,
+					'left': self.form_imaging_show.offset().left
 				});
 			}
 			if (self.options.skin == 3){
@@ -912,8 +939,8 @@
 					'width': self.form_imaging_show.width(),
 					'height': self.form_imaging_show.height(),
 					'opacity': 1,
-					'top': self.main_form.offset().top,
-					'left': self.main_form.offset().left
+					'top': self.form_imaging_show.offset().top,
+					'left': self.form_imaging_show.offset().left
 				});
 			}
 			var container_load = jQuery('<div />');
@@ -927,15 +954,15 @@
 				'box-shadow':         '0px 0px 3px 0px '+self.options.player_color,
 				'-webkit-border-radius': '6px',
 				'-moz-border-radius': '6px',
-				'left': self.main_form.position().left+(self.main_form.width()/2) - 35,
+				'left': self.form_imaging_show.offset().left + 200,
 				'top': jQuery(self).position().top-15,
 				'text-align': 'center'
 			});
 			if (self.options.skin == 2){
-				container_load.css({'left': self.main_form.position().left+(self.main_form.width()/2)-120});
+				container_load.css({'left': self.form_imaging_show.offset().left});
 			}
 			if (self.options.skin == 3){
-				container_load.css({'left': self.main_form.position().left+(self.main_form.width()/2)-90});
+				container_load.css({'left': self.form_imaging_show.offset().left+120});
 			}
 			var container_img = jQuery('<img />');
 			container_img.attr('src', 'asset/images/'+self.options.player_color.replace('#', '')+'-ajax-loader.gif');

@@ -1,3 +1,6 @@
+window.vt_imaging_delete_app = function(){
+	delete window['vt_imaging_plg_louvers'];
+}
 function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
@@ -10,12 +13,8 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	div_slide.html('');
-	div_slide.css({
-		'margin-top': '0px',
-		'display':'block'
-	});
 	var old_height = imaging.find('img').height();
+	var old_width = imaging.find('img').width();
 	imaging.find('img').attr('src', 'none');
 	if (_self.options.skin == 1){
 		var element_width = 90;
@@ -24,10 +23,28 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 	}
 	imaging.css({
 		'height': old_height,
+		'width': old_width,
 		'background':'#FFF',
 		'display':'inline-block'
 	});
-	
+	_self.resizeFix();
+	div_slide.css({
+		'height': imaging.height(), 
+		'width': imaging.width(),
+		'cursor': 'pointer',
+		'position': 'absolute',
+		'display': 'inline-block',
+		'top': imaging.position().top,
+		'left': imaging.position().left,
+		'text-align': 'center',
+		'background':'none',
+		'display': 'inline-block',
+		'overflow-x': 'none',
+		'overflow-y': 'none',
+		'overflow':'none',
+		'margin-top': '0px',
+		'background-color':'none'
+	});
 	var width = imaging.width()/element_width;
 	var height = imaging.height();
 	var elements = new Array();

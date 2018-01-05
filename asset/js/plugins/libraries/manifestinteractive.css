@@ -1,0 +1,14 @@
+#manifestinteractive
+{
+  position: relative;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+#manifestinteractive .ball
+{
+  background-color: #666;
+  display: inline-block;
+  float: left;
+  border-radius: 50%;
+  position: absolute;
+}

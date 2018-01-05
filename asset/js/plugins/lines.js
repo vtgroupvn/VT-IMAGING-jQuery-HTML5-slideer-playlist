@@ -1,3 +1,6 @@
+window.vt_imaging_delete_app = function(){
+	delete window['vt_imaging_plg_lines'];
+}
 function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
@@ -10,10 +13,6 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	div_slide.html('');
-	div_slide.show({
-		'margin-top': '0px'
-	});
 	if (_self.options.skin == 1){
 		var element_width = 90;
 	}else{
