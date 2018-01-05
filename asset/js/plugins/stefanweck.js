@@ -253,7 +253,6 @@ function vt_imaging_plg_stefanweck(_self, imaging, audio, div_slide)
 	_self.clearScreenLoading();
 	vt_imaging_application = new Application();
 	audio.unbind("ended").bind("ended", function(){
-		vt_imaging_application.deleteApp();
 		_self.setActiveImaging(_self.currently_active_imaging+1);
 		_self.loadImaging();
 	});
@@ -262,9 +261,7 @@ function vt_imaging_plg_stefanweck(_self, imaging, audio, div_slide)
 	
     //Start the initial loop function for the first time
     vt_imaging_application.loop();
-	window.vt_imaging_delete_app = function(){
-		delete window['vt_imaging_application'];
-	}
+
 	div_slide.show();
 	div_slide.css({
 		'background-color':'hsl(195, 100%, 7%)'
