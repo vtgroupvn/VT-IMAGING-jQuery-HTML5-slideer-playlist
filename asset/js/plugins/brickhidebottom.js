@@ -1,49 +1,28 @@
-jQuery.fn.rotateElement = function(width, height){
+jQuery.fn.vt_animateBottomElement = function(animateTime){
 	var self = this;
-	self.swivel_n=0;
-	self.swivel_rotINT = null;
-	self.sub_rotate = 50;
-	self.rotate_complete = false;
-	self.compile = function()
+	self.animate_complete = false;
+	self.animateTime = animateTime;
+	self.startAnimate = function()
 	{
-		clearInterval(self.swivel_rotINT);
-		self.swivel_rotINT=setInterval(function(){
-			self.startRotate();
-		},1);
+		jQuery(self).animate({
+			width: 'toggle',
+			height: 'toggle',
+			opacity: 1
+		}, self.animateTime, function(){
+			setTimeout(function(){
+				self.animate_complete = true;
+			}, 1000);
+		});
 	};
-	self.startRotate = function()
-	{
-		self.swivel_n = self.swivel_n + self.sub_rotate;
-		if(self.swivel_n >= 360){
-			self.swivel_n = 360;
-		}
-		jQuery(self).get(0).style.transform="rotate(" + self.swivel_n + "deg)";
-		jQuery(self).get(0).style.webkitTransform="rotate(" + self.swivel_n + "deg)";
-		jQuery(self).get(0).style.OTransform="rotate(" + self.swivel_n + "deg)";
-		jQuery(self).get(0).style.MozTransform="rotate(" + self.swivel_n + "deg)";
-		if (self.swivel_n == 360)
-		{
-			jQuery(self).animate({
-				'width': width,
-				'height': height
-			}, 10, function(){
-				setTimeout(function(){
-					self.rotate_complete = true;
-					//jQuery(self).hide();
-				}, 1000);
-			});
-			clearInterval(self.swivel_rotINT);
-		}
-	};
-	self.rotateComplete = function(){
-		return self.rotate_complete;
+	self.animateComplete = function(){
+		return self.animate_complete;
 	};
 	return self;
 };
 window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_brick'];
+	delete window['vt_imaging_plg_brickhidebottom'];
 }
-function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
+function vt_imaging_plg_brickhidebottom(_self, imaging, audio, div_slide)
 {
 	_self.createScreenLoading();
 	/**
@@ -56,7 +35,7 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 	audio[0].load();
 	audio[0].play();
 	var old_height = imaging.find('img').height();
-	imaging.find('img').attr('src', 'none');
+	imaging.find('img').attr('src', _self.getCurrentImage().src);
 	imaging.find('img').attr('alt', '');
 	imaging.css({
 		'height': old_height,
@@ -84,8 +63,10 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 	var width = div_slide.width()/element_width;
 	var height = div_slide.height()/element_height;
 	var elements = new Array();
-	var new_src = _self.getCurrentImage().src;
+	var old_src = _self.getOldImage().src;
+	var animateTime = 500;
 	for(var i=0; i < height; i++){
+		animateTime += 400;
 		elements[i] = new Array();
 		var position_height = i*element_height;
 		for(var n = 0; n < width; n++){
@@ -104,11 +85,11 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 				'z-index': '999'
 			});
 			child_element.css({
-				'background-image': "url('"+new_src+"')",
+				'background-image': "url('"+old_src+"')",
 				'background-size': (imaging.width()+'px')+' '+ (imaging.height()+'px'),
 				'float': 'left',
-				'height': '50%',
-				'width': '50%',
+				'height': element_height,
+				'width': element_width,
 				'display': 'block',
 				'opacity': 1,
 				'z-index': '999',
@@ -116,18 +97,28 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 			});
 			elements[i][n].append(child_element);
 			div_slide.append(elements[i][n]);
-			var rotate = child_element.rotateElement(element_width, element_height);
-			rotate.compile();
-			elements[i][n].data('rotate_obj', rotate);
+			animateTime += 10;
+			var animate = child_element.vt_animateBottomElement(animateTime);
+			elements[i][n].data('animate_obj', animate);
+		}
+	}
+	for(var i= 0; i < elements.length; i++){
+		for(var n = 0; n < elements[0].length; n++){
+			if (elements[i] != undefined){
+				var animate = elements[i][n].data('animate_obj');
+				animate.startAnimate();
+			}
 		}
 	}
 	var interValCheck = setInterval(function(){
 		var completed = true;
-		for(var i=0; i < height; i++){
-			for(var n = 0; n < width; n++){
-				var rotate = elements[i][n].data('rotate_obj');
-				if (rotate != undefined){
-					completed = completed & rotate.rotateComplete();
+		for(var i= 0; i < elements.length; i++){
+			for(var n = 0; n < elements[0].length; n++){
+				if (elements[i] != undefined){
+					var animate = elements[i][n].data('animate_obj');
+					if (animate != undefined){
+						completed = completed & animate.animateComplete();
+					}
 				}
 			}
 		}

@@ -9,6 +9,23 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
+	_self.print_values.louversPrintShow = function(print_array, sub_interval){
+		var animate_time = 500;
+		var loadingInterVal = null;
+		for(var n = 0; n < print_array.length; n++){
+			animate_time += sub_interval;
+			print_array[n].find('div.louvers-child-element').animate({						
+				width: '100%'
+			}, animate_time, function(){
+				//jQuery(this).parent().remove();
+			});
+			clearInterval(loadingInterVal);
+			loadingInterVal = setInterval(function(){
+				clearInterval(loadingInterVal);
+				jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+			}, animate_time);
+		}
+	};
 	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
@@ -16,10 +33,14 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 	var old_height = imaging.find('img').height();
 	var old_width = imaging.find('img').width();
 	imaging.find('img').attr('src', 'none');
-	if (_self.options.skin == 1){
-		var element_width = 90;
-	}else{
-		var element_width = 77;
+	var mod = false;
+	var element_width = 49;
+	while(!mod){
+		element_width++;
+		var extend = div_slide.width()%element_width;
+		if (extend == 0){
+			mod = true;
+		}
 	}
 	imaging.css({
 		'height': old_height,

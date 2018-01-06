@@ -21,6 +21,29 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
+	_self.print_values.bribblesPrintShow = function(spiral_array, sub_interval){
+		var animate_time = 50;
+		var loadingInterVal = null;
+		var sub = 5;
+		for(var i = 0; i < spiral_array[0].length; i++){
+			sub += 10;
+			for (var j = 0; j < spiral_array.length; j++){
+				animate_time += sub_interval;
+				spiral_array[i][j].show();
+				spiral_array[i][j].animate({
+					height: -sub,
+					width: -sub
+				}, animate_time, function(){
+					jQuery(this).remove();
+				});
+				clearInterval(loadingInterVal);
+				loadingInterVal = setInterval(function(){
+					clearInterval(loadingInterVal);
+					jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+				}, animate_time);
+			}
+		}
+	};
 	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();

@@ -9,14 +9,35 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
+	_self.print_values.linesPrintShow = function(print_array, sub_interval){
+		var animate_time = 500;
+		var loadingInterVal = null;
+		for(var n = 0; n < print_array.length; n++){
+			animate_time += sub_interval;
+			print_array[n].find('div.lines-child-element').animate({						
+				width: 'toggle'
+			}, animate_time, function(){
+				//jQuery(this).parent().remove();
+			});
+			clearInterval(loadingInterVal);
+			loadingInterVal = setInterval(function(){
+				clearInterval(loadingInterVal);
+				jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+			}, animate_time);
+		}
+	};
 	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	if (_self.options.skin == 1){
-		var element_width = 90;
-	}else{
-		var element_width = 77;
+	var element_width = 49;
+	var mod = false;
+	while(!mod){
+		element_width++;
+		var extend = div_slide.width()%element_width;
+		if (extend == 0){
+			mod = true;
+		}
 	}
 	imaging.find('img').attr('src', _self.getCurrentImage().src);
 	var width = imaging.width()/element_width;

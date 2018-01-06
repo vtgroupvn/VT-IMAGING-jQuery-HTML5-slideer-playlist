@@ -13,12 +13,24 @@ function vt_imaging_plg_default(_self, imaging, audio, div_slide)
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();
 	audio[0].play();
-	if (_self.options.skin == 1){
-		var element_width = 90, element_height = 48;
-	}else{
-		var element_width = 77, element_height = 58;
+	var mod = false;
+	var element_width = 49;
+	while(!mod){
+		element_width++;
+		var extend = div_slide.width()%element_width;
+		if (extend == 0){
+			mod = true;
+		}
 	}
-	
+	var mod = false;
+	var element_height = 30;
+	while(!mod){
+		element_height++;
+		var extend = div_slide.width()%element_height;
+		if (extend == 0){
+			mod = true;
+		}
+	}
 	var width = div_slide.width()/element_width;
 	var height = div_slide.height()/element_height;
 	var elements = new Array();
@@ -46,7 +58,7 @@ function vt_imaging_plg_default(_self, imaging, audio, div_slide)
 		}
 	}
 	_self.clearScreenLoading();
-	_self.print_values.spiralPrintShow(elements, 30);
+	_self.print_values.spiralPrintShow(elements, 5);
 	
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

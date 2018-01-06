@@ -100,63 +100,6 @@
 			}
 		};
 		self.print_values = {
-			louversPrintShow: function(print_array, sub_interval){
-				var animate_time = 500;
-				var loadingInterVal = null;
-				for(var n = 0; n < print_array.length; n++){
-					animate_time += sub_interval;
-					print_array[n].find('div.louvers-child-element').animate({						
-						width: '100%'
-					}, animate_time, function(){
-						//jQuery(this).parent().remove();
-					});
-					clearInterval(loadingInterVal);
-					loadingInterVal = setInterval(function(){
-						clearInterval(loadingInterVal);
-						jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
-					}, animate_time);
-				}
-			},
-			linesPrintShow: function(print_array, sub_interval){
-				var animate_time = 500;
-				var loadingInterVal = null;
-				for(var n = 0; n < print_array.length; n++){
-					animate_time += sub_interval;
-					print_array[n].find('div.lines-child-element').animate({						
-						width: 'toggle'
-					}, animate_time, function(){
-						//jQuery(this).parent().remove();
-					});
-					clearInterval(loadingInterVal);
-					loadingInterVal = setInterval(function(){
-						clearInterval(loadingInterVal);
-						jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
-					}, animate_time);
-				}
-			},
-			bribblesPrintShow: function(spiral_array, sub_interval){
-				var animate_time = 50;
-				var loadingInterVal = null;
-				var sub = 5;
-				for(var i = 0; i < spiral_array[0].length; i++){
-					sub += 10;
-					for (var j = 0; j < spiral_array.length; j++){
-						animate_time += sub_interval;
-						spiral_array[i][j].show();
-						spiral_array[i][j].animate({
-							height: -sub,
-							width: -sub
-						}, animate_time, function(){
-							jQuery(this).remove();
-						});
-						clearInterval(loadingInterVal);
-						loadingInterVal = setInterval(function(){
-							clearInterval(loadingInterVal);
-							jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
-						}, animate_time);
-					}
-				}
-			},
 			spiralPrintHide: function(spiral_array, sub_interval){
 				var over_load = new Array(), over_load_item = 0, i = 0,k = 0,l = 0,m = 0,n = 0;
 				m = spiral_array.length;
@@ -959,15 +902,15 @@
 				'box-shadow':         '0px 0px 3px 0px '+self.options.player_color,
 				'-webkit-border-radius': '6px',
 				'-moz-border-radius': '6px',
-				'left': self.form_imaging_show.offset().left + 200,
-				'top': jQuery(self).position().top-15,
+				'left': self.form_imaging_show.offset().left + self.form_imaging_show.width()/2-100,
+				'top': self.form_imaging_show.position().top+self.form_imaging_show.height()/2-100,
 				'text-align': 'center'
 			});
 			if (self.options.skin == 2){
-				container_load.css({'left': self.form_imaging_show.offset().left});
+				container_load.css({'left': self.form_imaging_show.offset().left+ self.form_imaging_show.width()/2-200});
 			}
 			if (self.options.skin == 3){
-				container_load.css({'left': self.form_imaging_show.offset().left+120});
+				container_load.css({'left': self.form_imaging_show.offset().left+self.form_imaging_show.width()/2-50});
 			}
 			var container_img = jQuery('<img />');
 			container_img.attr('src', 'asset/images/'+self.options.player_color.replace('#', '')+'-ajax-loader.gif');
