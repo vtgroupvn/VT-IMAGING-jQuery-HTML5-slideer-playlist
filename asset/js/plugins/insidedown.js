@@ -175,7 +175,7 @@ function vt_imaging_plg_insidedown(_self, imaging, audio, div_slide)
 	});
 	div_slide.append('<canvas id="InsideDown" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
 	insidedown_init();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
+	_self.onCompletePlugin("vt_imaging_plg_insidedown", "none");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

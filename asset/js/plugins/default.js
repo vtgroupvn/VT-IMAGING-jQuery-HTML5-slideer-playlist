@@ -1,3 +1,20 @@
+jQuery.fn.vt_imaging_spiral_show_loading = function(intervalTime){
+	var self = this;
+	self.interval= null;
+	self.interval_complete = false;
+	self.run_interval = function()
+	{
+		self.interval = setInterval(function(){
+			jQuery(self).css({'opacity':1});
+			self.interval_complete = true;
+			clearInterval(self.interval);
+		}, intervalTime);
+	};
+	self.is_interval_complete = function(){
+		return self.interval_complete;
+	};
+	return self;
+}
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_default'];
 }
@@ -9,6 +26,72 @@ function vt_imaging_plg_default(_self, imaging, audio, div_slide)
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
+	_self.print_values.spiralPrintShow = function(spiral_array, sub_interval) {
+		var over_load = new Array(), over_load_item = 0, i = 0,k = 0,l = 0,m = 0,n = 0;
+		m = spiral_array.length;
+		n = spiral_array[0].length;
+
+		/*  k - starting row index
+			m - ending row index
+			l - starting column index
+			n - ending column index
+			i - iterator
+		*/
+		var intervalTime = 50;
+		while (k < m && l < n) {
+			/* Print the first row from the remaining rows */
+			for (i = l; i < n; ++i) {
+				intervalTime += sub_interval;
+				over_load[over_load_item] =spiral_array[k][i].vt_imaging_spiral_show_loading(intervalTime);					
+				over_load[over_load_item].run_interval();
+				over_load_item++;
+			}
+			k++;
+
+			/* Print the last column from the remaining columns */
+			for (i = k; i < m; ++i) {
+				intervalTime += sub_interval;
+				over_load[over_load_item] = spiral_array[i][n - 1].vt_imaging_spiral_show_loading(intervalTime);					
+				over_load[over_load_item].run_interval();
+				over_load_item++;
+			}
+			n--;
+
+			/* Print the last row from the remaining rows */
+			if (k < m) {
+				for (i = n - 1; i >= l; --i) {
+					intervalTime += sub_interval;
+					over_load[over_load_item] = spiral_array[m - 1][i].vt_imaging_spiral_show_loading(intervalTime);					
+					over_load[over_load_item].run_interval();
+					over_load_item++;
+				}
+				m--;
+			}
+
+			/* Print the first column from the remaining columns */
+			if (l < n) {
+				for (i = m - 1; i >= k; --i) {
+					intervalTime += sub_interval;
+					over_load[over_load_item] = spiral_array[i][l].vt_imaging_spiral_show_loading(intervalTime);					
+					over_load[over_load_item].run_interval();
+					over_load_item++;
+				}
+				l++;
+			}
+		}
+		if (over_load.length > 0){
+			var check_complete = setInterval(function(){
+				var is_complete = true;
+				for(var i = 0; i < over_load.length; i++){
+					is_complete = is_complete && over_load[i].is_interval_complete();
+				}
+				if (is_complete){
+					clearInterval(check_complete);
+					_self.onCompletePlugin("vt_imaging_plg_default", undefined);
+				}
+			}, 50);
+		}
+	};
 	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
 	audio.find('source').attr('type', 'audio/mpeg');
 	audio[0].load();

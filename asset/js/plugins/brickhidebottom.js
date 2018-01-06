@@ -125,7 +125,7 @@ function vt_imaging_plg_brickhidebottom(_self, imaging, audio, div_slide)
 		if (completed){
 			div_slide.hide();
 			clearInterval(interValCheck);
-			jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);			
+			_self.onCompletePlugin("vt_imaging_plg_brickhidebottom", undefined);
 		}
 	}, 100);
 	_self.clearScreenLoading();

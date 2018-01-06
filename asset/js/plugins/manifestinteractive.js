@@ -115,7 +115,7 @@ function vt_imaging_plg_manifestinteractive(_self, imaging, audio, div_slide)
 	  });
 	div_slide.append('<div id="manifestinteractive"></div>');
 	manifestinteractive_load();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
+	_self.onCompletePlugin("vt_imaging_plg_manifestinteractive", "none");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

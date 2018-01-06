@@ -41,7 +41,7 @@ function vt_imaging_plg_zoom_topleft(_self, imaging, audio, div_slide)
 			width: '0px', 
 			height: '0px'
 		}, 1500, function(){
-			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+			_self.onCompletePlugin("vt_imaging_plg_zoom_topleft", undefined);
 	}); 
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

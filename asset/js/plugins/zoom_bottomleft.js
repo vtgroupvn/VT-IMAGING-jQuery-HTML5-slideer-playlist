@@ -42,7 +42,7 @@ function vt_imaging_plg_zoom_bottomleft(_self, imaging, audio, div_slide)
 			height: '0px',
 			top: imaging.position().top + imaging.height()
 		}, 1500, function(){
-			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+			_self.onCompletePlugin("vt_imaging_plg_zoom_bottomleft", undefined);
 	}); 
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

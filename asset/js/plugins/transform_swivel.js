@@ -55,7 +55,7 @@ function vt_imaging_plg_transform_swivel(_self, imaging, audio, div_slide)
 			'opacity': '1'
 		}, 500, function(){
 			imaging.css({opacity: 1});
-			jQuery(document).trigger("slide_next_complete", ['vt-imaging-app']);
+			_self.onCompletePlugin("vt_imaging_plg_transform_swivel", undefined);
 		});
 	});
 	rotateDIV(imaging);

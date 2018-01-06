@@ -48,7 +48,7 @@ function vt_imaging_plg_zoom_in(_self, imaging, audio, div_slide)
 			'margin-top': div_slide.height()/2,
 			'margin-bottom': div_slide.height()/2
 		}, 1000, function(){
-			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+			_self.onCompletePlugin("vt_imaging_plg_zoom_in", undefined);
 	}); 
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

@@ -22,7 +22,7 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 			clearInterval(loadingInterVal);
 			loadingInterVal = setInterval(function(){
 				clearInterval(loadingInterVal);
-				jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+				_self.onCompletePlugin("vt_imaging_plg_louvers", undefined);
 			}, animate_time);
 		}
 	};

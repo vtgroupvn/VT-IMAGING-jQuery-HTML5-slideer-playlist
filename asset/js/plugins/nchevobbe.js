@@ -102,7 +102,7 @@ function vt_imaging_plg_nchevobbe(_self, imaging, audio, div_slide)
 +'</svg>'
 +'</figure>');
 run_nchevobbe();
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
+	_self.onCompletePlugin("vt_imaging_plg_nchevobbe", "none");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

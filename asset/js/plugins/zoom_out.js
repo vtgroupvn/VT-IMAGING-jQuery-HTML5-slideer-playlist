@@ -54,7 +54,7 @@ function vt_imaging_plg_zoom_out(_self, imaging, audio, div_slide)
 			'margin-right': '-100px',
 			'margin-bottom': '-100px'
 		}, 1000, function(){
-			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+			_self.onCompletePlugin("vt_imaging_plg_zoom_out", undefined);
 	}); 
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

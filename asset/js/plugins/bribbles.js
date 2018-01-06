@@ -39,7 +39,7 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 				clearInterval(loadingInterVal);
 				loadingInterVal = setInterval(function(){
 					clearInterval(loadingInterVal);
-					jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
+					_self.onCompletePlugin("vt_imaging_plg_bribbles", undefined);
 				}, animate_time);
 			}
 		}

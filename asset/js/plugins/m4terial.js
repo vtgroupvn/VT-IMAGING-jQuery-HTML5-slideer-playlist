@@ -74,8 +74,7 @@ function vt_imaging_plg_m4terial(_self, imaging, audio, div_slide)
 	  }  
 	}
 	m4terial_drawFrame(canvas);
-	
-	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
+	_self.onCompletePlugin("vt_imaging_plg_m4terial", "none");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

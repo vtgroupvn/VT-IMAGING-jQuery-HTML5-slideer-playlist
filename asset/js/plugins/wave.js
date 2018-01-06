@@ -68,7 +68,7 @@ function vt_imaging_plg_wave(_self, imaging, audio, div_slide)
 			SW.setSpeed(audio[0].volume);
 			SW.setAmplitude(getLevelVolume());
 		});
-		jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
+		_self.onCompletePlugin("vt_imaging_plg_wave", "none");
 		_self.clearScreenLoading();		
 	});
 	audio.unbind("ended").bind("ended", function(){

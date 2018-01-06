@@ -5,39 +5,8 @@
 **/
 (function($){
 	"use strict"
-	jQuery.fn.vt_imaging_spiral_show_loading = function(intervalTime){
-		var self = this;
-		self.interval= null;
-		self.interval_complete = false;
-		self.run_interval = function()
-		{
-			self.interval = setInterval(function(){
-				jQuery(self).css({'opacity':1});
-				self.interval_complete = true;
-				clearInterval(self.interval);
-			}, intervalTime);
-		};
-		self.is_interval_complete = function(){
-			return self.interval_complete;
-		};
-		return self;
-	}
-	jQuery.fn.vt_imaging_spiral_hide_loading = function(intervalTime){
-		var self = this;
-		self.animate_complete = false;
-		self.run_interval = function()
-		{
-			jQuery(self).animate({
-				opacity: 0
-			}, intervalTime, function(){
-				self.animate_complete = true;
-			});
-		};
-		self.is_animate_complete = function(){
-			return self.animate_complete;
-		};
-		return self;
-	}
+	
+	
 	jQuery.fn.vt_imaging = function(fn_options){
 		var self = this;
 		if (typeof this == undefined){
@@ -99,143 +68,14 @@
 				jQuery(document).trigger('vt_loaded_plg', ['vt_imaging_plg_'+name]);
 			}
 		};
-		self.print_values = {
-			spiralPrintHide: function(spiral_array, sub_interval){
-				var over_load = new Array(), over_load_item = 0, i = 0,k = 0,l = 0,m = 0,n = 0;
-				m = spiral_array.length;
-				n = spiral_array[0].length;
-
-				/*  k - starting row index
-					m - ending row index
-					l - starting column index
-					n - ending column index
-					i - iterator
-				*/
-				var intervalTime = 5000;
-				while (k < m && l < n) {
-					/* Print the first row from the remaining rows */
-					for (i = l; i < n; ++i) {
-						intervalTime -= sub_interval;
-						over_load[over_load_item] =spiral_array[k][i].vt_imaging_spiral_hide_loading(intervalTime);					
-						over_load[over_load_item].run_interval();
-						over_load_item++;
-					}
-					k++;
-
-					/* Print the last column from the remaining columns */
-					for (i = k; i < m; ++i) {
-						intervalTime -= sub_interval;
-						over_load[over_load_item] = spiral_array[i][n - 1].vt_imaging_spiral_hide_loading(intervalTime);					
-						over_load[over_load_item].run_interval();
-						over_load_item++;
-					}
-					n--;
-
-					/* Print the last row from the remaining rows */
-					if (k < m) {
-						for (i = n - 1; i >= l; --i) {
-							intervalTime -= sub_interval;
-							over_load[over_load_item] = spiral_array[m - 1][i].vt_imaging_spiral_hide_loading(intervalTime);					
-							over_load[over_load_item].run_interval();
-							over_load_item++;
-						}
-						m--;
-					}
-
-					/* Print the first column from the remaining columns */
-					if (l < n) {
-						for (i = m - 1; i >= k; --i) {
-							intervalTime -= sub_interval;
-							over_load[over_load_item] = spiral_array[i][l].vt_imaging_spiral_hide_loading(intervalTime);					
-							over_load[over_load_item].run_interval();
-							over_load_item++;
-						}
-					    l++;
-					}
-				}
-				if (over_load.length > 0){
-					var check_complete = setInterval(function(){
-						var is_complete = true;
-						for(var i = 0; i < over_load.length; i++){
-							is_complete = is_complete && over_load[i].is_animate_complete();
-						}
-						if (is_complete){
-							clearInterval(check_complete);
-							jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
-						}
-					}, 50);
-				}
-			},
-			spiralPrintShow : function(spiral_array, sub_interval) {
-				var over_load = new Array(), over_load_item = 0, i = 0,k = 0,l = 0,m = 0,n = 0;
-				m = spiral_array.length;
-				n = spiral_array[0].length;
-
-				/*  k - starting row index
-					m - ending row index
-					l - starting column index
-					n - ending column index
-					i - iterator
-				*/
-				var intervalTime = 50;
-				while (k < m && l < n) {
-					/* Print the first row from the remaining rows */
-					for (i = l; i < n; ++i) {
-						intervalTime += sub_interval;
-						over_load[over_load_item] =spiral_array[k][i].vt_imaging_spiral_show_loading(intervalTime);					
-						over_load[over_load_item].run_interval();
-						over_load_item++;
-					}
-					k++;
-
-					/* Print the last column from the remaining columns */
-					for (i = k; i < m; ++i) {
-						intervalTime += sub_interval;
-						over_load[over_load_item] = spiral_array[i][n - 1].vt_imaging_spiral_show_loading(intervalTime);					
-						over_load[over_load_item].run_interval();
-						over_load_item++;
-					}
-					n--;
-
-					/* Print the last row from the remaining rows */
-					if (k < m) {
-						for (i = n - 1; i >= l; --i) {
-							intervalTime += sub_interval;
-							over_load[over_load_item] = spiral_array[m - 1][i].vt_imaging_spiral_show_loading(intervalTime);					
-							over_load[over_load_item].run_interval();
-							over_load_item++;
-						}
-						m--;
-					}
-
-					/* Print the first column from the remaining columns */
-					if (l < n) {
-						for (i = m - 1; i >= k; --i) {
-							intervalTime += sub_interval;
-							over_load[over_load_item] = spiral_array[i][l].vt_imaging_spiral_show_loading(intervalTime);					
-							over_load[over_load_item].run_interval();
-							over_load_item++;
-						}
-					    l++;
-					}
-				}
-				if (over_load.length > 0){
-					var check_complete = setInterval(function(){
-						var is_complete = true;
-						for(var i = 0; i < over_load.length; i++){
-							is_complete = is_complete && over_load[i].is_interval_complete();
-						}
-						if (is_complete){
-							clearInterval(check_complete);
-							jQuery(document).trigger("slide_next_complete", ["vt-imaging-app"]);
-						}
-					}, 50);
-				}
-			}
+		self.onCompletePlugin = function(from_name, extend){
+			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app", from_name, extend]);
 		};
+		/**Add function to print**/
+		self.print_values ={};
 		self.old_active_imaging = 0;
 		self.currently_active_imaging = 0;
-		self.queue_slide_new_event = 0;
+		self.queue_slide_new_events = new Array();
 		self.setActiveImaging = function(index){
 			self.old_active_imaging = self.currently_active_imaging;
 			if (index >= self.options.imaging_list.length || index < 0){
@@ -256,25 +96,27 @@
 				if (self.currently_active_imaging >= self.options.imaging_list.length || self.currently_active_imaging < 0){
 					self.currently_active_imaging = 0;
 				}
-				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from, img_none){
-					self.queue_slide_new_event--;
-					if (self.queue_slide_new_event < 0){
-						self.queue_slide_new_event = 1;
+				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from, from_name, img_none){
+					if (self.queue_slide_new_events.length > 0)
+					{
+						if (self.queue_slide_new_events[self.queue_slide_new_events.length-1] == from_name){
+							self.queue_slide_new_events = new Array();
+							if (trigger_from != 'vt-imaging-app' || self.queue_slide_new_event > 0){return;}
+							if (img_none == undefined){
+								self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
+							}
+							self.form_imaging_titlte.html(self.getCurrentImage().title);
+							self.form_imaging_description.html(self.getCurrentImage().description);
+							self.resizeFix();
+							self.form_imaging_over_display.hide();
+						}
 					}
-					if (trigger_from != 'vt-imaging-app' || self.queue_slide_new_event > 0){return;}
-					if (img_none == undefined){
-						self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
-						self.form_imaging_show.find('img').attr('alt', self.getCurrentImage().title);
-					}
-					self.form_imaging_titlte.html(self.getCurrentImage().title);
-					self.form_imaging_description.html(self.getCurrentImage().description);
-					self.resizeFix();
-					self.form_imaging_over_display.hide();
 				});
 				self.loadPluginSource(self.options.imaging_list[self.currently_active_imaging].name);
 				jQuery(document).unbind("vt_loaded_plg").on('vt_loaded_plg', function(event, func_name){
 					self.form_imaging_over_display.html('');
 					self.overlay_resize();
+					self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
 					window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
 				});
 				jQuery(self).find('div.imaging-hover').hide();
@@ -301,7 +143,6 @@
 			}
 			self.form_imaging_show_img.attr('id', 'imaging-show');
 			self.form_imaging_show_img.attr('src', self.options.imaging_list[self.currently_active_imaging].src);
-			self.form_imaging_show_img.attr('alt', self.options.imaging_list[self.currently_active_imaging].description);
 			self.form_imaging_show.append(self.form_imaging_show_img);
 			self.form_imaging.append(self.form_imaging_show);
 			self.form_imading_audio = jQuery('<audio />');
@@ -375,6 +216,7 @@
 			jQuery(document).unbind("vt_loaded_plg").on('vt_loaded_plg', function(event, func_name){
 				self.overlay_resize();
 				self.form_imaging_over_display.html('');
+				self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
 				window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
 			});
 		};
