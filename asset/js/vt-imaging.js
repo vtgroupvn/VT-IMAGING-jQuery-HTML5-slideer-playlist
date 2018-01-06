@@ -331,8 +331,7 @@
 				self.loadPluginSource(self.options.imaging_list[self.currently_active_imaging].name);
 				jQuery(document).unbind("vt_loaded_plg").on('vt_loaded_plg', function(event, func_name){
 					self.form_imaging_over_display.html('');
-					self.form_imaging_over_display.css({'background':'none'});
-					self.form_imaging_over_display.show();
+					self.overlay_resize();
 					window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
 				});
 				jQuery(self).find('div.imaging-hover').hide();
@@ -431,6 +430,7 @@
 			jQuery(self).find('div#over-imaging-item-'+(self.currently_active_imaging+1)).show();
 			self.loadPluginSource(self.options.imaging_list[self.currently_active_imaging].name);
 			jQuery(document).unbind("vt_loaded_plg").on('vt_loaded_plg', function(event, func_name){
+				self.overlay_resize();
 				self.form_imaging_over_display.html('');
 				window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
 			});

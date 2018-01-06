@@ -1,4 +1,4 @@
-var canvas, ctx, W, H, pixels = [];
+var canvas, ctx, W, H, pixels = [], interValCall;
 function m4terial_render(ts) {
   var imageData = ctx.getImageData(0, 0, W, H),
       len = pixels.length,
@@ -26,7 +26,7 @@ function m4terial_render(ts) {
 }
 
 function m4terial_drawFrame(ts){
-  request_requestAnimationFrame[request_requestAnimationFrame.length] = requestAnimationFrame(m4terial_drawFrame, canvas);
+  requestAnimationFrame(m4terial_drawFrame, canvas);
   ctx.fillStyle = '#17293a';
   ctx.fillRect(0, 0, W, H);
   m4terial_render(ts);
@@ -73,7 +73,8 @@ function vt_imaging_plg_m4terial(_self, imaging, audio, div_slide)
 		pixels.push({x: x, y: 500, z: z});
 	  }  
 	}
-	m4terial_drawFrame();
+	m4terial_drawFrame(canvas);
+	
 	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	_self.resizeFix();
 	_self.clearScreenLoading();

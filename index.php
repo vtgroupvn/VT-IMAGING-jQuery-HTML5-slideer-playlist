@@ -20,9 +20,14 @@
 	
 	jQuery(document).ready(function(){
 		var player_color = '<?php echo $color;?>';
+		if (<?php echo $skin?> == 1){
+			var height = jQuery(document).height()-50;
+		}else{
+			var height = jQuery(document).height()-60;
+		}
 		var fn_vt_imaging = jQuery('div#vt-imaging').vt_imaging({
-			form_height: '700',
-			form_width: '900',
+			form_height: height,//'700',
+			form_width: jQuery(document).width()-70,//'900',
 			form_imaging_audio_height: '20',
 			form_imaging_description_height: '100',
 			form_imaging_list_height: '100',
@@ -69,7 +74,7 @@
 				{name:'jackrugile', title: 'jackrugile', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'podrivo', title: 'podrivo', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'syropian', title: 'syropian', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-{name:'HektorW', title: 'HektorW', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},				
+				{name:'HektorW', title: 'HektorW', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},				
 				{name:'nchevobbe', title: 'nchevobbe', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'anshulbansal', title: 'anshulbansal', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'}				
 			],
@@ -84,7 +89,7 @@
 </head>
 <body>
 <form action="index.php" method="post">
-<center><img src="asset/images/jquery-plugins.jpg" alt="jQuery Plugins"/></center>
+<!--<center><img src="asset/images/jquery-plugins.jpg" alt="jQuery Plugins"/></center>-->
 <center>
 	<select name="select_skin" onChange="this.form.submit();">
 		<option value="0" selected="selected">--Select Skin--</option>

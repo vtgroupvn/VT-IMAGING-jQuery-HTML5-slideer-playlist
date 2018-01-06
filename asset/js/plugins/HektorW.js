@@ -4,7 +4,7 @@ let width, height;
 
 
 function HektorW_render(t) {
- 
+
   ctx.clearRect(0, 0, width, height);
   
   ctx.lineWidth = 2;
