@@ -5,8 +5,6 @@
 **/
 (function($){
 	"use strict"
-	
-	
 	jQuery.fn.vt_imaging = function(fn_options){
 		var self = this;
 		if (typeof this == undefined){
@@ -116,7 +114,9 @@
 					self.form_imaging_over_display.html('');
 					self.overlay_resize();
 					self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
-					window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
+					if (window[func_name] != undefined){
+						window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
+					}
 				});
 				jQuery(self).find('div.imaging-hover').hide();
 				jQuery(self).find('div#over-imaging-item-'+(self.currently_active_imaging+1)).show();

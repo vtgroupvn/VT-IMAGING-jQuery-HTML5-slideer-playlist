@@ -92,16 +92,16 @@ function vt_imaging_plg_nchevobbe(_self, imaging, audio, div_slide)
 		  href: _self.options.url_plugin_folder+'/libraries/nchevobbe.css'
 	  });
 	div_slide.append('<figure>'
-+'<svg viewBox="0 0 100 60">'
-  +'<defs>'
-  +'<linearGradient id="grad">'
-    +'<stop stop-color="#005A66"/>'
-    +'<stop offset="100%" stop-color="#D7E1E1"/>'
-  +'</linearGradient>'
-  +'</defs>'
-+'</svg>'
-+'</figure>');
-run_nchevobbe();
+	+'<svg viewBox="0 0 100 60">'
+	  +'<defs>'
+	  +'<linearGradient id="grad">'
+		+'<stop stop-color="#005A66"/>'
+		+'<stop offset="100%" stop-color="#D7E1E1"/>'
+	  +'</linearGradient>'
+	  +'</defs>'
+	+'</svg>'
+	+'</figure>');
+	run_nchevobbe();
 	_self.onCompletePlugin("vt_imaging_plg_nchevobbe", "none");
 	_self.resizeFix();
 	_self.clearScreenLoading();

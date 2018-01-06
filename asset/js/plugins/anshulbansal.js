@@ -37,19 +37,19 @@ function vt_imaging_plg_anshulbansal(_self, imaging, audio, div_slide)
 		  href: _self.options.url_plugin_folder+'/libraries/anshulbansal.css'
 	  });
 	div_slide.append('<section id="anshulbansal">'
-  +'<div class="anshulbansal-loader">'
-    +'<div class="anshulbansal-load a"></div>'
-    +'<div class="anshulbansal-load b"></div>'
-    +'<div class="anshulbansal-load c"></div>'
-    +'<div class="anshulbansal-load d"></div>'
-    +'<div class="anshulbansal-load e"></div>'
-    +'<div class="anshulbansal-load f"></div>'
-    +'<div class="anshulbansal-load g"></div>'
-    +'<div class="anshulbansal-load h"></div>'
-    +'<div class="anshulbansal-load i"></div>'
-    +'<div class="anshulbansal-load j"></div>'
-  +'</div>'
-+'</section>');
+	  +'<div class="anshulbansal-loader">'
+		+'<div class="anshulbansal-load a"></div>'
+		+'<div class="anshulbansal-load b"></div>'
+		+'<div class="anshulbansal-load c"></div>'
+		+'<div class="anshulbansal-load d"></div>'
+		+'<div class="anshulbansal-load e"></div>'
+		+'<div class="anshulbansal-load f"></div>'
+		+'<div class="anshulbansal-load g"></div>'
+		+'<div class="anshulbansal-load h"></div>'
+		+'<div class="anshulbansal-load i"></div>'
+		+'<div class="anshulbansal-load j"></div>'
+	  +'</div>'
+	+'</section>');
 	_self.onCompletePlugin("vt_imaging_plg_anshulbansal", undefined);
 	_self.resizeFix();
 	_self.clearScreenLoading();
