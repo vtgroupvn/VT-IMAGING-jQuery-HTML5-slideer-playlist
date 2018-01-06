@@ -35,7 +35,7 @@ function vt_imaging_plg_srekoble(_self, imaging, audio, div_slide)
 		  href: _self.options.url_plugin_folder+'/libraries/srekoble.css'
 	  });
 	div_slide.append('<div class="srekoble-wrap"><ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></div>');
-	_self.onCompletePlugin("vt_imaging_plg_srekoble", "none");
+	_self.onCompletePlugin("vt_imaging_plg_srekoble", "noimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

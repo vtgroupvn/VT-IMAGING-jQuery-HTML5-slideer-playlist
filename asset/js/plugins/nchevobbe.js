@@ -102,7 +102,7 @@ function vt_imaging_plg_nchevobbe(_self, imaging, audio, div_slide)
 	+'</svg>'
 	+'</figure>');
 	run_nchevobbe();
-	_self.onCompletePlugin("vt_imaging_plg_nchevobbe", "none");
+	_self.onCompletePlugin("vt_imaging_plg_nchevobbe", "noimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

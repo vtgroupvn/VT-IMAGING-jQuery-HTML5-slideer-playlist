@@ -92,7 +92,7 @@ function vt_imaging_plg_HektorW(_self, imaging, audio, div_slide)
 	intervalDraw = setInterval(function(){
 		HektorW_render(performance.now());
 	}, 15);
-	_self.onCompletePlugin("vt_imaging_plg_HektorW", "none");
+	_self.onCompletePlugin("vt_imaging_plg_HektorW", "noimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

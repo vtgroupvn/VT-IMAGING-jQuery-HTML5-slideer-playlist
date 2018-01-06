@@ -106,7 +106,7 @@ function vt_imaging_plg_jackrugile(_self, imaging, audio, div_slide)
 	div_slide.append('<canvas style="margin-top:-'+(old_height/2)+'px;" id="syropian" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
 	canvas = div_slide.find('canvas#syropian')[0];
 	jackrugile_loader(old_width, old_width, '#ea80b0');
-	_self.onCompletePlugin("vt_imaging_plg_jackrugile", "none");
+	_self.onCompletePlugin("vt_imaging_plg_jackrugile", "noimage");
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);
