@@ -1,14 +1,4 @@
-window.requestAnimFrame = (function(callback){
-    return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function(callback){
-        window.setTimeout(callback, 1000 / 60);
-    };
-})();
-var canvas, ctx, time;
+var canvas, ctx, time, interValCall;
 var circles = [];
 var max = 70;
 function getRandomArbitrary (min, max) {
@@ -76,7 +66,7 @@ function draw_syropian(){
 	ctx.clearRect(0,0,canvas.width, canvas.height);
 	ctx.globalCompositeOperation = 'lighter';
 	//Call our super awesome animation method, because setTimeout is for suckers
-	request_requestAnimationFrame[request_requestAnimationFrame.length] = requestAnimFrame(draw_syropian);
+
 	/*var now = new Date().getTime();
 	var dt = now - (time || now);
 	time = now;
@@ -85,6 +75,10 @@ function draw_syropian(){
 	createCircles();
 	updateCircles();
 	renderCircles();
+	clearInterval(interValCall);
+	interValCall = setInterval(function(){
+		draw_syropian();
+	}, 15);
 }
 var analyser;
 function setupAudioContext(audio)
@@ -112,6 +106,7 @@ function getLevelVolume(){
 	return average;
 }
 window.vt_imaging_delete_app = function(){
+	clearInterval(interValCall);
 	delete window['vt_imaging_plg_syropian'];
 }
 function vt_imaging_plg_syropian(_self, imaging, audio, div_slide)

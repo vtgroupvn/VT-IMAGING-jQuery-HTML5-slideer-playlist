@@ -6,7 +6,8 @@ var wave_height = 150,      // Height of wave
     max_brightness = 75,    // Max brightness ( 0 = No Brigthness, 100 = Max Brightness )
     max_blur = 2,           // How much blur to add during moving
     period_factor = 2,      // Period Factor
-    count = 0;              // This just keeps track of where we are in the wave formation
+    count = 0,
+	interValCall;              // This just keeps track of where we are in the wave formation
 
 function manifestinteractive_load(){
 
@@ -51,8 +52,10 @@ function move()
   {
     count = 0;
   }
-  
-  request_requestAnimationFrame[request_requestAnimationFrame.length] = requestAnimationFrame(move);
+  clearInterval(interValCall);
+  interValCall = setInterval(function(){
+	  move();
+  }, 15);
 }
 
 function increase_brightness(hex, percent){

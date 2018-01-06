@@ -1,13 +1,4 @@
-window.requestAnimFrame = (function(){
-return window.requestAnimationFrame   ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame    ||
-    function( callback ){
-      window.setTimeout(callback, 1000 / 60);
-    };
-})();
-
-var iSawTheSin = 0;
+var iSawTheSin = 0, interValCall;
 function nsharmon_render() {
   var c=document.getElementById('nsharmon');
   var ctx=c.getContext('2d');
@@ -26,9 +17,13 @@ function nsharmon_render() {
   if(iSawTheSin > 2*Math.PI) {
     iSawTheSin -= 2*Math.PI;
   }
-  request_requestAnimationFrame[request_requestAnimationFrame.length] = window.requestAnimFrame(nsharmon_render);
+  clearInterval(interValCall);
+  interValCall = setInterval(function(){
+	  nsharmon_render();
+  }, 15);
 }
 window.vt_imaging_delete_app = function(){
+	clearInterval(interValCall);
 	delete window['vt_imaging_plg_nsharmon'];
 }
 function vt_imaging_plg_nsharmon(_self, imaging, audio, div_slide)

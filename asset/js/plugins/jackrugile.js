@@ -1,5 +1,4 @@
-window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
-var canvas;
+var canvas, interValCall;
 function jackrugile_loader(canvas_width, canvas_height, color) {
   var ctx = canvas.getContext( '2d' ),
       cw = canvas.width = canvas_width,
@@ -29,7 +28,10 @@ function jackrugile_loader(canvas_width, canvas_height, color) {
   };
 
   loop = function() {
-    requestAnimFrame( loop )
+	clearInterval(interValCall);
+	interValCall = setInterval(function(){
+		loop();
+	}, 15);
     var now = Date.now(),
     dt = ( now - ot ) / fps;
     ot = now ;
@@ -75,6 +77,7 @@ function jackrugile_loader(canvas_width, canvas_height, color) {
   loop();    
 }
 window.vt_imaging_delete_app = function(){
+	clearInterval(interValCall);
 	delete window['vt_imaging_plg_jackrugile'];
 }
 function vt_imaging_plg_jackrugile(_self, imaging, audio, div_slide)

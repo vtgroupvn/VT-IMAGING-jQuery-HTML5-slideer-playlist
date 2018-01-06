@@ -1,11 +1,10 @@
-var canvas, ctx;
+var canvas, ctx, intervalDraw;
 
 let width, height;
 
 
 function HektorW_render(t) {
-  requestAnimationFrame(HektorW_render);
-  
+ 
   ctx.clearRect(0, 0, width, height);
   
   ctx.lineWidth = 2;
@@ -56,6 +55,7 @@ function HektorW_render(t) {
   
 }
 window.vt_imaging_delete_app = function(){
+	clearInterval(intervalDraw);
 	delete window['vt_imaging_plg_HektorW'];
 }
 function vt_imaging_plg_HektorW(_self, imaging, audio, div_slide)
@@ -89,7 +89,9 @@ function vt_imaging_plg_HektorW(_self, imaging, audio, div_slide)
 	ctx = canvas.getContext('2d');
 	canvas.width = width = imaging.width();
 	canvas.height = height = imaging.height();
-	HektorW_render(performance.now());
+	intervalDraw = setInterval(function(){
+		HektorW_render(performance.now());
+	}, 15);
 	jQuery(document).trigger("slide_next_complete", ['vt-imaging-app', 'none']);
 	_self.resizeFix();
 	_self.clearScreenLoading();

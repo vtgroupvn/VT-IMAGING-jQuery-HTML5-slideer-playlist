@@ -3,7 +3,6 @@
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Donate link: http://vt-group.vn/donate.html
 **/
-var request_requestAnimationFrame = new Array();
 (function($){
 	"use strict"
 	jQuery.fn.vt_imaging_spiral_show_loading = function(intervalTime){
@@ -80,9 +79,6 @@ var request_requestAnimationFrame = new Array();
 			if (window['vt_imaging_delete_app'] != undefined){
 				window['vt_imaging_delete_app']();
 				delete window['vt_imaging_delete_app'];
-			}
-			for(var k in request_requestAnimationFrame){
-				//window.requestAnimationFrame(request_requestAnimationFrame[k]);
 			}
 			var time = new Date();
 			if (window['vt_imaging_plg_'+name] == undefined){
@@ -319,6 +315,9 @@ var request_requestAnimationFrame = new Array();
 				}
 				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from, img_none){
 					self.queue_slide_new_event--;
+					if (self.queue_slide_new_event < 0){
+						self.queue_slide_new_event = 1;
+					}
 					if (trigger_from != 'vt-imaging-app' || self.queue_slide_new_event > 0){return;}
 					if (img_none == undefined){
 						self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);

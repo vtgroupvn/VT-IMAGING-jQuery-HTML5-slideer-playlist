@@ -3,7 +3,7 @@
 var _stage; 				// _sg
 var _stageContext; 			// _sc
 //turn interval on/off
-var _intervalID; 			//_id
+var intervalDraw; 			//_id
 //stage width/height
 var _stageWidth=900; 		//_sw
 var _stageHeight=400; 		//_sh
@@ -56,7 +56,7 @@ function insidedown_init(){
 		window[vBallName].yPos = window[vBallName].yStart = _ballStartYNum + (vCount*_ballSpacingNum); 
 		
 	}
-	_intervalID = setInterval( fEnterFrame,_milliFPS);
+	intervalDraw = setInterval( fEnterFrame,_milliFPS);
 }
 
 function fDrawStage(){
@@ -144,6 +144,7 @@ function fSinD($angle){
 function fClearStage(){_stageContext.clearRect(0,0,_stageWidth,_stageHeight); // clear canvas
 }
 window.vt_imaging_delete_app = function(){
+	clearInterval(intervalDraw);
 	delete window['vt_imaging_plg_insidedown'];
 }
 function vt_imaging_plg_insidedown(_self, imaging, audio, div_slide)
