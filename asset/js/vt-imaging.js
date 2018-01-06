@@ -83,7 +83,6 @@
 			}else{
 				self.currently_active_imaging = index;
 			}
-			self.queue_slide_new_event++;
 		};
 		self.getOldImage = function(){
 			return self.options.imaging_list[self.old_active_imaging];
@@ -101,7 +100,7 @@
 					{
 						if (self.queue_slide_new_events[self.queue_slide_new_events.length-1] == from_name){
 							self.queue_slide_new_events = new Array();
-							if (trigger_from != 'vt-imaging-app' || self.queue_slide_new_event > 0){return;}
+							if (trigger_from != 'vt-imaging-app'){return;}
 							if (img_none == undefined){
 								self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
 							}
