@@ -34,7 +34,7 @@ function vt_imaging_plg_nobitagit(_self, imaging, audio, div_slide)
 		  href: _self.options.url_plugin_folder+'/libraries/nobitagit.css'
 	  });
 	div_slide.append('<div class="nobitagit"></div><div class="nobitagit"></div><div class="nobitagit"></div><div class="nobitagit"></div>');
-	_self.onCompletePlugin("vt_imaging_plg_nobitagit", "noimage");
+	_self.onCompletePlugin("vt_imaging_plg_nobitagit", undefined);
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

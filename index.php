@@ -47,9 +47,9 @@
 			},
 			//[wave, m4terial, default, transform_yscale, transform_swivel,]
 			imaging_list:[
-				{name:'wave', title: 'wave', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},								
-				{name:'laustdeleuran', title: 'laustdeleuran', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'m4terial', title: 'm4terial', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'wave', title: 'wave', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},								
+				{name:'laustdeleuran', title: 'laustdeleuran', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'m4terial', title: 'm4terial', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'stefanweck', title: 'stefanweck', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'default', title: 'Description', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
 				{name:'transform_yscale', title: 'transform_yscale', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/KhocTrongMua.mp3'},
@@ -69,8 +69,8 @@
 				{name:'zoom_topright', title: 'zoom_topright', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/6-t.jpg', src: 'asset/images/6.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},				
 				{name:'zoom_bottomleft', title: 'zoom_bottomleft', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},				
 				{name:'zoom_bottomright', title: 'zoom_bottomright', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
-				{name:'insidedown', title: 'insidedown', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'manifestinteractive', title: 'manifestinteractive', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'insidedown', title: 'insidedown', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'manifestinteractive', title: 'manifestinteractive', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'srekoble', title: 'srekoble', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'nobitagit', title: 'nobitagit', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'marcmalignan', title: 'marcmalignan', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
@@ -78,9 +78,9 @@
 				{name:'jackrugile', title: 'jackrugile', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'podrivo', title: 'podrivo', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'syropian', title: 'syropian', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'HektorW', title: 'HektorW', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},				
-				{name:'nchevobbe', title: 'nchevobbe', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
-				{name:'anshulbansal', title: 'anshulbansal', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/wave.png', audio_src: 'asset/musics/KhocTrongMua.mp3'}			
+				{name:'HektorW', title: 'HektorW', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},				
+				{name:'nchevobbe', title: 'nchevobbe', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'anshulbansal', title: 'anshulbansal', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'}			
 			],
 			url_plugin_folder:'asset/js/plugins/',
 			player_color: player_color,
