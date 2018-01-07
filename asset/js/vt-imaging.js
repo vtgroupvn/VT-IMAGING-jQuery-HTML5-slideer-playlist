@@ -207,8 +207,12 @@
 				'top': self.form_imaging_show.position().top,
 				'left': self.form_imaging_show.position().left,
 				'text-align': 'center',
-				'background':'none'
+				'background':'red',
+				'overflow':'hidden'
 			});
+			if (self.checkBrowser() == 'Chrome'){
+				self.form_imaging_over_display.css({'height': self.form_imaging_show.height()-12});
+			}
 			jQuery(self).find('div.imaging-hover').hide();
 			jQuery(self).find('div#over-imaging-item-'+(self.currently_active_imaging+1)).show();
 			self.loadPluginSource(self.options.imaging_list[self.currently_active_imaging].name);
@@ -614,11 +618,14 @@
 					'display': 'inline-block',
 					'overflow-x': 'none',
 					'overflow-y': 'none',
-					'overflow':'none',
+					'overflow':'hidden',
 					'margin-top': '0px',
 					'background':''
+					
 				});
-				
+				if (self.checkBrowser() == 'Chrome'){
+					self.form_imaging_over_display.css({'height': self.form_imaging_show.height()-12});
+				}
 				if (self.getCurrentImage().name == 'stefanweck'){
 					self.form_imaging_over_display.css({
 						'background-color':'hsl(195, 100%, 7%)'
