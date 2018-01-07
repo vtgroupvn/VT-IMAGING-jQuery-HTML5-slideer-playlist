@@ -51,7 +51,7 @@ function vt_imaging_plg_nsharmon(_self, imaging, audio, div_slide)
 	_self.resizeFix();
 	div_slide.append('<canvas id="nsharmon" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
 	nsharmon_render();
-	_self.onCompletePlugin("vt_imaging_plg_nsharmon", undefined);
+	_self.onCompletePlugin("vt_imaging_plg_nsharmon", "noneimage");
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

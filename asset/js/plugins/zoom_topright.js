@@ -41,7 +41,7 @@ function vt_imaging_plg_zoom_topright(_self, imaging, audio, div_slide)
 			width: '0px', 
 			height: '0px'
 		}, 1500, function(){
-			_self.onCompletePlugin("vt_imaging_plg_zoom_topright", undefined);
+			_self.onCompletePlugin("vt_imaging_plg_zoom_topright", "noneimage");
 	}); 
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

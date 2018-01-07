@@ -149,7 +149,7 @@ function vt_imaging_plg_syropian(_self, imaging, audio, div_slide)
 	
     //Start the initial loop function for the first time
     vt_imaging_application.loop();
-	_self.onCompletePlugin("vt_imaging_plg_syropian", undefined);
+	_self.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
 	div_slide.show();
 	div_slide.css({
 		'background-color':'hsl(195, 100%, 7%)'

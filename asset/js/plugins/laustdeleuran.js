@@ -364,7 +364,7 @@ function vt_imaging_plg_laustdeleuran(_self, imaging, audio, div_slide)
 	canvas.width = imaging.width();
 	canvas.height = imaging.height();
 	laustdeleuran_run();
-	_self.onCompletePlugin("vt_imaging_plg_laustdeleuran", undefined);
+	_self.onCompletePlugin("vt_imaging_plg_laustdeleuran", "noneimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

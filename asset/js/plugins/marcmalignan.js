@@ -43,7 +43,7 @@ function vt_imaging_plg_marcmalignan(_self, imaging, audio, div_slide)
 		+'<div class="marcmalignan-bar"></div>'
 		+'<div class="marcmalignan-bar"></div>'
 	+'</div>');
-	_self.onCompletePlugin("vt_imaging_plg_marcmalignan", undefined);
+	_self.onCompletePlugin("vt_imaging_plg_marcmalignan", "noneimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

@@ -74,7 +74,7 @@ function vt_imaging_plg_m4terial(_self, imaging, audio, div_slide)
 	  }  
 	}
 	m4terial_drawFrame(canvas);
-	_self.onCompletePlugin("vt_imaging_plg_m4terial", undefined);
+	_self.onCompletePlugin("vt_imaging_plg_m4terial", "noneimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){

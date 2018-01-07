@@ -50,7 +50,7 @@ function vt_imaging_plg_anshulbansal(_self, imaging, audio, div_slide)
 		+'<div class="anshulbansal-load j"></div>'
 	  +'</div>'
 	+'</section>');
-	_self.onCompletePlugin("vt_imaging_plg_anshulbansal", undefined);
+	_self.onCompletePlugin("vt_imaging_plg_anshulbansal", "noneimage");
 	_self.resizeFix();
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){
