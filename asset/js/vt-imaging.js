@@ -675,31 +675,6 @@
 			}
 			return browser;
 		};
-		self.createOverLayImaging = function(){
-			self.form_imaging_show_overlay = jQuery('<div />');
-			self.form_imaging_show_overlay.attr('id', 'imaging-orverlay-thum');
-			self.form_imaging_show_overlay.css({
-				'height': self.form_imaging_show.height(), 
-				'width': self.form_imaging_show.width(),
-				'cursor': 'pointer',
-				'position': 'absolute',
-				'display': 'block',
-				'top': self.form_imaging_show.position().top+self.form_imaging_show.height()/2-250,
-				'left': self.form_imaging_show.position().left,
-				'text-align': 'center'
-			});
-			if (self.options.skin > 1){
-				self.form_imaging_show_overlay.css({'top': self.form_imaging_show.position().top+self.form_imaging_show.height()/2-215});
-			}
-			var imaging_overlay_thum = jQuery('<img />');
-			imaging_overlay_thum.attr('src', 'asset/images/'+self.options.player_color.replace('#', '')+'-main-imaging-pause.png');
-			imaging_overlay_thum.attr('width', '80px');
-			imaging_overlay_thum.attr('height', '80px');
-			imaging_overlay_thum.css({'margin-top':self.form_imaging_show.height()/2-50});
-			imaging_overlay_thum.css({'display':'none'});
-			self.form_imaging_show_overlay.append(imaging_overlay_thum);
-			self.form_imaging.append(self.form_imaging_show_overlay);
-		};
 		self.createScreenLoading = function()
 		{
 			var bg_load = jQuery('<div />');

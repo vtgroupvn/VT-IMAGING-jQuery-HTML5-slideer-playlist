@@ -47,18 +47,23 @@ function vt_imaging_plg_transform_swivel(_self, imaging, audio, div_slide)
 	});
 	imaging.css({opacity: 0.5});
 	imaging.find('img').attr('src', _self.getCurrentImage().src);
-	imaging.find('img').css({'width':'0px'});
+	imaging.find('img').css({'width':'200px'});
+	imaging.find('img').css({'height':'200px'});
+	imaging.find('img').css({
+		'margin-top':'100px'
+	});
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
 		imaging.find('img').animate({
 			'height': imaging.height(),
 			'width': _self.form_imaging.width(),
-			'opacity': '1'
+			'opacity': '1',
+			'margin-top':'0px'
 		}, 500, function(){
 			imaging.css({opacity: 1});
 			_self.onCompletePlugin("vt_imaging_plg_transform_swivel", undefined);
 		});
 	});
-	rotateDIV(imaging);
+	rotateDIV(imaging.find('img'));
 	_self.clearScreenLoading();
 	audio.unbind("ended").bind("ended", function(){
 		_self.setActiveImaging(_self.currently_active_imaging+1);

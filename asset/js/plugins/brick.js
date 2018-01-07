@@ -1,5 +1,7 @@
-jQuery.fn.rotateElement = function(width, height){
+jQuery.fn.rotateElement = function(waitTime, width, height){
 	var self = this;
+	self.width = width;
+	self.height = height;
 	self.swivel_n=0;
 	self.swivel_rotINT = null;
 	self.sub_rotate = 50;
@@ -23,16 +25,15 @@ jQuery.fn.rotateElement = function(width, height){
 		jQuery(self).get(0).style.MozTransform="rotate(" + self.swivel_n + "deg)";
 		if (self.swivel_n == 360)
 		{
-			jQuery(self).animate({
-				'width': width,
-				'height': height
-			}, 10, function(){
-				setTimeout(function(){
-					self.rotate_complete = true;
-					//jQuery(self).hide();
-				}, 1000);
-			});
-			clearInterval(self.swivel_rotINT);
+			setTimeout(function(){
+				jQuery(self).css({
+					'width': self.width,
+					'height': self.height
+				});
+				self.rotate_complete = true;
+				clearInterval(self.swivel_rotINT);
+			}, waitTime);
+			
 		}
 	};
 	self.rotateComplete = function(){
@@ -85,9 +86,11 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 	var height = div_slide.height()/element_height;
 	var elements = new Array();
 	var new_src = _self.getCurrentImage().src;
+	waitTime = 50;
 	for(var i=0; i < height; i++){
 		elements[i] = new Array();
 		var position_height = i*element_height;
+		waitTime += 5;
 		for(var n = 0; n < width; n++){
 			var position_width = n*element_width;
 			elements[i][n] = jQuery('<div />');
@@ -116,7 +119,8 @@ function vt_imaging_plg_brick(_self, imaging, audio, div_slide)
 			});
 			elements[i][n].append(child_element);
 			div_slide.append(elements[i][n]);
-			var rotate = child_element.rotateElement(element_width, element_height);
+			waitTime += 5;
+			var rotate = child_element.rotateElement(waitTime, element_width, element_height);
 			rotate.compile();
 			elements[i][n].data('rotate_obj', rotate);
 		}

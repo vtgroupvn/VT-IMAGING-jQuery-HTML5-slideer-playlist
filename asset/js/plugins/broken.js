@@ -36,7 +36,7 @@ function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
 			n - ending column index
 			i - iterator
 		*/
-		var intervalTime = 5000;
+		var intervalTime = 10000;
 		while (k < m && l < n) {
 			/* Print the first row from the remaining rows */
 			for (i = l; i < n; ++i) {
