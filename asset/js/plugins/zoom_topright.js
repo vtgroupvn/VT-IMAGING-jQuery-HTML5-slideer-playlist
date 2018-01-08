@@ -1,43 +1,43 @@
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_zoom_topright'];
 }
-function vt_imaging_plg_zoom_topright(_self, imaging, audio, div_slide)
+function vt_imaging_plg_zoom_topright(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin();
+	VT_Obj.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
 	
-	div_slide.css({
+	VT_Element_Slide.css({
 		'position': 'absolute',
 		'display': 'inline-block',
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+_self.getCurrentImage().src+"') no-repeat center",
+		'background': "url('"+VT_Obj.getCurrentImage().src+"') no-repeat center",
 		'background-color':'none'
 	});
-	imaging.find('img').attr('src', _self.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
 	var img = jQuery('<img />');
 	img.css({
-		'width': imaging.width(), 
-		'height': imaging.height(),
+		'width': VT_Imaging.width(), 
+		'height': VT_Imaging.height(),
 		'z-index': '99',
 		'position': 'absolute',
 		'right': 0,
 		'top': 0,
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+_self.getCurrentImage().src+"') no-repeat center"
+		'background': "url('"+VT_Obj.getCurrentImage().src+"') no-repeat center"
 	});
-	img.attr('src', _self.getOldImage().src);
-	div_slide.append(img);
-	div_slide.find('img').stop()
+	img.attr('src', VT_Obj.getOldImage().src);
+	VT_Element_Slide.append(img);
+	VT_Element_Slide.find('img').stop()
 	.animate({
 			width: '0px', 
 			height: '0px'
 		}, 1500, function(){
-			_self.onCompletePlugin("vt_imaging_plg_zoom_topright", "noneimage");
+			VT_Obj.onCompletePlugin("vt_imaging_plg_zoom_topright", "noneimage");
 	});	
 }

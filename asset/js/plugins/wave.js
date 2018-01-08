@@ -1,8 +1,8 @@
 var analyser;
-function setupAudioContext(audio)
+function setup_AudioContext(VT_Audio)
 {
 	window.context = new AudioContext();
-	video = context.createMediaElementSource(audio[0]);
+	video = context.createMediaElementSource(VT_Audio[0]);
 	analyser = context.createAnalyser(); //we create an analyser
 	analyser.smoothingTimeConstant = 0.9;
 	analyser.fftSize = 512; //the total samples are half the fft size.
@@ -26,34 +26,34 @@ function getLevelVolume(){
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_wave'];
 }
-function vt_imaging_plg_wave(_self, imaging, audio, div_slide)
+function vt_imaging_plg_wave(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	setupAudioContext(audio);
-	jQuery.getScript(_self.options.url_plugin_folder+'/libraries/siriwave.js').done(function(){
+	setup_AudioContext(VT_Audio);
+	jQuery.getScript(VT_Obj.options.url_plugin_folder+'/libraries/siriwave.js').done(function(){
 		var container = jQuery('<div />');
 		container.attr('id', 'wave-container');
 		container.css({
-			'height': div_slide.height(),
-			'width': div_slide.width()
+			'height': VT_Element_Slide.height(),
+			'width': VT_Element_Slide.width()
 		});
-		div_slide.append(container);
+		VT_Element_Slide.append(container);
 		var SW = new SiriWave({
 			style: 'ios9',
-			speed: audio[0].volume,
-			amplitude: audio[0].volume,
+			speed: VT_Audio[0].volume,
+			amplitude: VT_Audio[0].volume,
 			container: container[0],
 			autostart: true,
 		});
-		audio[0].addEventListener('timeupdate', function(){
-			SW.setSpeed(audio[0].volume);
+		VT_Audio[0].addEventListener('timeupdate', function(){
+			SW.setSpeed(VT_Audio[0].volume);
 			SW.setAmplitude(getLevelVolume());
 		});
-		_self.onCompletePlugin("vt_imaging_plg_wave", "noneimage");
+		VT_Obj.onCompletePlugin("vt_imaging_plg_wave", "noneimage");
 	});
 }

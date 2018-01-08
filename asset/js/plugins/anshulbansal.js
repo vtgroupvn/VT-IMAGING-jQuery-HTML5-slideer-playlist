@@ -1,17 +1,17 @@
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_anshulbansal'];
 }
-function vt_imaging_plg_anshulbansal(_self, imaging, audio, div_slide)
+function vt_imaging_plg_anshulbansal(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
-		'height': imaging.height(),
-		'width': imaging.width(),
+	VT_Element_Slide.css({
+		'height': VT_Imaging.height(),
+		'width': VT_Imaging.width(),
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
@@ -20,9 +20,9 @@ function vt_imaging_plg_anshulbansal(_self, imaging, audio, div_slide)
 	  .attr({
 		  type: 'text/css', 
 		  rel: 'stylesheet',
-		  href: _self.options.url_plugin_folder+'/libraries/anshulbansal.css'
+		  href: VT_Obj.options.url_plugin_folder+'/libraries/anshulbansal.css'
 	  });
-	div_slide.append('<section id="anshulbansal">'
+	VT_Element_Slide.append('<section id="anshulbansal">'
 	  +'<div class="anshulbansal-loader">'
 		+'<div class="anshulbansal-load a"></div>'
 		+'<div class="anshulbansal-load b"></div>'
@@ -36,5 +36,5 @@ function vt_imaging_plg_anshulbansal(_self, imaging, audio, div_slide)
 		+'<div class="anshulbansal-load j"></div>'
 	  +'</div>'
 	+'</section>');
-	_self.onCompletePlugin("vt_imaging_plg_anshulbansal", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_anshulbansal", "noneimage");
 }

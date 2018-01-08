@@ -147,19 +147,19 @@ window.vt_imaging_delete_app = function(){
 	clearInterval(intervalDraw);
 	delete window['vt_imaging_plg_insidedown'];
 }
-function vt_imaging_plg_insidedown(_self, imaging, audio, div_slide)
+function vt_imaging_plg_insidedown(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	VT_Element_Slide.css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	div_slide.append('<canvas id="InsideDown" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
+	VT_Element_Slide.append('<canvas id="InsideDown" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
 	insidedown_init();
-	_self.onCompletePlugin("vt_imaging_plg_insidedown", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_insidedown", "noneimage");
 }

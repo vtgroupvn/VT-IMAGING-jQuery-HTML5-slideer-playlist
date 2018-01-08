@@ -23,21 +23,21 @@ function startYRotate()
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_transform_yscale'];
 }
-function vt_imaging_plg_transform_yscale(_self, imaging, audio, div_slide)
+function vt_imaging_plg_transform_yscale(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin();
+	VT_Obj.onStartPlugin();
 	transform_ny = 0;
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	VT_Element_Slide.css({
 		'background-color':'none'
 	});
 	transform_set = false;
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
-		_self.onCompletePlugin("vt_imaging_plg_transform_yscale", undefined);
+		VT_Obj.onCompletePlugin("vt_imaging_plg_transform_yscale", undefined);
 	});
-	rotateYDIV(imaging);
+	rotateYDIV(VT_Imaging);
 }

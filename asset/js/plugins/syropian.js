@@ -81,10 +81,10 @@ function draw_syropian(){
 	}, 15);
 }
 var analyser;
-function setupAudioContext(audio)
+function setup_AudioContext(VT_Audio)
 {
 	window.context = new AudioContext();
-	video = context.createMediaElementSource(audio[0]);
+	video = context.createMediaElementSource(VT_Audio[0]);
 	analyser = context.createAnalyser(); //we create an analyser
 	analyser.smoothingTimeConstant = 0.9;
 	analyser.fftSize = 512; //the total samples are half the fft size.
@@ -109,22 +109,22 @@ window.vt_imaging_delete_app = function(){
 	clearInterval(interValCall);
 	delete window['vt_imaging_plg_syropian'];
 }
-function vt_imaging_plg_syropian(_self, imaging, audio, div_slide)
+function vt_imaging_plg_syropian(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	VT_Element_Slide.css({
 		'display':'block'
 		'background-color':'hsl(195, 100%, 7%)'
 	});
-	div_slide.append('<canvas id="syropian" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
+	VT_Element_Slide.append('<canvas id="syropian" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
 	canvas = document.getElementById("syropian");
 	ctx = canvas.getContext("2d");
-	setupAudioContext(audio);
+	setup_AudioContext(VT_Audio);
 	draw_syropian();
-	_self.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
 }

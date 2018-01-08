@@ -34,24 +34,24 @@ function m4terial_drawFrame(ts){
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_m4terial'];
 }
-function vt_imaging_plg_m4terial(_self, imaging, audio, div_slide)
+function vt_imaging_plg_m4terial(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	VT_Element_Slide.css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	div_slide.append('<canvas id="m4terial" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
+	VT_Element_Slide.append('<canvas id="m4terial" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
 	
 	canvas = document.getElementById('m4terial'),
 		ctx = canvas.getContext('2d'),
-		W = canvas.width = imaging.width(),
-		H = canvas.height = imaging.height(),
+		W = canvas.width = VT_Imaging.width(),
+		H = canvas.height = VT_Imaging.height(),
 		pixels = [];
 
 	for (var x = -300; x < 400; x += 6) {
@@ -60,5 +60,5 @@ function vt_imaging_plg_m4terial(_self, imaging, audio, div_slide)
 	  }  
 	}
 	m4terial_drawFrame(canvas);
-	_self.onCompletePlugin("vt_imaging_plg_m4terial", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_m4terial", "noneimage");
 }

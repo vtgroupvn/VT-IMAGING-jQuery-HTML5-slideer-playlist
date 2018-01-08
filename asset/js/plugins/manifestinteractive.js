@@ -80,15 +80,15 @@ function increase_brightness(hex, percent){
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_manifestinteractive'];
 }
-function vt_imaging_plg_manifestinteractive(_self, imaging, audio, div_slide)
+function vt_imaging_plg_manifestinteractive(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	VT_Element_Slide.css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
@@ -97,9 +97,9 @@ function vt_imaging_plg_manifestinteractive(_self, imaging, audio, div_slide)
 	  .attr({
 		  type: 'text/css', 
 		  rel: 'stylesheet',
-		  href: _self.options.url_plugin_folder+'/libraries/manifestinteractive.css'
+		  href: VT_Obj.options.url_plugin_folder+'/libraries/manifestinteractive.css'
 	  });
-	div_slide.append('<div id="manifestinteractive"></div>');
+	VT_Element_Slide.append('<div id="manifestinteractive"></div>');
 	manifestinteractive_load();
-	_self.onCompletePlugin("vt_imaging_plg_manifestinteractive", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_manifestinteractive", "noneimage");
 }

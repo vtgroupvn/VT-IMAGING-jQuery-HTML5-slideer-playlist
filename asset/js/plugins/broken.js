@@ -17,15 +17,15 @@ jQuery.fn.vt_imaging_spiral_hide_loading = function(intervalTime){
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_broken'];
 }
-function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
+function vt_imaging_plg_broken(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin();
+	VT_Obj.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	_self.print_values.spiralPrintHide = function(spiral_array, sub_interval){
+	VT_Obj.print_values.spiralPrintHide = function(spiral_array, sub_interval){
 		var over_load = new Array(), over_load_item = 0, i = 0,k = 0,l = 0,m = 0,n = 0;
 		m = spiral_array.length;
 		n = spiral_array[0].length;
@@ -86,7 +86,7 @@ function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
 				}
 				if (is_complete){
 					clearInterval(check_complete);
-					_self.onCompletePlugin("vt_imaging_plg_broken", undefined);
+					VT_Obj.onCompletePlugin("vt_imaging_plg_broken", undefined);
 				}
 			}, 50);
 		}
@@ -96,7 +96,7 @@ function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
 	var element_width = 49;
 	while(!mod){
 		element_width++;
-		var extend = div_slide.width()%element_width;
+		var extend = VT_Element_Slide.width()%element_width;
 		if (extend == 0){
 			mod = true;
 		}
@@ -105,16 +105,16 @@ function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
 	var element_height = 30;
 	while(!mod){
 		element_height++;
-		var extend = div_slide.width()%element_height;
+		var extend = VT_Element_Slide.width()%element_height;
 		if (extend == 0){
 			mod = true;
 		}
 	}
-	imaging.find('img').attr('src', _self.getCurrentImage().src);
-	var width = div_slide.width()/element_width;
-	var height = div_slide.height()/element_height;
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	var width = VT_Element_Slide.width()/element_width;
+	var height = VT_Element_Slide.height()/element_height;
 	var elements = new Array();
-	var new_src = _self.getOldImage().src;
+	var new_src = VT_Obj.getOldImage().src;
 	for(var i=0; i < height; i++){
 		elements[i] = new Array();
 		var position_height = i*element_height;
@@ -125,7 +125,7 @@ function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
 			elements[i][n].attr('id', 'over-lay-slide-'+i+'-'+n);
 			elements[i][n].css({
 				'background-image': "url('"+new_src+"')",
-				'background-size': (imaging.width()+'px')+' '+ (imaging.height()+'px'),
+				'background-size': (VT_Imaging.width()+'px')+' '+ (VT_Imaging.height()+'px'),
 				'float': 'left',
 				'height': element_height,
 				'width': element_width,
@@ -133,8 +133,8 @@ function vt_imaging_plg_broken(_self, imaging, audio, div_slide)
 				'opacity': 1,
 				'background-position':('-'+position_width+'px')+' '+('-'+position_height+'px')
 			});
-			div_slide.append(elements[i][n]);
+			VT_Element_Slide.append(elements[i][n]);
 		}
 	}
-	_self.print_values.spiralPrintHide(elements, 50);
+	VT_Obj.print_values.spiralPrintHide(elements, 50);
 }

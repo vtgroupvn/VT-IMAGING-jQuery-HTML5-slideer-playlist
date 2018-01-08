@@ -26,16 +26,16 @@ window.vt_imaging_delete_app = function(){
 	clearInterval(interValCall);
 	delete window['vt_imaging_plg_nsharmon'];
 }
-function vt_imaging_plg_nsharmon(_self, imaging, audio, div_slide)
+function vt_imaging_plg_nsharmon(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	_self.resizeFix();
-	div_slide.append('<canvas id="nsharmon" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
+	VT_Obj.resizeFix();
+	VT_Element_Slide.append('<canvas id="nsharmon" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
 	nsharmon_render();
-	_self.onCompletePlugin("vt_imaging_plg_nsharmon", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_nsharmon", "noneimage");
 }

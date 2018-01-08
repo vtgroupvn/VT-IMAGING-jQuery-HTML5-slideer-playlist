@@ -29,34 +29,34 @@ function startRotate()
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_transform_swivel'];
 }
-function vt_imaging_plg_transform_swivel(_self, imaging, audio, div_slide)
+function vt_imaging_plg_transform_swivel(VT_Obj, VT_Imaging, VT_Audio, SLIDE_Element)
 {
-	_self.onStartPlugin();
+	VT_Obj.onStartPlugin();
 	swivel_n=0;
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	SLIDE_Element.css({
 		'background-color':'none'
 	});
-	imaging.css({opacity: 0.5});
-	imaging.find('img').attr('src', _self.getCurrentImage().src);
-	imaging.find('img').css({'width':'200px'});
-	imaging.find('img').css({'height':'200px'});
-	imaging.find('img').css({
+	VT_Imaging.css({opacity: 0.5});
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').css({'width':'200px'});
+	VT_Imaging.find('img').css({'height':'200px'});
+	VT_Imaging.find('img').css({
 		'margin-top':'100px'
 	});
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
-		imaging.find('img').animate({
-			'height': imaging.height(),
-			'width': _self.form_imaging.width(),
+		VT_Imaging.find('img').animate({
+			'height': VT_Imaging.height(),
+			'width': VT_Obj.form_imaging.width(),
 			'opacity': '1',
 			'margin-top':'0px'
 		}, 500, function(){
-			imaging.css({opacity: 1});
-			_self.onCompletePlugin("vt_imaging_plg_transform_swivel", undefined);
+			VT_Imaging.css({opacity: 1});
+			VT_Obj.onCompletePlugin("vt_imaging_plg_transform_swivel", undefined);
 		});
 	});
 	rotateDIV(imaging.find('img'));

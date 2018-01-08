@@ -13,15 +13,15 @@ function randomIn(min,max)
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_bribbles'];
 }
-function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
+function vt_imaging_plg_bribbles(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin();
+	VT_Obj.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	_self.print_values.bribblesPrintShow = function(spiral_array, sub_interval){
+	VT_Obj.print_values.bribblesPrintShow = function(spiral_array, sub_interval){
 		var animate_time = 50;
 		var loadingInterVal = null;
 		var sub = 5;
@@ -39,14 +39,14 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 				clearInterval(loadingInterVal);
 				loadingInterVal = setInterval(function(){
 					clearInterval(loadingInterVal);
-					_self.onCompletePlugin("vt_imaging_plg_bribbles", undefined);
+					VT_Obj.onCompletePlugin("vt_imaging_plg_bribbles", undefined);
 				}, animate_time);
 			}
 		}
 	};
-	div_slide.css({
+	VT_Element_Slide.css({
 		'position': 'relative',
-		'margin-top': '-'+(_self.form_imaging_show.height()+_self.form_imaging_text.outerHeight()+_self.form_imading_audio.height())+'px',
+		'margin-top': '-'+(VT_Obj.form_imaging_show.height()+VT_Obj.form_imaging_text.outerHeight()+VT_Obj.form_imading_VT_Audio.height())+'px',
 		'top':'-160px',
 		'left':'0px',
 		'display': 'inline-block',
@@ -55,16 +55,16 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 		'overflow':'hidden',
 		'background-color':'none'
 	});
-	if (_self.options.skin == 1){
+	if (VT_Obj.options.skin == 1){
 		var element_width = 90, element_height = 48;
 	}else{
 		var element_width = 77, element_height = 58;
 	}
-	imaging.find('img').attr('src', _self.getCurrentImage().src);
-	var width = div_slide.width()/element_width;
-	var height = div_slide.height()/element_height;
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	var width = VT_Element_Slide.width()/element_width;
+	var height = VT_Element_Slide.height()/element_height;
 	var elements = new Array();
-	var new_src = _self.getCurrentImage().src;
+	var new_src = VT_Obj.getCurrentImage().src;
 	for(var i=0; i < height; i++){
 		elements[i] = new Array();
 		var position_height = i*element_height;
@@ -74,11 +74,11 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 			elements[i][n] = jQuery('<div />');
 			elements[i][n].attr('class', 'over-lay-slide');
 			elements[i][n].attr('id', 'over-lay-slide-'+i+'-'+n);
-			var top = randomIn(div_slide.offset().top - 250, div_slide.offset().top + div_slide.height()-ran_width);
-			if (_self.options.skin == 2){
-				var left = randomIn(div_slide.offset().left-_self.options.form_imaging_list_width - 350, div_slide.offset().left + div_slide.width());
+			var top = randomIn(VT_Element_Slide.offset().top - 250, VT_Element_Slide.offset().top + VT_Element_Slide.height()-ran_width);
+			if (VT_Obj.options.skin == 2){
+				var left = randomIn(VT_Element_Slide.offset().left-VT_Obj.options.form_imaging_list_width - 350, VT_Element_Slide.offset().left + VT_Element_Slide.width());
 			}else{
-				var left = randomIn(div_slide.offset().left-300, div_slide.offset().left + div_slide.width());
+				var left = randomIn(VT_Element_Slide.offset().left-300, VT_Element_Slide.offset().left + VT_Element_Slide.width());
 			}
 			elements[i][n].css({
 				'float': 'left',
@@ -93,8 +93,8 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 				'left': left,
 				'background':getRandomColor()
 			});
-			div_slide.append(elements[i][n]);
+			VT_Element_Slide.append(elements[i][n]);
 		}
 	}
-	_self.print_values.bribblesPrintShow(elements, 100);
+	VT_Obj.print_values.bribblesPrintShow(elements, 100);
 }

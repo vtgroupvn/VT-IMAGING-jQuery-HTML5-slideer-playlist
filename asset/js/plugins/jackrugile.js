@@ -80,16 +80,16 @@ window.vt_imaging_delete_app = function(){
 	clearInterval(interValCall);
 	delete window['vt_imaging_plg_jackrugile'];
 }
-function vt_imaging_plg_jackrugile(_self, imaging, audio, div_slide)
+function vt_imaging_plg_jackrugile(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.append('<canvas style="margin-top:-'+(imaging.height()/2)+'px;" id="syropian" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
-	canvas = div_slide.find('canvas#syropian')[0];
-	jackrugile_loader(imaging.width(), imaging.width(), '#ea80b0');
-	_self.onCompletePlugin("vt_imaging_plg_jackrugile", "noneimage");
+	VT_Element_Slide.append('<canvas style="margin-top:-'+(VT_Imaging.height()/2)+'px;" id="syropian" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
+	canvas = VT_Element_Slide.find('canvas#syropian')[0];
+	jackrugile_loader(VT_Imaging.width(), VT_Imaging.width(), '#ea80b0');
+	VT_Obj.onCompletePlugin("vt_imaging_plg_jackrugile", "noneimage");
 }

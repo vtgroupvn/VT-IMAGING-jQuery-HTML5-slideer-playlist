@@ -206,21 +206,21 @@ class Circle {
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_stefanweck'];
 }
-function vt_imaging_plg_stefanweck(_self, imaging, audio, div_slide)
+function vt_imaging_plg_stefanweck(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.show();
-	div_slide.css({
+	VT_Element_Slide.show();
+	VT_Element_Slide.css({
 		'background-color':'hsl(195, 100%, 7%)'
 	});
-	canvas_width = imaging.width();
-	canvas_height = imaging.height();
-	div_slide.append('<canvas id="canvas">Your browser doesn\'t support canvas</canvas>'
+	canvas_width = VT_Imaging.width();
+	canvas_height = VT_Imaging.height();
+	VT_Element_Slide.append('<canvas id="canvas">Your browser doesn\'t support canvas</canvas>'
 +'<svg xmlns="http://www.w3.org/2000/svg" version="1.1">'
 +'    <defs>'
 +'      <filter id="shadowed-goo">'
@@ -239,12 +239,12 @@ function vt_imaging_plg_stefanweck(_self, imaging, audio, div_slide)
 +'      </filter>'
 +'    </defs>'
 +'</svg>');
-	_self.clearScreenLoading();
+	VT_Obj.clearScreenLoading();
 	vt_imaging_application = new Application();
     //vt_imaging_application the CircleContainer objects
     vt_imaging_application.initializeCircleContainers();
 	
     //Start the initial loop function for the first time
     vt_imaging_application.loop();
-	_self.onCompletePlugin("vt_imaging_plg_stefanweck", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_stefanweck", "noneimage");
 }

@@ -55,25 +55,25 @@ window.vt_imaging_delete_app = function(){
 	clearInterval(intervalDraw);
 	delete window['vt_imaging_plg_HektorW'];
 }
-function vt_imaging_plg_HektorW(_self, imaging, audio, div_slide)
+function vt_imaging_plg_HektorW(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.css({
+	VT_Element_Slide.css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	div_slide.append('<canvas id="HektorW" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
-	canvas = div_slide.find('canvas#HektorW')[0];
+	VT_Element_Slide.append('<canvas id="HektorW" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
+	canvas = VT_Element_Slide.find('canvas#HektorW')[0];
 	ctx = canvas.getContext('2d');
-	canvas.width = width = imaging.width();
-	canvas.height = height = imaging.height();
+	canvas.width = width = VT_Imaging.width();
+	canvas.height = height = VT_Imaging.height();
 	intervalDraw = setInterval(function(){
 		HektorW_render(performance.now());
 	}, 15);
-	_self.onCompletePlugin("vt_imaging_plg_HektorW", "noneimage");
+	VT_Obj.onCompletePlugin("vt_imaging_plg_HektorW", "noneimage");
 }

@@ -329,24 +329,24 @@ function laustdeleuran_run()
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_laustdeleuran'];
 }
-function vt_imaging_plg_laustdeleuran(_self, imaging, audio, div_slide)
+function vt_imaging_plg_laustdeleuran(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin(true);
+	VT_Obj.onStartPlugin(true);
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	div_slide.append('<canvas id="canvas" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
-	canvas = div_slide.find('canvas#canvas')[0];
+	VT_Element_Slide.append('<canvas id="canvas" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
+	canvas = VT_Element_Slide.find('canvas#canvas')[0];
     context = canvas.getContext('2d');
-	canvas.width = imaging.width();
-	canvas.height = imaging.height();
+	canvas.width = VT_Imaging.width();
+	canvas.height = VT_Imaging.height();
 	laustdeleuran_run();
-	_self.onCompletePlugin("vt_imaging_plg_laustdeleuran", "noneimage");
-	div_slide.css({
-		'height': imaging.height(),
-		'width': imaging.width(),
+	VT_Obj.onCompletePlugin("vt_imaging_plg_laustdeleuran", "noneimage");
+	VT_Element_Slide.css({
+		'height': VT_Imaging.height(),
+		'width': VT_Imaging.width(),
 		'overflow': 'hidden',
 		'background': '#000',
 		'background-image': 'radial-gradient(ellipse at center, #111 0%,#000 100%)'

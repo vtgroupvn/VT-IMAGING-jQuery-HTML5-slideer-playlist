@@ -1,15 +1,15 @@
 window.vt_imaging_delete_app = function(){
 	delete window['vt_imaging_plg_lines'];
 }
-function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
+function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 {
-	_self.onStartPlugin();
+	VT_Obj.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function _self.print_values.printFunction = function(){}
+	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	_self.print_values.linesPrintShow = function(print_array, sub_interval){
+	VT_Obj.print_values.linesPrintShow = function(print_array, sub_interval){
 		var animate_time = 500;
 		var loadingInterVal = null;
 		for(var n = 0; n < print_array.length; n++){
@@ -22,7 +22,7 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 			clearInterval(loadingInterVal);
 			loadingInterVal = setInterval(function(){
 				clearInterval(loadingInterVal);
-				_self.onCompletePlugin("vt_imaging_plg_lines", undefined);
+				VT_Obj.onCompletePlugin("vt_imaging_plg_lines", undefined);
 			}, animate_time);
 		}
 	};
@@ -30,16 +30,16 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 	var mod = false;
 	while(!mod){
 		element_width++;
-		var extend = div_slide.width()%element_width;
+		var extend = VT_Element_Slide.width()%element_width;
 		if (extend == 0){
 			mod = true;
 		}
 	}
-	imaging.find('img').attr('src', _self.getCurrentImage().src);
-	var width = imaging.width()/element_width;
-	var height = imaging.height();
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	var width = VT_Imaging.width()/element_width;
+	var height = VT_Imaging.height();
 	var elements = new Array();
-	var new_src = _self.getOldImage().src;
+	var new_src = VT_Obj.getOldImage().src;
 	for(var i=0; i < width; i++){
 		
 		elements[i] = jQuery('<div />');
@@ -57,7 +57,7 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 		});
 		child_element.css({
 			'background-image': "url('"+new_src+"')",
-			'background-size': (imaging.width()+'px')+' '+ (imaging.height()+'px'),
+			'background-size': (VT_Imaging.width()+'px')+' '+ (VT_Imaging.height()+'px'),
 			'float': 'left',
 			'height': height,
 			'width': element_width,
@@ -67,7 +67,7 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 			'background-position':('-'+(element_width * i)+'px')+' '+('-'+height+'px')
 		});
 		elements[i].append(child_element);
-		div_slide.append(elements[i]);
+		VT_Element_Slide.append(elements[i]);
 	}
-	_self.print_values.linesPrintShow(elements, 500);
+	VT_Obj.print_values.linesPrintShow(elements, 500);
 }
