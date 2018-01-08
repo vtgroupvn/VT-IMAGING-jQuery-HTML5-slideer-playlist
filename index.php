@@ -87,7 +87,7 @@
 			skin: <?php echo $skin;?>,//[1,2,3]-have 3 skin
 		});
 		VT_Imaging.compile();
-		//fn_vt_imaging.addNewItem({name:'default', title: 'Description', description: 'Description<br />Description<br />Description<br />Description', thumbnail:'asset/images/3-t.jpg', src: 'asset/images/3.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'});
+		//VT_Imaging.addNewItem({name:'default', title: 'Description', description: 'Description<br />Description<br />Description<br />Description', thumbnail:'asset/images/3-t.jpg', src: 'asset/images/3.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'});
 	});
 </script>
 </head>
