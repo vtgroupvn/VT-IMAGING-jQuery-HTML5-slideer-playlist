@@ -331,33 +331,12 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_laustdeleuran(_self, imaging, audio, div_slide)
 {
-	_self.createScreenLoading();
+	_self.onStartPlugin(true);
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
-	var old_height = imaging.height();
-	var old_width = imaging.width();
-	imaging.find('img').attr('src', 'none');
-	imaging.find('img').attr('alt', '');
-	imaging.css({
-		'height': old_height,
-		'width': old_width,
-		'background':'#000',
-		'display':'inline-block'
-	});
-	div_slide.css({
-		'height': old_height,
-		'width': old_width,
-		'overflow': 'hidden',
-		'background': '#000',
-		'background-image': 'radial-gradient(ellipse at center, #111 0%,#000 100%)'
-	});
 	div_slide.append('<canvas id="canvas" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
 	canvas = div_slide.find('canvas#canvas')[0];
     context = canvas.getContext('2d');
@@ -365,10 +344,11 @@ function vt_imaging_plg_laustdeleuran(_self, imaging, audio, div_slide)
 	canvas.height = imaging.height();
 	laustdeleuran_run();
 	_self.onCompletePlugin("vt_imaging_plg_laustdeleuran", "noneimage");
-	_self.resizeFix();
-	_self.clearScreenLoading();
-	audio.unbind("ended").bind("ended", function(){
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
+	div_slide.css({
+		'height': imaging.height(),
+		'width': imaging.width(),
+		'overflow': 'hidden',
+		'background': '#000',
+		'background-image': 'radial-gradient(ellipse at center, #111 0%,#000 100%)'
 	});
 }

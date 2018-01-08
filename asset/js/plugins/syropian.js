@@ -111,47 +111,20 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_syropian(_self, imaging, audio, div_slide)
 {
-	_self.createScreenLoading();
+	_self.onStartPlugin(true);
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
-	var old_height = imaging.height();
-	var old_width = imaging.width();
-	imaging.find('img').attr('src', 'none');
-	imaging.find('img').attr('alt', '');
-	imaging.css({
-		'height': old_height,
-		'width': old_width,
-		'background':'#FFF',
-		'display':'inline-block'
+	div_slide.css({
+		'display':'block'
+		'background-color':'hsl(195, 100%, 7%)'
 	});
-	_self.resizeFix();
 	div_slide.append('<canvas id="syropian" width="'+imaging.width()+'" height="'+imaging.height()+'"></canvas>');
 	canvas = document.getElementById("syropian");
 	ctx = canvas.getContext("2d");
 	setupAudioContext(audio);
 	draw_syropian();
-	_self.clearScreenLoading();
-	vt_imaging_application = new Application();
-	audio.unbind("ended").bind("ended", function(){
-		vt_imaging_application.deleteApp();
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
-	});
-    //vt_imaging_application the CircleContainer objects
-    vt_imaging_application.initializeCircleContainers();
-	
-    //Start the initial loop function for the first time
-    vt_imaging_application.loop();
 	_self.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
-	div_slide.show();
-	div_slide.css({
-		'background-color':'hsl(195, 100%, 7%)'
-	});
 }

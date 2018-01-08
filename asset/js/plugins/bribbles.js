@@ -15,7 +15,7 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 {
-	_self.createScreenLoading();
+	_self.onStartPlugin();
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
@@ -44,10 +44,6 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 			}
 		}
 	};
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
 	div_slide.css({
 		'position': 'relative',
 		'margin-top': '-'+(_self.form_imaging_show.height()+_self.form_imaging_text.outerHeight()+_self.form_imading_audio.height())+'px',
@@ -100,11 +96,5 @@ function vt_imaging_plg_bribbles(_self, imaging, audio, div_slide)
 			div_slide.append(elements[i][n]);
 		}
 	}
-	_self.clearScreenLoading();
 	_self.print_values.bribblesPrintShow(elements, 100);
-	
-	audio.unbind("ended").bind("ended", function(){
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
-	});
 }

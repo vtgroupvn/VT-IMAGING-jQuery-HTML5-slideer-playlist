@@ -3,7 +3,7 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 {
-	_self.createScreenLoading();
+	_self.onStartPlugin();
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
@@ -26,13 +26,6 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 			}, animate_time);
 		}
 	};
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
-	var old_height = imaging.find('img').height();
-	var old_width = imaging.find('img').width();
-	imaging.find('img').attr('src', 'none');
 	var mod = false;
 	var element_width = 49;
 	while(!mod){
@@ -42,13 +35,6 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 			mod = true;
 		}
 	}
-	imaging.css({
-		'height': old_height,
-		'width': old_width,
-		'background':'#FFF',
-		'display':'inline-block'
-	});
-	_self.resizeFix();
 	div_slide.css({
 		'height': imaging.height(), 
 		'width': imaging.width(),
@@ -100,11 +86,5 @@ function vt_imaging_plg_louvers(_self, imaging, audio, div_slide)
 		elements[i].append(child_element);
 		div_slide.append(elements[i]);
 	}
-	_self.clearScreenLoading();
 	_self.print_values.louversPrintShow(elements, 500);
-	
-	audio.unbind("ended").bind("ended", function(){
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
-	});
 }

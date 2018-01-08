@@ -66,8 +66,33 @@
 				jQuery(document).trigger('vt_loaded_plg', ['vt_imaging_plg_'+name]);
 			}
 		};
+		self.onStartPlugin = function(create_screen_loading){
+			if (create_screen_loading != undefined){
+				self.createScreenLoading();
+			}
+			self.form_imading_audio.find('source').attr('src', self.getCurrentImage().audio_src);
+			self.form_imading_audio.find('source').attr('type', 'audio/mpeg');
+			self.form_imading_audio[0].load();
+			self.form_imading_audio[0].play();
+			var old_height = self.form_imaging_show.height();
+			var old_width = self.form_imaging_show.width();
+			self.form_imaging_show.find('img').attr('src', 'none');
+			self.form_imaging_show.find('img').attr('alt', '');
+			self.form_imaging_show.css({
+				'height': old_height,
+				'width': old_width,
+				'background':'#FFF',
+				'display':'inline-block'
+			});
+		};
 		self.onCompletePlugin = function(from_name, extend){
+			self.form_imading_audio.unbind("ended").bind("ended", function(){
+				self.setActiveImaging(self.currently_active_imaging+1);
+				self.loadImaging();
+			});
 			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app", from_name, extend]);
+			self.resizeFix();
+			self.clearScreenLoading();
 		};
 		/**Add function to print**/
 		self.print_values ={};

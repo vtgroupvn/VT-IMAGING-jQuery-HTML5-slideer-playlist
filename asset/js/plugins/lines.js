@@ -3,7 +3,7 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 {
-	_self.createScreenLoading();
+	_self.onStartPlugin();
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
@@ -26,10 +26,6 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 			}, animate_time);
 		}
 	};
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
 	var element_width = 49;
 	var mod = false;
 	while(!mod){
@@ -73,11 +69,5 @@ function vt_imaging_plg_lines(_self, imaging, audio, div_slide)
 		elements[i].append(child_element);
 		div_slide.append(elements[i]);
 	}
-	_self.clearScreenLoading();
 	_self.print_values.linesPrintShow(elements, 500);
-	
-	audio.unbind("ended").bind("ended", function(){
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
-	});
 }

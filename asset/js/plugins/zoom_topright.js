@@ -3,16 +3,13 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_zoom_topright(_self, imaging, audio, div_slide)
 {
-	//_self.createScreenLoading();
+	_self.onStartPlugin();
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
+	
 	div_slide.css({
 		'position': 'absolute',
 		'display': 'inline-block',
@@ -42,9 +39,5 @@ function vt_imaging_plg_zoom_topright(_self, imaging, audio, div_slide)
 			height: '0px'
 		}, 1500, function(){
 			_self.onCompletePlugin("vt_imaging_plg_zoom_topright", "noneimage");
-	}); 
-	audio.unbind("ended").bind("ended", function(){
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
-	});
+	});	
 }

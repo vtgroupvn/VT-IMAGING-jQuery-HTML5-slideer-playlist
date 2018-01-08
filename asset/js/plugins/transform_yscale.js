@@ -25,17 +25,13 @@ window.vt_imaging_delete_app = function(){
 }
 function vt_imaging_plg_transform_yscale(_self, imaging, audio, div_slide)
 {
-	_self.createScreenLoading();
+	_self.onStartPlugin();
 	transform_ny = 0;
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	audio.find('source').attr('src', _self.getCurrentImage().audio_src);
-	audio.find('source').attr('type', 'audio/mpeg');
-	audio[0].load();
-	audio[0].play();
 	div_slide.css({
 		'background-color':'none'
 	});
@@ -44,9 +40,4 @@ function vt_imaging_plg_transform_yscale(_self, imaging, audio, div_slide)
 		_self.onCompletePlugin("vt_imaging_plg_transform_yscale", undefined);
 	});
 	rotateYDIV(imaging);
-	_self.clearScreenLoading();
-	audio.unbind("ended").bind("ended", function(){
-		_self.setActiveImaging(_self.currently_active_imaging+1);
-		_self.loadImaging();
-	});
 }
