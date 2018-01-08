@@ -70,10 +70,10 @@
 			if (create_screen_loading != undefined){
 				self.createScreenLoading();
 			}
-			self.form_imading_audio.find('source').attr('src', self.getCurrentImage().audio_src);
-			self.form_imading_audio.find('source').attr('type', 'audio/mpeg');
-			self.form_imading_audio[0].load();
-			self.form_imading_audio[0].play();
+			self.form_imaging_audio.find('source').attr('src', self.getCurrentImage().audio_src);
+			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
+			self.form_imaging_audio[0].load();
+			self.form_imaging_audio[0].play();
 			var old_height = self.form_imaging_show.height();
 			var old_width = self.form_imaging_show.width();
 			self.form_imaging_show.find('img').attr('src', 'none');
@@ -86,7 +86,7 @@
 			});
 		};
 		self.onCompletePlugin = function(from_name, extend){
-			self.form_imading_audio.unbind("ended").bind("ended", function(){
+			self.form_imaging_audio.unbind("ended").bind("ended", function(){
 				self.setActiveImaging(self.currently_active_imaging+1);
 				self.loadImaging();
 			});
@@ -140,7 +140,7 @@
 					self.overlay_resize();
 					self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
 					if (window[func_name] != undefined){
-						window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
+						window[func_name](self, self.form_imaging_show, self.form_imaging_audio, self.form_imaging_over_display);
 					}
 				});
 				jQuery(self).find('div.imaging-hover').hide();
@@ -169,19 +169,19 @@
 			self.form_imaging_show_img.attr('src', self.options.imaging_list[self.currently_active_imaging].src);
 			self.form_imaging_show.append(self.form_imaging_show_img);
 			self.form_imaging.append(self.form_imaging_show);
-			self.form_imading_audio = jQuery('<audio />');
-			self.form_imading_audio.css({
+			self.form_imaging_audio = jQuery('<audio />');
+			self.form_imaging_audio.css({
 				'height': self.options.form_imaging_audio_height,
 				'width': '100%'
 			});
-			self.form_imading_audio.attr('controls', 'controls');
-			self.form_imading_audio.attr('crossOrigin', 'anonymous');
+			self.form_imaging_audio.attr('controls', 'controls');
+			self.form_imaging_audio.attr('crossOrigin', 'anonymous');
 			self.form_imaging_audio_source = jQuery('<source />');
 			self.form_imaging_audio_source.attr('src', self.options.imaging_list[self.currently_active_imaging].audio_src);
 			self.form_imaging_audio_source.attr('type', 'audio/mpeg');
-			self.form_imading_audio.append(self.form_imaging_audio_source);
-			self.form_imading_audio[0].play();			
-			self.form_imaging.append(self.form_imading_audio);			
+			self.form_imaging_audio.append(self.form_imaging_audio_source);
+			self.form_imaging_audio[0].play();			
+			self.form_imaging.append(self.form_imaging_audio);			
 			self.form_imaging_text = jQuery('<div />');
 			self.form_imaging_text.css({
 				'height': 'auto',
@@ -245,7 +245,7 @@
 				self.overlay_resize();
 				self.form_imaging_over_display.html('');
 				self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
-				window[func_name](self, self.form_imaging_show, self.form_imading_audio, self.form_imaging_over_display);
+				window[func_name](self, self.form_imaging_show, self.form_imaging_audio, self.form_imaging_over_display);
 			});
 		};
 		self.createForm = function(){
@@ -668,22 +668,22 @@
 					'text-align': 'center'
 				});
 				self.slide_imaging.css({
-					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imading_audio.height()
+					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imaging_audio.height()
 				});
 				self.main_form.css({
-					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imading_audio.height()
+					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imaging_audio.height()
 				});
 				
 				jQuery(self).css({'display': 'block'});
 			}else{
 				self.main_imaging.css({
-					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imading_audio.height()
+					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imaging_audio.height()
 				});
 				self.form_imaging.css({
-					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imading_audio.height()
+					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.form_imaging_audio.height()
 				});
 				self.main_form.css({
-					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.slide_imaging.outerHeight()+self.form_imading_audio.height()
+					'height': self.form_imaging_show.height()+self.form_imaging_text.outerHeight()+self.slide_imaging.outerHeight()+self.form_imaging_audio.height()
 				});
 			}
 			self.overlay_resize();
