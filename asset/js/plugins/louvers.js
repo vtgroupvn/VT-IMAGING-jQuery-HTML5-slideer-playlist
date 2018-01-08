@@ -36,13 +36,13 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		}
 	}
 	VT_Element_Slide.css({
-		'height': imaging.height(), 
-		'width': imaging.width(),
+		'height': VT_Imaging.height(), 
+		'width': VT_Imaging.width(),
 		'cursor': 'pointer',
 		'position': 'absolute',
 		'display': 'inline-block',
-		'top': imaging.position().top,
-		'left': imaging.position().left,
+		'top': VT_Imaging.position().top,
+		'left': VT_Imaging.position().left,
 		'text-align': 'center',
 		'background':'none',
 		'display': 'inline-block',
@@ -52,8 +52,8 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		'margin-top': '0px',
 		'background-color':'none'
 	});
-	var width = imaging.width()/element_width;
-	var height = imaging.height();
+	var width = VT_Imaging.width()/element_width;
+	var height = VT_Imaging.height();
 	var elements = new Array();
 	var new_src = VT_Obj.getCurrentImaging().src;
 	for(var i=0; i < width; i++){
@@ -73,7 +73,7 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		});
 		child_element.css({
 			'background-image': "url('"+new_src+"')",
-			'background-size': (imaging.width()+'px')+' '+ (imaging.height()+'px'),
+			'background-size': (VT_Imaging.width()+'px')+' '+ (VT_Imaging.height()+'px'),
 			'float': 'left',
 			'height': height,
 			'width': '0px',
