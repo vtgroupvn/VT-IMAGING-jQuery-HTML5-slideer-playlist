@@ -113,7 +113,7 @@ function vt_imaging_plg_default(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 	var width = VT_Element_Slide.width()/element_width;
 	var height = VT_Element_Slide.height()/element_height;
 	var elements = new Array();
-	var new_src = VT_Obj.getCurrentImage().src;
+	var new_src = VT_Obj.getCurrentImaging().src;
 	for(var i=0; i < height; i++){
 		elements[i] = new Array();
 		var position_height = i*element_height;

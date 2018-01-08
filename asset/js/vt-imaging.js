@@ -70,7 +70,7 @@
 			if (create_screen_loading != undefined){
 				self.createScreenLoading();
 			}
-			self.form_imaging_audio.find('source').attr('src', self.getCurrentImage().audio_src);
+			self.form_imaging_audio.find('source').attr('src', self.getCurrentImaging().audio_src);
 			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
 			self.form_imaging_audio[0].load();
 			self.form_imaging_audio[0].play();
@@ -110,7 +110,7 @@
 		self.getOldImage = function(){
 			return self.options.imaging_list[self.old_active_imaging];
 		};
-		self.getCurrentImage = function(){
+		self.getCurrentImaging = function(){
 			return self.options.imaging_list[self.currently_active_imaging];
 		};
 		self.loadImaging = function(){
@@ -125,10 +125,10 @@
 							self.queue_slide_new_events = new Array();
 							if (trigger_from != 'vt-imaging-app'){return;}
 							if (img_none == undefined){
-								self.form_imaging_show.find('img').attr('src', self.getCurrentImage().src);
+								self.form_imaging_show.find('img').attr('src', self.getCurrentImaging().src);
 							}
-							self.form_imaging_titlte.html(self.getCurrentImage().title);
-							self.form_imaging_description.html(self.getCurrentImage().description);
+							self.form_imaging_titlte.html(self.getCurrentImaging().title);
+							self.form_imaging_description.html(self.getCurrentImaging().description);
 							self.resizeFix();
 							self.form_imaging_over_display.hide();
 						}
@@ -651,7 +651,7 @@
 				if (self.checkBrowser() == 'Chrome'){
 					self.form_imaging_over_display.css({'height': self.form_imaging_show.height()-12});
 				}
-				if (self.getCurrentImage().name == 'stefanweck'){
+				if (self.getCurrentImaging().name == 'stefanweck'){
 					self.form_imaging_over_display.css({
 						'background-color':'hsl(195, 100%, 7%)'
 					});

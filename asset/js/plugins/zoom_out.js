@@ -15,14 +15,14 @@ function vt_imaging_plg_zoom_out(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+VT_Obj.getOldImage().src+"') no-repeat center",
+		'background': "url('"+VT_Obj.getOldImaging().src+"') no-repeat center",
 		'text-align': 'center','margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
 			
 	});
 	VT_Element_Slide.attr('align', 'center');
-	VT_Imaging.find('img').attr('src', VT_Obj.getOldImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getOldImaging().src);
 	var center = jQuery('<center/>');
 	var img = jQuery('<div />');
 	img.css({
@@ -32,7 +32,7 @@ function vt_imaging_plg_zoom_out(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		'position': 'relative',
 		'border-radius': '60%',
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+VT_Obj.getCurrentImage().src+"') no-repeat center",	
+		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center",	
 		'margin':'auto',
 		'vertical-align': 'middle',
 		'margin-top': VT_Element_Slide.height()/2,

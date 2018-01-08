@@ -30,7 +30,7 @@ function vt_imaging_plg_brickhidetop(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Sl
 	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
 	var mod = false;
 	var element_width = 49;
 	while(!mod){
@@ -52,7 +52,7 @@ function vt_imaging_plg_brickhidetop(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Sl
 	var width = VT_Element_Slide.width()/element_width;
 	var height = VT_Element_Slide.height()/element_height;
 	var elements = new Array();
-	var old_src = VT_Obj.getOldImage().src;
+	var old_src = VT_Obj.getOldImaging().src;
 	var animateTime = 5000;
 	for(var i=0; i < height; i++){
 		animateTime -= 30;

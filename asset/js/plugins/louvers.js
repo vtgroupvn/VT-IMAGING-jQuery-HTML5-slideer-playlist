@@ -55,7 +55,7 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 	var width = imaging.width()/element_width;
 	var height = imaging.height();
 	var elements = new Array();
-	var new_src = VT_Obj.getCurrentImage().src;
+	var new_src = VT_Obj.getCurrentImaging().src;
 	for(var i=0; i < width; i++){
 		
 		elements[i] = jQuery('<div />');

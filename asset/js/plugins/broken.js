@@ -110,11 +110,11 @@ function vt_imaging_plg_broken(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			mod = true;
 		}
 	}
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
 	var width = VT_Element_Slide.width()/element_width;
 	var height = VT_Element_Slide.height()/element_height;
 	var elements = new Array();
-	var new_src = VT_Obj.getOldImage().src;
+	var new_src = VT_Obj.getOldImaging().src;
 	for(var i=0; i < height; i++){
 		elements[i] = new Array();
 		var position_height = i*element_height;

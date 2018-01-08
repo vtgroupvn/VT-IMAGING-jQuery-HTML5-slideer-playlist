@@ -35,11 +35,11 @@ function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			mod = true;
 		}
 	}
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
 	var width = VT_Imaging.width()/element_width;
 	var height = VT_Imaging.height();
 	var elements = new Array();
-	var new_src = VT_Obj.getOldImage().src;
+	var new_src = VT_Obj.getOldImaging().src;
 	for(var i=0; i < width; i++){
 		
 		elements[i] = jQuery('<div />');

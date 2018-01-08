@@ -15,14 +15,14 @@ function vt_imaging_plg_zoom_in_square(VT_Obj, VT_Imaging, VT_Audio, VT_Element_
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+VT_Obj.getCurrentImage().src+"') no-repeat center",
+		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center",
 		'text-align': 'center','margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
 			
 	});
 	VT_Element_Slide.attr('align', 'center');
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
 	var center = jQuery('<center/>');
 	var img = jQuery('<div />');
 	img.css({
@@ -31,7 +31,7 @@ function vt_imaging_plg_zoom_in_square(VT_Obj, VT_Imaging, VT_Audio, VT_Element_
 		'z-index': '99',
 		'position': 'relative',
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+VT_Obj.getOldImage().src+"') no-repeat center",	
+		'background': "url('"+VT_Obj.getOldImaging().src+"') no-repeat center",	
 		'margin':'auto',
 		'vertical-align': 'middle'		
 	});

@@ -42,7 +42,7 @@ function vt_imaging_plg_transform_swivel(VT_Obj, VT_Imaging, VT_Audio, SLIDE_Ele
 		'background-color':'none'
 	});
 	VT_Imaging.css({opacity: 0.5});
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
 	VT_Imaging.find('img').css({'width':'200px'});
 	VT_Imaging.find('img').css({'height':'200px'});
 	VT_Imaging.find('img').css({

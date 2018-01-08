@@ -16,10 +16,10 @@ function vt_imaging_plg_zoom_topright(VT_Obj, VT_Imaging, VT_Audio, VT_Element_S
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+VT_Obj.getCurrentImage().src+"') no-repeat center",
+		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center",
 		'background-color':'none'
 	});
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImage().src);
+	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
 	var img = jQuery('<img />');
 	img.css({
 		'width': VT_Imaging.width(), 
@@ -29,9 +29,9 @@ function vt_imaging_plg_zoom_topright(VT_Obj, VT_Imaging, VT_Audio, VT_Element_S
 		'right': 0,
 		'top': 0,
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+VT_Obj.getCurrentImage().src+"') no-repeat center"
+		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center"
 	});
-	img.attr('src', VT_Obj.getOldImage().src);
+	img.attr('src', VT_Obj.getOldImaging().src);
 	VT_Element_Slide.append(img);
 	VT_Element_Slide.find('img').stop()
 	.animate({
