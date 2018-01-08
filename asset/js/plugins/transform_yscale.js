@@ -32,6 +32,7 @@ function vt_imaging_plg_transform_yscale(VT_Obj, VT_Imaging, VT_Audio, VT_Elemen
 	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
 	*
 	**/
+	VT_Imaging.find('img').attr('src', VT_Obj.getOldImaging().src);
 	VT_Element_Slide.css({
 		'background-color':'none'
 	});
