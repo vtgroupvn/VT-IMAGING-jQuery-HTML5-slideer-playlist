@@ -59,5 +59,5 @@ function vt_imaging_plg_transform_swivel(VT_Obj, VT_Imaging, VT_Audio, SLIDE_Ele
 			VT_Obj.onCompletePlugin("vt_imaging_plg_transform_swivel", undefined);
 		});
 	});
-	rotateDIV(imaging.find('img'));
+	rotateDIV(VT_Imaging.find('img'));
 }

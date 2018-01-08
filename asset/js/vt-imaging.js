@@ -74,13 +74,11 @@
 			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
 			self.form_imaging_audio[0].load();
 			self.form_imaging_audio[0].play();
-			var old_height = self.form_imaging_show.height();
-			var old_width = self.form_imaging_show.width();
 			self.form_imaging_show.find('img').attr('src', 'none');
 			self.form_imaging_show.find('img').attr('alt', '');
 			self.form_imaging_show.css({
-				'height': old_height,
-				'width': old_width,
+				'height': (parseInt(self.options.form_height)-parseInt(self.options.form_imaging_audio_height) - parseInt(self.options.form_imaging_description_height)-parseInt(self.options.form_imaging_list_height))+'px', 
+				'width': self.options.form_width+'px',
 				'background':'#FFF',
 				'display':'inline-block'
 			});
@@ -398,7 +396,6 @@
 							'display': 'inline-block',
 							'text-align': 'center'
 						});
-
 					}
 					self.list_imaging.append(imaging);
 					var imaging_thum = jQuery('<img />');

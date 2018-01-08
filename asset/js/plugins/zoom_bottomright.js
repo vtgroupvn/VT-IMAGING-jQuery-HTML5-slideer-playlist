@@ -33,7 +33,7 @@ function vt_imaging_plg_zoom_bottomright(VT_Obj, VT_Imaging, VT_Audio, VT_Elemen
 	img.attr('src', VT_Obj.getOldImaging().src);
 	VT_Element_Slide.append(img);
 	VT_Element_Slide.find('img').stop()
-	.animate({			
+	.animate({
 			width: '0px',
 			height: '0px',
 			top: VT_Imaging.position().top + VT_Imaging.height(),
