@@ -25,7 +25,7 @@
 		}else{
 			var height = jQuery(document).height()-60;
 		}
-		var fn_vt_imaging = jQuery('div#vt-imaging').vt_imaging({
+		var VT_Imaging = jQuery('div#vt-imaging').vt_imaging({
 			form_height: height,//'700',
 			form_width: jQuery(document).width()-70,//'900',
 			form_imaging_audio_height: '20',
@@ -69,7 +69,7 @@
 				{name:'zoom_topright', title: 'zoom_topright', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/6-t.jpg', src: 'asset/images/6.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},				
 				{name:'zoom_bottomleft', title: 'zoom_bottomleft', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/1-t.jpg', src: 'asset/images/1.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},				
 				{name:'zoom_bottomright', title: 'zoom_bottomright', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/2-t.jpg', src: 'asset/images/2.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'},
-				{name:'insidedown', title: 'insidedown', description: 'Description', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
+				{name:'insidedown', title: 'insidedown', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'manifestinteractive', title: 'manifestinteractive', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/app-img.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'srekoble', title: 'srekoble', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
 				{name:'nobitagit', title: 'nobitagit', description: 'Contact infor.vtgroup@gmail.com. Skype: cuongvt2608', thumbnail:'asset/images/app-icon.png', src: 'asset/images/stefanweck.png', audio_src: 'asset/musics/KhocTrongMua.mp3'},
@@ -86,7 +86,7 @@
 			player_color: player_color,
 			skin: <?php echo $skin;?>,//[1,2,3]-have 3 skin
 		});
-		fn_vt_imaging.compile();
+		VT_Imaging.compile();
 		//fn_vt_imaging.addNewItem({name:'default', title: 'Description', description: 'Description<br />Description<br />Description<br />Description', thumbnail:'asset/images/3-t.jpg', src: 'asset/images/3.jpg', audio_src: 'asset/musics/duongdendinhvinhquang.mp3'});
 	});
 </script>
@@ -107,6 +107,7 @@
 		<option value="#FFAA00" <?php if ($color == '#FFAA00'){echo 'selected="selected"';}?>>Yellow</option>
 		<option value="#A60000" <?php if ($color == '#A60000'){echo 'selected="selected"';}?>>Red</option>
 	</select>
+	<a href="https://github.com/vtgroupvn/VT-IMAGING-jQuery-HTML5-slideer-playlist">Checkout this script</a>
 </center>
 <div id="vt-imaging"></div>
 </form>
