@@ -81,16 +81,23 @@
 			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
 			self.form_imaging_audio[0].load();
 			self.form_imaging_audio[0].play();
-			var old_height = self.form_imaging_show.find('img').height();
-			var old_width = self.form_imaging_show.find('img').width();
 			self.form_imaging_show.find('img').attr('src', 'none');
 			self.form_imaging_show.find('img').attr('alt', '');
-			self.form_imaging_show.css({
-				'height': old_height, 
-				'width': '100%',
-				'background':'#FFF',
-				'display':'inline-block'
-			});
+			if (self.options.skin == 1){
+				self.form_imaging_show.css({
+					'height': (parseInt(self.options.form_height)-parseInt(self.options.form_imaging_audio_height) - parseInt(self.options.form_imaging_description_height)-parseInt(self.options.form_imaging_list_height))+'px', 
+					'width': '100%',
+					'background':'#FFF',
+					'display':'inline-block'
+				});
+			}else{
+				self.form_imaging_show.css({
+					'height': self.options.form_height - self.options.form_imaging_description_height - self.options.form_imaging_audio_height, 
+					'width': '100%',
+					'background':'#FFF',
+					'display':'inline-block'					
+				});
+			}
 		};
 		self.onCompletePlugin = function(from_name, extend){
 			self.form_imaging_audio.unbind("ended").bind("ended", function(){
