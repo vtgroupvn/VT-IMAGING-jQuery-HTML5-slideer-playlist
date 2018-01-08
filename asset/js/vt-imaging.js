@@ -81,11 +81,13 @@
 			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
 			self.form_imaging_audio[0].load();
 			self.form_imaging_audio[0].play();
+			var old_height = self.form_imaging_show.find('img').height();
+			var old_width = self.form_imaging_show.find('img').width();
 			self.form_imaging_show.find('img').attr('src', 'none');
 			self.form_imaging_show.find('img').attr('alt', '');
 			self.form_imaging_show.css({
-				'height': (parseInt(self.options.form_height)-parseInt(self.options.form_imaging_audio_height) - parseInt(self.options.form_imaging_description_height)-parseInt(self.options.form_imaging_list_height))+'px', 
-				'width': self.options.form_width+'px',
+				'height': old_height, 
+				'width': '100%',
 				'background':'#FFF',
 				'display':'inline-block'
 			});
@@ -658,6 +660,21 @@
 			}
 		};
 		self.resizeForm = function(){
+			if (jQuery(self).parents('div').length == 0){
+				if (self.options.skin == 1){
+					self.options.form_height = jQuery(window).height()-50;
+				}else{
+					self.options.form_height = jQuery(window).height()-60;
+				}
+				self.options.form_width = jQuery(window).width() - 70;
+			}else{
+				if (self.options.skin == 1){
+					self.options.form_height = jQuery(self).height()-50;
+				}else{
+					self.options.form_height = jQuery(self).height()-60;
+				}
+				self.options.form_width = jQuery(self).width() - 70;
+			}
 			self.main_form.css({
 				'width': self.options.form_width,
 				'height': self.options.form_height,
@@ -889,24 +906,8 @@
 			}
 		};
 		self.compile = function(){
-			jQuery(window).unbind("resize").resize(function(){
-				if (jQuery(self).parents('div').length == 0){
-					if (self.options.skin == 1){
-						self.options.form_height = jQuery(window).height()-50;
-					}else{
-						self.options.form_height = jQuery(window).height()-60;
-					}
-					self.options.form_width = jQuery(window).width() - 70;
-				}else{
-					if (self.options.skin == 1){
-						self.options.form_height = jQuery(self).height()-50;
-					}else{
-						self.options.form_height = jQuery(self).height()-60;
-					}
-					self.options.form_width = jQuery(self).width() - 70;
-				}
+			jQuery(window).unbind("resize").resize(function(){		
 				self.resizeForm();
-				self.resizeFix();
 			});
 			self.createForm();
 			self.createFormList();
