@@ -12,13 +12,7 @@ function vt_imaging_plg_marcmalignan(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Sl
 	VT_Element_Slide.css({
 		'background': 'radial-gradient(#888, #444)'
 	});
-	jQuery('<link>')
-	  .appendTo('head')
-	  .attr({
-		  type: 'text/css', 
-		  rel: 'stylesheet',
-		  href: VT_Obj.options.url_plugin_folder+'/libraries/marcmalignan.css'
-	  });
+	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/marcmalignan.css');
 	VT_Element_Slide.append('<div id="marcmalignan-loader">'
 		+'<div class="marcmalignan-bar"></div>'
 		+'<div class="marcmalignan-bar"></div>'

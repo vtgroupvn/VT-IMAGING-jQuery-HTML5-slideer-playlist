@@ -27,6 +27,12 @@ function startRotate()
 	}
 }
 window.vt_imaging_delete_app = function(){
+	delete window['swivel_x'];
+	delete window['swivel_n'];
+	delete window['swivel_rotINT'];
+	delete window['sub_rotate'];
+	delete window['rotateDIV'];
+	delete window['startRotate'];
 	delete window['vt_imaging_plg_transform_swivel'];
 }
 function vt_imaging_plg_transform_swivel(VT_Obj, VT_Imaging, VT_Audio, SLIDE_Element)

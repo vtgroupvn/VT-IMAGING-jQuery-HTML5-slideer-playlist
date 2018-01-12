@@ -15,13 +15,7 @@ function vt_imaging_plg_anshulbansal(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Sl
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	jQuery('<link>')
-	  .appendTo('head')
-	  .attr({
-		  type: 'text/css', 
-		  rel: 'stylesheet',
-		  href: VT_Obj.options.url_plugin_folder+'/libraries/anshulbansal.css'
-	  });
+	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/anshulbansal.css');
 	VT_Element_Slide.append('<section id="anshulbansal">'
 	  +'<div class="anshulbansal-loader">'
 		+'<div class="anshulbansal-load a"></div>'

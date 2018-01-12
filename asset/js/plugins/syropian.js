@@ -107,6 +107,9 @@ function getLevelVolume(){
 }
 window.vt_imaging_delete_app = function(){
 	clearInterval(interValCall);
+	delete window['getLevelVolume'];
+	delete window['setup_AudioContext'];
+	delete window['draw_syropian'];
 	delete window['vt_imaging_plg_syropian'];
 }
 function vt_imaging_plg_syropian(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)

@@ -92,13 +92,7 @@ function vt_imaging_plg_manifestinteractive(VT_Obj, VT_Imaging, VT_Audio, VT_Ele
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	jQuery('<link>')
-	  .appendTo('head')
-	  .attr({
-		  type: 'text/css', 
-		  rel: 'stylesheet',
-		  href: VT_Obj.options.url_plugin_folder+'/libraries/manifestinteractive.css'
-	  });
+	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/manifestinteractive.css');
 	VT_Element_Slide.append('<div id="manifestinteractive"></div>');
 	manifestinteractive_load();
 	VT_Obj.onCompletePlugin("vt_imaging_plg_manifestinteractive", "noneimage");

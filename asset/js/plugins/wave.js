@@ -24,6 +24,9 @@ function getLevelVolume(){
 	return average;
 }
 window.vt_imaging_delete_app = function(){
+	delete window['analyser'];
+	delete window['getLevelVolume'];
+	delete window['setup_AudioContext'];
 	delete window['vt_imaging_plg_wave'];
 }
 function vt_imaging_plg_wave(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
@@ -35,7 +38,7 @@ function vt_imaging_plg_wave(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 	*
 	**/
 	setup_AudioContext(VT_Audio);
-	jQuery.getScript(VT_Obj.options.url_plugin_folder+'/libraries/siriwave.js').done(function(){
+	VT_Obj.loadScript(VT_Obj.options.url_plugin_folder+'/libraries/siriwave.js').done(function(){
 		var container = jQuery('<div />');
 		container.attr('id', 'wave-container');
 		container.css({

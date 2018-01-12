@@ -11,6 +11,8 @@ function randomIn(min,max)
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 window.vt_imaging_delete_app = function(){
+	delete window['randomIn'];
+	delete window['getRandomColor'];
 	delete window['vt_imaging_plg_bribbles'];
 }
 function vt_imaging_plg_bribbles(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)

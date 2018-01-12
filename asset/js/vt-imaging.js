@@ -73,6 +73,18 @@
 				jQuery(document).trigger('vt_loaded_plg', ['vt_imaging_plg_'+name]);
 			}
 		};
+		self.loadScript = function(src){
+			return jQuery.getScript(src);
+		};
+		self.loadStyle = function(href){
+			jQuery('<link>')
+			.appendTo('head')
+			.attr({
+				type: 'text/css', 
+				rel: 'stylesheet',
+				href: href
+			});
+		};
 		self.onStartPlugin = function(create_screen_loading){
 			if (create_screen_loading != undefined){
 				self.createScreenLoading();

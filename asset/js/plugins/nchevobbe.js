@@ -70,13 +70,7 @@ function vt_imaging_plg_nchevobbe(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide
 		'background': '#000',
 		'overflow': 'hidden'
 	});
-	jQuery('<link>')
-	  .appendTo('head')
-	  .attr({
-		  type: 'text/css', 
-		  rel: 'stylesheet',
-		  href: VT_Obj.options.url_plugin_folder+'/libraries/nchevobbe.css'
-	  });
+	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/nchevobbe.css');
 	VT_Element_Slide.append('<figure>'
 	+'<svg viewBox="0 0 100 60">'
 	  +'<defs>'
