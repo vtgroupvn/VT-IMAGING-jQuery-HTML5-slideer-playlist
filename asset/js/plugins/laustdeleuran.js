@@ -131,12 +131,21 @@ class Particle {
 		const { diameter, style } = this.settings;
 		var { current } = this.position;
 		var radius = diameter / 2;
-
-		context.fillStyle = typeof style === 'function' ? style() : style;
-		context.beginPath();
-		context.arc(current.x, current.y, radius, 0, Math.PI * 2, false);
-		context.closePath();
-		context.fill();
+		if (typeof context == 'object'){
+			context.fillStyle = typeof style === 'function' ? style() : style;
+			if (typeof context.beginPath == 'function'){
+				context.beginPath();
+			}
+			if (typeof context.arc == 'function'){
+				context.arc(current.x, current.y, radius, 0, Math.PI * 2, false);
+			}
+			if (typeof context.closePath == 'function'){
+				context.closePath();
+			}
+			if (typeof context.fill == 'function'){
+				context.fill();
+			}
+		}
 	}
 
   /**
@@ -316,37 +325,37 @@ class Animator {
 function laustdeleuran_run()
 {
 	var waves = [
-  new Sine(1, index => `hsl(275, 100%, ${60 + index % 30}%)`, -1),
-  new Sine(2, index => `hsl(330, 100%, ${70 + index % 30}%)`, 1)
-];
+		new Sine(1, index => `hsl(275, 100%, ${60 + index % 30}%)`, -1),
+		new Sine(2, index => `hsl(330, 100%, ${70 + index % 30}%)`, 1)
+	];
 	// Start animation
 	const animator = new Animator(60);
 	animator.animate(function (frame, fps) {
-	  context.clearRect(0, 0, canvas.width, canvas.height);
+		if (typeof context.clearRect == 'function'){
+			context.clearRect(0, 0, canvas.width, canvas.height);
+		}
 	  waves.forEach(wave => wave.draw(frame / fps))
 	});
 }
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_laustdeleuran'];
-}
-function vt_imaging_plg_laustdeleuran(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_laustdeleuran(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
+	_self.registerVariables(['canvas','context','distance','getAngle','getDirectionVector','getVectorTowards','Particle','Sine','Animator','laustdeleuran_run']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.append('<canvas id="canvas" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
-	canvas = VT_Element_Slide.find('canvas#canvas')[0];
+	_self.getImagingOverlay().append('<canvas id="canvas" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
+	canvas = _self.getImagingOverlay().find('canvas#canvas')[0];
     context = canvas.getContext('2d');
-	canvas.width = VT_Imaging.width();
-	canvas.height = VT_Imaging.height();
+	canvas.width = _self.getImaging().width();
+	canvas.height = _self.getImaging().height();
 	laustdeleuran_run();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_laustdeleuran", "noneimage");
-	VT_Element_Slide.css({
-		'height': VT_Imaging.height(),
-		'width': VT_Imaging.width(),
+	_self.onCompletePlugin("noneimage");
+	_self.getImagingOverlay().css({
+		'height': _self.getImaging().height(),
+		'width': _self.getImaging().width(),
 		'overflow': 'hidden',
 		'background': '#000',
 		'background-image': 'radial-gradient(ellipse at center, #111 0%,#000 100%)'

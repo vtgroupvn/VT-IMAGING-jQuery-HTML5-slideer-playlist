@@ -1,19 +1,16 @@
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_srekoble'];
-}
-function vt_imaging_plg_srekoble(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_srekoble(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/srekoble.css');
-	VT_Element_Slide.append('<div class="srekoble-wrap"><ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></div>');
-	VT_Obj.onCompletePlugin("vt_imaging_plg_srekoble", "noneimage");
+	_self.loadStyle('libraries/srekoble.css');
+	_self.getImagingOverlay().append('<div class="srekoble-wrap"><ul><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></div>');
+	_self.onCompletePlugin("noneimage");
 }

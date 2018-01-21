@@ -77,23 +77,21 @@ function increase_brightness(hex, percent){
     ((0|(1<<8) + g + (256 - g) * percent / 100).toString(16)).substr(1) +
     ((0|(1<<8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
 }
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_manifestinteractive'];
-}
-function vt_imaging_plg_manifestinteractive(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_manifestinteractive(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
+	_self.registerVariables(['wave_height','wave_shift','ball_count','ball_size','base_color','max_brightness','max_blur','period_factor','count','interValCall','manifestinteractive_load','move','increase_brightness']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/manifestinteractive.css');
-	VT_Element_Slide.append('<div id="manifestinteractive"></div>');
+	_self.loadStyle('libraries/manifestinteractive.css');
+	_self.getImagingOverlay().append('<div id="manifestinteractive"></div>');
 	manifestinteractive_load();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_manifestinteractive", "noneimage");
+	_self.onCompletePlugin("noneimage");
 }

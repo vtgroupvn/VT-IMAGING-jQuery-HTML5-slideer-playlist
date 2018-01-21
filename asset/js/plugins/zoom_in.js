@@ -1,49 +1,46 @@
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_zoom_in'];
-}
-function vt_imaging_plg_zoom_in(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_zoom_in(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'position': 'absolute',
 		'display': 'inline-block',
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center",
+		'background': "url('"+_self.getCurrentImaging().src+"') no-repeat center",
 		'text-align': 'center','margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
 			
 	});
-	VT_Element_Slide.attr('align', 'center');
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
+	_self.getImagingOverlay().attr('align', 'center');
+	_self.getImaging().find('img').attr('src', _self.getCurrentImaging().src);
 	var center = jQuery('<center/>');
 	var img = jQuery('<div />');
 	img.css({
-		'width': VT_Imaging.width(), 
-		'height': VT_Imaging.height(),
+		'width': _self.getImaging().width(), 
+		'height': _self.getImaging().height(),
 		'z-index': '99',
 		'position': 'relative',
 		'border-radius': '60%',
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+VT_Obj.getOldImaging().src+"') no-repeat center",	
+		'background': "url('"+_self.getOldImaging().src+"') no-repeat center",	
 		'margin':'auto',
 		'vertical-align': 'middle'		
 	});
-	VT_Element_Slide.append(img);
-	VT_Element_Slide.find('div').stop()
+	_self.getImagingOverlay().append(img);
+	_self.getImagingOverlay().find('div').stop()
 	.animate({
 			width: '0px', 
 			height: '0px',
-			'margin-top': VT_Element_Slide.height()/2,
-			'margin-bottom': VT_Element_Slide.height()/2
+			'margin-top': _self.getImagingOverlay().height()/2,
+			'margin-bottom': _self.getImagingOverlay().height()/2
 		}, 1000, function(){
-			VT_Obj.onCompletePlugin("vt_imaging_plg_zoom_in", undefined);
+			_self.onCompletePlugin();
 	}); 
 }

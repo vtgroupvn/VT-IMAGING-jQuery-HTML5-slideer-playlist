@@ -143,23 +143,20 @@ function fSinD($angle){
 //clear the stage
 function fClearStage(){_stageContext.clearRect(0,0,_stageWidth,_stageHeight); // clear canvas
 }
-window.vt_imaging_delete_app = function(){
-	clearInterval(intervalDraw);
-	delete window['vt_imaging_plg_insidedown'];
-}
-function vt_imaging_plg_insidedown(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_insidedown(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
+	_self.registerVariables(['_stage','_stageContext','intervalDraw','_stageWidth','_stageHeight','_ballCountInt','_ballStartYNum','_ballSpacingNum','_FPS','_milliFPS','_angle','_speed','_baseRad','_ranRad','_radius','vSpace','_vFriction','l','m','n','fEnterFrame','insidedown_init','fDrawStage','fCosD','fSinD','fClearStage']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'background': '#1C1C1C',
 		'overflow': 'hidden'
 	});
-	VT_Element_Slide.append('<canvas id="InsideDown" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
+	_self.getImagingOverlay().append('<canvas id="InsideDown" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
 	insidedown_init();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_insidedown", "noneimage");
+	_self.onCompletePlugin("noneimage");
 }

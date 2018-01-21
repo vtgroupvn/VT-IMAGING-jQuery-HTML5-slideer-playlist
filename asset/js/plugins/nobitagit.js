@@ -1,18 +1,15 @@
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_nobitagit'];
-}
-function vt_imaging_plg_nobitagit(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_nobitagit(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'background': '#333'
 	});
-	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/nobitagit.css');
-	VT_Element_Slide.append('<div class="nobitagit"></div><div class="nobitagit"></div><div class="nobitagit"></div><div class="nobitagit"></div>');
-	VT_Obj.onCompletePlugin("vt_imaging_plg_nobitagit", "noneimage");
+	_self.loadStyle('libraries/nobitagit.css');
+	_self.getImagingOverlay().append('<div class="nobitagit"></div><div class="nobitagit"></div><div class="nobitagit"></div><div class="nobitagit"></div>');
+	_self.onCompletePlugin("noneimage");
 }

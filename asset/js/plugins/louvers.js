@@ -1,48 +1,48 @@
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_louvers'];
-}
-function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_louvers(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Obj.print_values.louversPrintShow = function(print_array, sub_interval){
+	_self.print_values.louversPrintShow = function(print_array, sub_interval){
 		var animate_time = 500;
 		var loadingInterVal = null;
+		var complete_animate = 0;
 		for(var n = 0; n < print_array.length; n++){
 			animate_time += sub_interval;
 			print_array[n].find('div.louvers-child-element').animate({						
 				width: '100%'
 			}, animate_time, function(){
-				//jQuery(this).parent().remove();
-			});
-			clearInterval(loadingInterVal);
-			loadingInterVal = setInterval(function(){
-				clearInterval(loadingInterVal);
-				VT_Obj.onCompletePlugin("vt_imaging_plg_louvers", undefined);
-			}, animate_time);
+				complete_animate++;
+			});			
 		}
+		loadingInterVal = setInterval(function(){
+			if (complete_animate == print_array.length){
+				clearInterval(loadingInterVal);
+				_self.onCompletePlugin();
+				_self.getImagingOverlay().css({'display':'none'});
+			}
+		}, 1);
 	};
 	var mod = false;
 	var element_width = 49;
 	while(!mod){
 		element_width++;
-		var extend = VT_Element_Slide.width()%element_width;
+		var extend = _self.getImagingOverlay().width()%element_width;
 		if (extend == 0){
 			mod = true;
 		}
 	}
-	VT_Element_Slide.css({
-		'height': VT_Imaging.height(), 
-		'width': VT_Imaging.width(),
+	_self.getImagingOverlay().css({
+		'height': _self.getImaging().height(), 
+		'width': _self.getImaging().width(),
 		'cursor': 'pointer',
 		'position': 'absolute',
 		'display': 'inline-block',
-		'top': VT_Imaging.position().top,
-		'left': VT_Imaging.position().left,
+		'top': _self.getImaging().position().top,
+		'left': _self.getImaging().position().left,
 		'text-align': 'center',
 		'background':'none',
 		'display': 'inline-block',
@@ -52,10 +52,10 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		'margin-top': '0px',
 		'background-color':'none'
 	});
-	var width = VT_Imaging.width()/element_width;
-	var height = VT_Imaging.height();
+	var width = _self.getImaging().width()/element_width;
+	var height = _self.getImaging().height();
 	var elements = new Array();
-	var new_src = VT_Obj.getCurrentImaging().src;
+	var new_src = _self.getCurrentImaging().src;
 	for(var i=0; i < width; i++){
 		
 		elements[i] = jQuery('<div />');
@@ -73,7 +73,7 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		});
 		child_element.css({
 			'background-image': "url('"+new_src+"')",
-			'background-size': (VT_Imaging.width()+'px')+' '+ (VT_Imaging.height()+'px'),
+			'background-size': (_self.getImaging().width()+'px')+' '+ (_self.getImaging().height()+'px'),
 			'float': 'left',
 			'height': height,
 			'width': '0px',
@@ -84,7 +84,7 @@ function vt_imaging_plg_louvers(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			'border':'1px solid #000'
 		});
 		elements[i].append(child_element);
-		VT_Element_Slide.append(elements[i]);
+		_self.getImagingOverlay().append(elements[i]);
 	}
-	VT_Obj.print_values.louversPrintShow(elements, 500);
+	_self.print_values.louversPrintShow(elements, 500);
 }

@@ -20,25 +20,24 @@ function startYRotate()
 		clearInterval(transform_rotYINT);
 	}
 }
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_transform_yscale'];
-}
-function vt_imaging_plg_transform_yscale(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_transform_yscale(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
+	_self.registerVariables(['transform_set', 'transform_y', 'transform_ny', 'transform_rotYINT', 'transform_rotYINT', 'startYRotate']);
 	transform_ny = 0;
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Imaging.find('img').attr('src', VT_Obj.getOldImaging().src);
-	VT_Element_Slide.css({
+	_self.getImaging().find('img').attr('src', _self.getOldImaging().src);
+	_self.getImagingOverlay().css({
 		'background-color':'none'
 	});
 	transform_set = false;
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
-		VT_Obj.onCompletePlugin("vt_imaging_plg_transform_yscale", undefined);
+		_self.getImaging().find('img').attr('src', _self.getCurrentImaging().src);
+		_self.onCompletePlugin();
 	});
-	rotateYDIV(VT_Imaging);
+	rotateYDIV(_self.getImaging());
 }

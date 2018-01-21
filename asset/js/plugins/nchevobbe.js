@@ -53,25 +53,23 @@ for(let i=0; i < arcNumber; i ++) {
 
 }
 }
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_nchevobbe'];
-}
-function vt_imaging_plg_nchevobbe(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_nchevobbe(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
+	_self.registerVariables(['createSVGElement','run_nchevobbe']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
-		'height': VT_Imaging.height(),
-		'width': VT_Imaging.width(),
+	_self.getImagingOverlay().css({
+		'height': _self.getImaging().height(),
+		'width': _self.getImaging().width(),
 		'background': '#000',
 		'overflow': 'hidden'
 	});
-	VT_Obj.loadStyle(VT_Obj.options.url_plugin_folder+'/libraries/nchevobbe.css');
-	VT_Element_Slide.append('<figure>'
+	_self.loadStyle('libraries/nchevobbe.css');
+	_self.getImagingOverlay().append('<figure>'
 	+'<svg viewBox="0 0 100 60">'
 	  +'<defs>'
 	  +'<linearGradient id="grad">'
@@ -82,5 +80,5 @@ function vt_imaging_plg_nchevobbe(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide
 	+'</svg>'
 	+'</figure>');
 	run_nchevobbe();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_nchevobbe", "noneimage");
+	_self.onCompletePlugin("noneimage");
 }

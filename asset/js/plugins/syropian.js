@@ -84,7 +84,7 @@ var analyser;
 function setup_AudioContext(VT_Audio)
 {
 	window.context = new AudioContext();
-	video = context.createMediaElementSource(VT_Audio[0]);
+	video = context.createMediaElementSource(VT_Audio);
 	analyser = context.createAnalyser(); //we create an analyser
 	analyser.smoothingTimeConstant = 0.9;
 	analyser.fftSize = 512; //the total samples are half the fft size.
@@ -105,29 +105,23 @@ function getLevelVolume(){
 	average /= array.length;
 	return average;
 }
-window.vt_imaging_delete_app = function(){
-	clearInterval(interValCall);
-	delete window['getLevelVolume'];
-	delete window['setup_AudioContext'];
-	delete window['draw_syropian'];
-	delete window['vt_imaging_plg_syropian'];
-}
-function vt_imaging_plg_syropian(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_syropian(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('vt_imaging_plg_syropian', true);
+	_self.registerVariables(['canvas','ctx','time','interValCall','circles','max','getRandomArbitrary','getRandomInt','circle','createCircles','updateCircles','renderCircles','draw_syropian','analyser','setup_AudioContext','getLevelVolume']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'display':'block'
 		'background-color':'hsl(195, 100%, 7%)'
 	});
-	VT_Element_Slide.append('<canvas id="syropian" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
+	_self.getImagingOverlay().append('<canvas id="syropian" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
 	canvas = document.getElementById("syropian");
 	ctx = canvas.getContext("2d");
-	setup_AudioContext(VT_Audio);
+	setup_AudioContext(_self.getAudio()[0]);
 	draw_syropian();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
+	_self.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
 }

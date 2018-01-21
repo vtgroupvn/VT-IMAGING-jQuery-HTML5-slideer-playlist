@@ -1,28 +1,25 @@
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_zoom_out'];
-}
-function vt_imaging_plg_zoom_out(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_zoom_out(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'position': 'absolute',
 		'display': 'inline-block',
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+VT_Obj.getOldImaging().src+"') no-repeat center",
+		'background': "url('"+_self.getOldImaging().src+"') no-repeat center",
 		'text-align': 'center','margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
 			
 	});
-	VT_Element_Slide.attr('align', 'center');
-	VT_Imaging.find('img').attr('src', VT_Obj.getOldImaging().src);
+	_self.getImagingOverlay().attr('align', 'center');
+	_self.getImaging().find('img').attr('src', _self.getOldImaging().src);
 	var center = jQuery('<center/>');
 	var img = jQuery('<div />');
 	img.css({
@@ -32,24 +29,24 @@ function vt_imaging_plg_zoom_out(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		'position': 'relative',
 		'border-radius': '60%',
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center",	
+		'background': "url('"+_self.getCurrentImaging().src+"') no-repeat center",	
 		'margin':'auto',
 		'vertical-align': 'middle',
-		'margin-top': VT_Element_Slide.height()/2,
-		'margin-left': VT_Element_Slide.width()/2,
-		'margin-bottom': VT_Element_Slide.height()/2,
-		'margin-right': VT_Element_Slide.height()/2
+		'margin-top': _self.getImagingOverlay().height()/2,
+		'margin-left': _self.getImagingOverlay().width()/2,
+		'margin-bottom': _self.getImagingOverlay().height()/2,
+		'margin-right': _self.getImagingOverlay().height()/2
 	});
-	VT_Element_Slide.append(img);
-	VT_Element_Slide.find('div').stop()
+	_self.getImagingOverlay().append(img);
+	_self.getImagingOverlay().find('div').stop()
 	.animate({
-			width: VT_Imaging.width()+200, 
-			height: VT_Imaging.height()+200,
+			width: _self.getImaging().width()+200, 
+			height: _self.getImaging().height()+200,
 			'margin-top': '-100px',
 			'margin-left': '-100px',
 			'margin-right': '-100px',
 			'margin-bottom': '-100px'
 		}, 1000, function(){
-			VT_Obj.onCompletePlugin("vt_imaging_plg_zoom_out", undefined);
+			_self.onCompletePlugin();
 	}); 
 }

@@ -41,22 +41,20 @@ jQuery.fn.rotateElement = function(waitTime, width, height){
 	};
 	return self;
 };
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_brick'];
-}
-function vt_imaging_plg_brick(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_brick(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
+	_self.registerVariables([window['jQuery']['fn']['rotateElement']]);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
 	var mod = false;
 	var element_width = 49;
 	while(!mod){
 		element_width++;
-		var extend = VT_Element_Slide.width()%element_width;
+		var extend = _self.getImagingOverlay().width()%element_width;
 		if (extend == 0){
 			mod = true;
 		}
@@ -65,15 +63,15 @@ function vt_imaging_plg_brick(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 	var element_height = 30;
 	while(!mod){
 		element_height++;
-		var extend = VT_Element_Slide.width()%element_height;
+		var extend = _self.getImagingOverlay().width()%element_height;
 		if (extend == 0){
 			mod = true;
 		}
 	}
-	var width = VT_Element_Slide.width()/element_width;
-	var height = VT_Element_Slide.height()/element_height;
+	var width = _self.getImagingOverlay().width()/element_width;
+	var height = _self.getImagingOverlay().height()/element_height;
 	var elements = new Array();
-	var new_src = VT_Obj.getCurrentImaging().src;
+	var new_src = _self.getCurrentImaging().src;
 	waitTime = 50;
 	for(var i=0; i < height; i++){
 		elements[i] = new Array();
@@ -96,7 +94,7 @@ function vt_imaging_plg_brick(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			});
 			child_element.css({
 				'background-image': "url('"+new_src+"')",
-				'background-size': (VT_Imaging.width()+'px')+' '+ (VT_Imaging.height()+'px'),
+				'background-size': (_self.getImaging().width()+'px')+' '+ (_self.getImaging().height()+'px'),
 				'float': 'left',
 				'height': '50%',
 				'width': '50%',
@@ -106,7 +104,7 @@ function vt_imaging_plg_brick(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 				'background-position':('-'+position_width+'px')+' '+('-'+position_height+'px')
 			});
 			elements[i][n].append(child_element);
-			VT_Element_Slide.append(elements[i][n]);
+			_self.getImagingOverlay().append(elements[i][n]);
 			waitTime += 5;
 			var rotate = child_element.rotateElement(waitTime, element_width, element_height);
 			rotate.compile();
@@ -124,9 +122,9 @@ function vt_imaging_plg_brick(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			}
 		}
 		if (completed){
-			VT_Element_Slide.hide();
+			_self.getImagingOverlay().hide();
 			clearInterval(interValCheck);
-			VT_Obj.onCompletePlugin("vt_imaging_plg_brick", undefined);
+			_self.onCompletePlugin();
 		}
 	}, 100);
 }

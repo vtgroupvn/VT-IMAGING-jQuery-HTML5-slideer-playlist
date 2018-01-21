@@ -1,15 +1,15 @@
-window.vt_imaging_delete_app = function(){
+window.vt_imaging_plg_delete_app = function(){
 	delete window['vt_imaging_plg_lines'];
 }
-function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_lines(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Obj.print_values.linesPrintShow = function(print_array, sub_interval){
+	_self.print_values.linesPrintShow = function(print_array, sub_interval){
 		var animate_time = 500;
 		var loadingInterVal = null;
 		for(var n = 0; n < print_array.length; n++){
@@ -22,7 +22,7 @@ function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			clearInterval(loadingInterVal);
 			loadingInterVal = setInterval(function(){
 				clearInterval(loadingInterVal);
-				VT_Obj.onCompletePlugin("vt_imaging_plg_lines", undefined);
+				_self.onCompletePlugin();
 			}, animate_time);
 		}
 	};
@@ -30,16 +30,16 @@ function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 	var mod = false;
 	while(!mod){
 		element_width++;
-		var extend = VT_Element_Slide.width()%element_width;
+		var extend = _self.getImagingOverlay().width()%element_width;
 		if (extend == 0){
 			mod = true;
 		}
 	}
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
-	var width = VT_Imaging.width()/element_width;
-	var height = VT_Imaging.height();
+	_self.getImaging().find('img').attr('src', _self.getCurrentImaging().src);
+	var width = _self.getImaging().width()/element_width;
+	var height = _self.getImaging().height();
 	var elements = new Array();
-	var new_src = VT_Obj.getOldImaging().src;
+	var new_src = _self.getOldImaging().src;
 	for(var i=0; i < width; i++){
 		
 		elements[i] = jQuery('<div />');
@@ -57,7 +57,7 @@ function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 		});
 		child_element.css({
 			'background-image': "url('"+new_src+"')",
-			'background-size': (VT_Imaging.width()+'px')+' '+ (VT_Imaging.height()+'px'),
+			'background-size': (_self.getImaging().width()+'px')+' '+ (_self.getImaging().height()+'px'),
 			'float': 'left',
 			'height': height,
 			'width': element_width,
@@ -67,7 +67,7 @@ function vt_imaging_plg_lines(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
 			'background-position':('-'+(element_width * i)+'px')+' '+('-'+height+'px')
 		});
 		elements[i].append(child_element);
-		VT_Element_Slide.append(elements[i]);
+		_self.getImagingOverlay().append(elements[i]);
 	}
-	VT_Obj.print_values.linesPrintShow(elements, 500);
+	_self.print_values.linesPrintShow(elements, 500);
 }

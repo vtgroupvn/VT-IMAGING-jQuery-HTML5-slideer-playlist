@@ -3,6 +3,10 @@
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Donate link: http://vt-group.vn/donate.html
 **/
+function _getName(_from)
+{
+	alert(_from.callee.toString().match(/function ([^\(]+)/)[1]);
+}
 (function($){
 	"use strict"
 	jQuery.fn.vt_imaging = function(fn_options){
@@ -13,6 +17,7 @@
 			jQuery(self).attr('class', 'vt-imaging');
 		}
 		self.constructor = function(fn_options){
+			self.variables = new Array();
 			self.print_values ={};
 			self.old_active_imaging = 0;
 			self.currently_active_imaging = 0;
@@ -50,10 +55,6 @@
 			return self;
 		};
 		self.loadPluginSource = function(name){
-			if (window['vt_imaging_delete_app'] != undefined){
-				window['vt_imaging_delete_app']();
-				delete window['vt_imaging_delete_app'];
-			}
 			var time = new Date();
 			if (window['vt_imaging_plg_'+name] == undefined){
 				jQuery.getScript(self.options.url_plugin_folder+name+'.js?time='+time.getTime()).done(function(){
@@ -74,7 +75,7 @@
 			}
 		};
 		self.loadScript = function(src){
-			return jQuery.getScript(src);
+			return jQuery.getScript(self.options.url_plugin_folder+'/'+src);
 		};
 		self.loadStyle = function(href){
 			jQuery('<link>')
@@ -82,12 +83,39 @@
 			.attr({
 				type: 'text/css', 
 				rel: 'stylesheet',
-				href: href
+				href: self.options.url_plugin_folder+'/'+href
 			});
 		};
-		self.onStartPlugin = function(create_screen_loading){
-			if (create_screen_loading != undefined){
+		self.registerVariables = function(variables){			
+			if (typeof variables != 'Array'){
+				var vars = [variables];
+			}else{
+				var vars = variables;
+			}
+			for(var k in vars){
+				self.variables[self.variables.length] = vars[k];
+			}
+		};
+		self.clearVariables = function(){
+			for(var k in self.variables){
+				if (typeof self.variables[k] == 'String'){
+					if (window[self.variables[k]] != undefined){
+						delete(window[self.variables[k]]);
+					}
+				}else{
+					delete(self.variables[k]);
+				}
+			}
+		};
+		self.onStartPlugin = function(condition){
+			if (condition == 'show-loading'){
 				self.createScreenLoading();
+			}
+			self.clearVariables();
+			self.registerVariables([self.options.imaging_list[self.currently_active_imaging].name]);
+			var audio_events = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
+			for(var k in audio_events){
+				self.removeAudioEvent(audio_events[k], function(_this){});
 			}
 			self.form_imaging_audio.find('source').attr('src', self.getCurrentImaging().audio_src);
 			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
@@ -109,16 +137,32 @@
 					'background':'#FFF',
 					'display':'inline-block'					
 				});
-			}
+			}			
 		};
-		self.onCompletePlugin = function(from_name, extend){
-			self.form_imaging_audio.unbind("ended").bind("ended", function(){
+		self.onCompletePlugin = function(condition){
+			self.addAudioEvent("ended", function(_this){
 				self.setActiveImaging(self.currently_active_imaging+1);
 				self.loadImaging();
 			});
-			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app", from_name, extend]);
+			jQuery(document).trigger("slide_next_complete", ["vt-imaging-app", self.options.imaging_list[self.currently_active_imaging].name, condition]);
 			self.resizeFix();
 			self.clearScreenLoading();
+		};
+		self.getAudio = function(){
+			return self.form_imaging_audio;
+		};
+		self.getImaging = function(){
+			return self.form_imaging_show;
+		};
+		self.getImagingOverlay = function(){
+			return self.form_imaging_over_display;
+		};
+		self.removeAudioEvent = function(eventName, _callback){
+			self.form_imaging_audio.unbind(eventName, function(){_callback(self.form_imaging_audio[0]);});
+		}
+		self.addAudioEvent = function(eventName, _callback){
+			self.removeAudioEvent(eventName, function(_this){});
+			self.form_imaging_audio.bind(eventName, function(){_callback(self.form_imaging_audio[0]);});
 		};
 		self.setActiveImaging = function(index){
 			self.old_active_imaging = self.currently_active_imaging;
@@ -142,7 +186,7 @@
 				jQuery(document).unbind("slide_next_complete").on("slide_next_complete", function(event, trigger_from, from_name, img_none){
 					if (self.queue_slide_new_events.length > 0)
 					{
-						if (self.queue_slide_new_events[self.queue_slide_new_events.length-1] == from_name){
+						if (self.queue_slide_new_events[self.queue_slide_new_events.length-1].replace('vt_imaging_plg_','') == from_name){
 							self.queue_slide_new_events = new Array();
 							if (trigger_from != 'vt-imaging-app'){return;}
 							if (img_none == undefined){
@@ -161,7 +205,7 @@
 					self.overlay_resize();
 					self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
 					if (window[func_name] != undefined){
-						window[func_name](self, self.form_imaging_show, self.form_imaging_audio, self.form_imaging_over_display);
+						window[func_name](self);
 					}
 				});
 				jQuery(self).find('div.imaging-hover').hide();
@@ -266,7 +310,7 @@
 				self.overlay_resize();
 				self.form_imaging_over_display.html('');
 				self.queue_slide_new_events[self.queue_slide_new_events.length] = func_name;
-				window[func_name](self, self.form_imaging_show, self.form_imaging_audio, self.form_imaging_over_display);
+				window[func_name](self);
 			});
 		};
 		self.createForm = function(){

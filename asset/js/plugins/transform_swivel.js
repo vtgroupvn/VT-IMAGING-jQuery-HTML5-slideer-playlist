@@ -26,44 +26,36 @@ function startRotate()
 		clearInterval(swivel_rotINT);
 	}
 }
-window.vt_imaging_delete_app = function(){
-	delete window['swivel_x'];
-	delete window['swivel_n'];
-	delete window['swivel_rotINT'];
-	delete window['sub_rotate'];
-	delete window['rotateDIV'];
-	delete window['startRotate'];
-	delete window['vt_imaging_plg_transform_swivel'];
-}
-function vt_imaging_plg_transform_swivel(VT_Obj, VT_Imaging, VT_Audio, SLIDE_Element)
+function vt_imaging_plg_transform_swivel(_self)
 {
-	VT_Obj.onStartPlugin();
+	_self.onStartPlugin();
+	_self.registerVariables(['startRotate', 'rotateDIV', 'swivel_x', 'swivel_n', 'swivel_rotINT', 'sub_rotate']);
 	swivel_n=0;
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	SLIDE_Element.css({
+	_self.getImagingOverlay().css({
 		'background-color':'none'
 	});
-	VT_Imaging.css({opacity: 0.5});
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
-	VT_Imaging.find('img').css({'width':'200px'});
-	VT_Imaging.find('img').css({'height':'200px'});
-	VT_Imaging.find('img').css({
+	_self.getImaging().css({opacity: 0.5});
+	_self.getImaging().find('img').attr('src', _self.getCurrentImaging().src);
+	_self.getImaging().find('img').css({'width':'200px'});
+	_self.getImaging().find('img').css({'height':'200px'});
+	_self.getImaging().find('img').css({
 		'margin-top':'100px'
 	});
 	jQuery(document).unbind('rotate_complete').on('rotate_complete', function(){
-		VT_Imaging.find('img').animate({
-			'height': VT_Imaging.height(),
-			'width': VT_Obj.form_imaging.width(),
+		_self.getImaging().find('img').animate({
+			'height': _self.getImaging().height(),
+			'width': _self.form_imaging.width(),
 			'opacity': '1',
 			'margin-top':'0px'
 		}, 500, function(){
-			VT_Imaging.css({opacity: 1});
-			VT_Obj.onCompletePlugin("vt_imaging_plg_transform_swivel", undefined);
+			_self.getImaging().css({opacity: 1});
+			_self.onCompletePlugin();
 		});
 	});
-	rotateDIV(VT_Imaging.find('img'));
+	rotateDIV(_self.getImaging().find('img'));
 }

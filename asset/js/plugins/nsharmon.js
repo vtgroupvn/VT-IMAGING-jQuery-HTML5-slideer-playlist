@@ -22,20 +22,17 @@ function nsharmon_render() {
 	  nsharmon_render();
   }, 15);
 }
-window.vt_imaging_delete_app = function(){
-	clearInterval(interValCall);
-	delete window['vt_imaging_plg_nsharmon'];
-}
-function vt_imaging_plg_nsharmon(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_nsharmon(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
+	_self.registerVariables(['iSawTheSin','interValCall','nsharmon_render']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Obj.resizeFix();
-	VT_Element_Slide.append('<canvas id="nsharmon" width="'+VT_Imaging.width()+'" height="'+VT_Imaging.height()+'"></canvas>');
+	_self.resizeFix();
+	_self.getImagingOverlay().append('<canvas id="nsharmon" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
 	nsharmon_render();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_nsharmon", "noneimage");
+	_self.onCompletePlugin("noneimage");
 }

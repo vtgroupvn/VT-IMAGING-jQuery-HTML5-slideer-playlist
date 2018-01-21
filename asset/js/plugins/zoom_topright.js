@@ -1,43 +1,40 @@
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_zoom_topright'];
-}
-function vt_imaging_plg_zoom_topright(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
-{
-	VT_Obj.onStartPlugin();
+function vt_imaging_plg_zoom_topright(_self)
+{	
+	_self.onStartPlugin();
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
 	
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().css({
 		'position': 'absolute',
 		'display': 'inline-block',
 		'overflow-x': 'hidden',
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
-		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center",
+		'background': "url('"+_self.getCurrentImaging().src+"') no-repeat center",
 		'background-color':'none'
 	});
-	VT_Imaging.find('img').attr('src', VT_Obj.getCurrentImaging().src);
+	_self.getImaging().find('img').attr('src', _self.getCurrentImaging().src);
 	var img = jQuery('<img />');
 	img.css({
-		'width': VT_Imaging.width(), 
-		'height': VT_Imaging.height(),
+		'width': _self.getImaging().width(), 
+		'height': _self.getImaging().height(),
 		'z-index': '99',
 		'position': 'absolute',
 		'right': 0,
 		'top': 0,
 		'-ms-interpolation-mode': 'bicubic',
-		'background': "url('"+VT_Obj.getCurrentImaging().src+"') no-repeat center"
+		'background': "url('"+_self.getCurrentImaging().src+"') no-repeat center"
 	});
-	img.attr('src', VT_Obj.getOldImaging().src);
-	VT_Element_Slide.append(img);
-	VT_Element_Slide.find('img').stop()
+	img.attr('src', _self.getOldImaging().src);
+	_self.getImagingOverlay().append(img);
+	_self.getImagingOverlay().find('img').stop()
 	.animate({
 			width: '0px', 
 			height: '0px'
 		}, 1500, function(){
-			VT_Obj.onCompletePlugin("vt_imaging_plg_zoom_topright", "noneimage");
-	});	
+			_self.onCompletePlugin("noneimage");
+	});
 }

@@ -203,24 +203,22 @@ class Circle {
     }
 }
 
-window.vt_imaging_delete_app = function(){
-	delete window['vt_imaging_plg_stefanweck'];
-}
-function vt_imaging_plg_stefanweck(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slide)
+function vt_imaging_plg_stefanweck(_self)
 {
-	VT_Obj.onStartPlugin(true);
+	_self.onStartPlugin('show-loading');
+	_self.registerVariables(['TWO_PI','canvas_width','canvas_height','Application','CircleContainer','Circle']);
 	/**
 	*
-	* Feel want to make print function VT_Obj.print_values.printFunction = function(){}
+	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	VT_Element_Slide.show();
-	VT_Element_Slide.css({
+	_self.getImagingOverlay().show();
+	_self.getImagingOverlay().css({
 		'background-color':'hsl(195, 100%, 7%)'
 	});
-	canvas_width = VT_Imaging.width();
-	canvas_height = VT_Imaging.height();
-	VT_Element_Slide.append('<canvas id="canvas">Your browser doesn\'t support canvas</canvas>'
+	canvas_width = _self.getImaging().width();
+	canvas_height = _self.getImaging().height();
+	_self.getImagingOverlay().append('<canvas id="canvas">Your browser doesn\'t support canvas</canvas>'
 +'<svg xmlns="http://www.w3.org/2000/svg" version="1.1">'
 +'    <defs>'
 +'      <filter id="shadowed-goo">'
@@ -239,12 +237,12 @@ function vt_imaging_plg_stefanweck(VT_Obj, VT_Imaging, VT_Audio, VT_Element_Slid
 +'      </filter>'
 +'    </defs>'
 +'</svg>');
-	VT_Obj.clearScreenLoading();
-	vt_imaging_application = new Application();
-    //vt_imaging_application the CircleContainer objects
-    vt_imaging_application.initializeCircleContainers();
+	_self.clearScreenLoading();
+	vt_imaging_plg_application = new Application();
+    //vt_imaging_plg_application the CircleContainer objects
+    vt_imaging_plg_application.initializeCircleContainers();
 	
     //Start the initial loop function for the first time
-    vt_imaging_application.loop();
-	VT_Obj.onCompletePlugin("vt_imaging_plg_stefanweck", "noneimage");
+    vt_imaging_plg_application.loop();
+	_self.onCompletePlugin("noneimage");
 }
