@@ -973,7 +973,7 @@
 			}
 		};
 		self.compile = function(){
-			jQuery(window).unbind("resize").resize(function(){		
+			jQuery(window).unbind("resize").resize(function(){
 				self.resizeForm();
 			});
 			self.createForm();

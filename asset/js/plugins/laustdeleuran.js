@@ -357,7 +357,9 @@ function vt_imaging_plg_laustdeleuran(_self)
     context = canvas.getContext('2d');
 	canvas.width = _self.getImaging().width();
 	canvas.height = _self.getImaging().height();
-	laustdeleuran_run();
+	if (typeof laustdeleuran_run != 'undefined'){
+		laustdeleuran_run();
+	}
 	_self.onCompletePlugin("noneimage");
 	_self.getImagingOverlay().css({
 		'height': _self.getImaging().height(),
