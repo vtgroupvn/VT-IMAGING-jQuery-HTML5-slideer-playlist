@@ -94,7 +94,7 @@ class Particle {
 		var { current, home } = this.position;
 
 		var { velocity } = this;
-		if (typeof getDirectionVector == undefined){
+		if (typeof getDirectionVector == 'undefined'){
 			return;
 		}
 		// Add velocity in the current direction.
@@ -229,7 +229,9 @@ class Sine {
     const { particles, hz, style, speed, offset, spread, amp, yOffset, xOffset } = this;
     
     time *= speed;
-    
+    if (typeof canvas == 'undefined'){
+		return;
+	}
     const width = canvas.width - xOffset * 2;
     for (let x = 0; x * spread < width; x++) {
       let realX = x * spread;
@@ -344,7 +346,7 @@ function laustdeleuran_run()
 function vt_imaging_plg_laustdeleuran(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('canvas;context;distance;getAngle;getDirectionVector;getVectorTowards;Particle;Sine;Animator;laustdeleuran_run');
+	_self.registerClearVariables('canvas;context;distance;getAngle;getDirectionVector;getVectorTowards;Particle;Sine;Animator;laustdeleuran_run');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

@@ -18,13 +18,14 @@ jQuery.fn.vt_imaging_plg_spiral_show_loading = function(intervalTime){
 function vt_imaging_plg_default(_self)
 {
 	_self.onStartPlugin();
-	_self.register([window['jQuery']['fn']['vt_imaging_plg_spiral_show_loading']]);
+	_self.registerClearVariables('jQuery.fn.vt_imaging_plg_spiral_show_loading');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
 	_self.print_values.spiralPrintShow = function(spiral_array, sub_interval) {
+
 		var over_load = new Array(), over_load_item = 0, i = 0,k = 0,l = 0,m = 0,n = 0;
 		m = spiral_array.length;
 		n = spiral_array[0].length;
@@ -134,5 +135,7 @@ function vt_imaging_plg_default(_self)
 			_self.getImagingOverlay().append(elements[i][n]);
 		}
 	}
-	_self.print_values.spiralPrintShow(elements, 5);
+	if (elements.length > 0){
+		_self.print_values.spiralPrintShow(elements, 5);
+	}
 }

@@ -26,7 +26,7 @@ function getLevelVolume(){
 function vt_imaging_plg_wave(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('analyser;context;setup_AudioContext;getLevelVolume');
+	_self.registerClearVariables('analyser;context;setup_AudioContext;getLevelVolume');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

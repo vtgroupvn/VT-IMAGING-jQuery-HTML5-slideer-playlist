@@ -3,7 +3,13 @@ function rotateDIV(el)
 {
 	swivel_x=el[0];
 	clearInterval(swivel_rotINT);
-	swivel_rotINT=setInterval("startRotate()",10);
+	swivel_rotINT=setInterval(function(){
+		if (typeof startRotate == 'undefined'){
+			clearInterval(swivel_rotINT);
+		}else{
+			startRotate();
+		}
+	},10);
 }
 
 function startRotate()
@@ -29,7 +35,7 @@ function startRotate()
 function vt_imaging_plg_transform_swivel(_self)
 {
 	_self.onStartPlugin();
-	_self.register('startRotate', 'rotateDIV', 'swivel_x', 'swivel_n', 'swivel_rotINT', 'sub_rotate');
+	_self.registerClearVariables('startRotate;rotateDIV;swivel_x;swivel_n;clearInterval(swivel_rotINT);sub_rotate');
 	swivel_n=0;
 	/**
 	*

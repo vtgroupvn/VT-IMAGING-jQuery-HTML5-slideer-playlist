@@ -79,7 +79,7 @@ function jackrugile_loader(canvas_width, canvas_height, color) {
 function vt_imaging_plg_jackrugile(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('canvas;interValCall;jackrugile_loader');
+	_self.registerClearVariables('canvas;clearInterval(interValCall);jackrugile_loader');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

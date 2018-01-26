@@ -3,7 +3,13 @@ function rotateYDIV(el)
 {
 	transform_y = el[0];
 	clearInterval(transform_rotYINT);
-	transform_rotYINT=setInterval("startYRotate()",10);
+	transform_rotYINT=setInterval(function(){
+		if (typeof startYRotate == 'undefined'){
+			clearInterval(transform_rotYINT);
+		}else{
+			startYRotate();
+		}
+	},10);
 }
 function startYRotate()
 {
@@ -23,7 +29,7 @@ function startYRotate()
 function vt_imaging_plg_transform_yscale(_self)
 {
 	_self.onStartPlugin();
-	_self.register('transform_set', 'transform_y', 'transform_ny', 'transform_rotYINT', 'transform_rotYINT', 'startYRotate');
+	_self.registerClearVariables('transform_set;transform_y;transform_ny;clearInterval(transform_rotYINT);startYRotate');
 	transform_ny = 0;
 	/**
 	*

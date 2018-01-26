@@ -108,7 +108,7 @@ function getLevelVolume(){
 function vt_imaging_plg_syropian(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('canvas;ctx;time;interValCall;circles;max;getRandomArbitrary;getRandomInt;circle;createCircles;updateCircles;renderCircles;draw_syropian;analyser;setup_AudioContext;getLevelVolume');
+	_self.registerClearVariables('canvas;ctx;time;clearInterval(interValCall);circles;max;getRandomArbitrary;getRandomInt;circle;createCircles;updateCircles;renderCircles;draw_syropian;analyser;setup_AudioContext;getLevelVolume');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

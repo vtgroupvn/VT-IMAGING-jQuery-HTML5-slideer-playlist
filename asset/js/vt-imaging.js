@@ -14,7 +14,7 @@
 		}
 		self.constructor = function(fn_options){
 			self.audio_events = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
-			self.registerMethods = new Array();
+			self._registerClearVariables = new Array();
 			self.print_values ={};
 			self.old_active_imaging = 0;
 			self.currently_active_imaging = 0;
@@ -83,31 +83,38 @@
 				href: self.options.url_plugin_folder+'/'+href
 			});
 		};
-		self.register = function(methods){
-			self.registerMethods = new Array();
-			self.registerMethods[self.registerMethods.length] = 'vt_imaging_plg_'+self.options.imaging_list[self.currently_active_imaging].name;
-			methods = String(methods);
-			var vars = methods.split(';');
+		self.registerClearVariables = function(_clear_ariables){
+			self._registerClearVariables = new Array();
+			self._registerClearVariables[self._registerClearVariables.length] = 'vt_imaging_plg_'+self.options.imaging_list[self.currently_active_imaging].name;
+			_clear_ariables = String(_clear_ariables);
+			var vars = _clear_ariables.split(';');
 			for(var k in vars){
-				self.registerMethods[self.registerMethods.length] = vars[k];
+				if (vars[k].indexOf('.') != -1){
+					var func_name = vars[k].replace('.', '][');
+					self._registerClearVariables[self._registerClearVariables.length] = 'window['+func_name+']';
+				}else{
+					self._registerClearVariables[self._registerClearVariables.length] = vars[k];
+				}
 			}
 		};
-		self.clearRegister = function(){
-			for(var k in self.registerMethods){
-				if (self.registerMethods[k].indexOf('function[') != -1){
-					var execute_func = self.registerMethods[k].replace('function[', '');
-					execute_func = execute_func.replace(']', '');
-					eval(execute_func);
-				}else{
-					if (typeof window[self.registerMethods[k]] != 'undefined'){
-						delete(window[self.registerMethods[k]]);
-					}else if(typeof self.registerMethods[k] != 'undefined'){
-						delete(self.registerMethods[k]);
+		self.processClearVariables = function(){
+			if (self._registerClearVariables.length <= 0){return;}
+			for(var k = 0; k < self._registerClearVariables.length; k++){
+				if (self._registerClearVariables[k] != undefined && self._registerClearVariables[k].indexOf('function') == -1){
+					if (self._registerClearVariables[k].indexOf('(') != -1 && self._registerClearVariables[k].indexOf(')') != -1){
+						eval(self._registerClearVariables[k]);
+					}else{
+						if (typeof window[self._registerClearVariables[k]] != 'undefined'){
+							delete(window[self._registerClearVariables[k]]);
+						}else if(typeof self._registerClearVariables[k] != 'undefined'){
+							delete(self._registerClearVariables[k]);
+						}
 					}
 				}
 			}
 		};
 		self.onStartPlugin = function(condition){
+			self.processClearVariables();
 			if (condition == 'show-loading'){
 				self.createScreenLoading();
 			}	
@@ -162,7 +169,6 @@
 			self.form_imaging_audio.bind(eventName, function(){_callback(self.form_imaging_audio.get(0));});
 		};
 		self.setActiveImaging = function(index){
-			self.clearRegister();
 			self.old_active_imaging = self.currently_active_imaging;
 			if (index >= self.options.imaging_list.length || index < 0){
 				self.currently_active_imaging = 0;
@@ -968,7 +974,7 @@
 		};
 		self.compile = function(){
 			jQuery(window).unbind("resize").resize(function(){		
-				//self.resizeForm();
+				self.resizeForm();
 			});
 			self.createForm();
 			self.createFormList();

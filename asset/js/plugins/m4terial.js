@@ -40,7 +40,7 @@ function cancelAnimation()
 function vt_imaging_plg_m4terial(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('function[window.cancelAnimation()];canvas;ctx;W;H;pixels;interValCall;m4terial_render;m4terial_drawFrame');
+	_self.registerClearVariables('window.cancelAnimation();canvas;ctx;W;H;pixels;clearInterval(interValCall);m4terial_render;m4terial_drawFrame');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

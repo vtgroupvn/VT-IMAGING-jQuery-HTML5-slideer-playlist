@@ -54,7 +54,7 @@ function HektorW_render(t) {
 function vt_imaging_plg_HektorW(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('canvas;ctx;intervalDraw;width;height;HektorW_render');
+	_self.registerClearVariables('canvas;ctx;clearInterval(intervalDraw);width;height;HektorW_render');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

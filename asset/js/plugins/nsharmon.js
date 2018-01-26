@@ -19,13 +19,17 @@ function nsharmon_render() {
   }
   clearInterval(interValCall);
   interValCall = setInterval(function(){
-	  nsharmon_render();
+	  if (typeof nsharmon_render == 'undefined'){
+		  clearInterval(interValCall);
+	  }else{
+		nsharmon_render();
+	  }
   }, 15);
 }
 function vt_imaging_plg_nsharmon(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('iSawTheSin;interValCall;nsharmon_render');
+	_self.registerClearVariables('iSawTheSin;clearInterval(interValCall);nsharmon_render');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

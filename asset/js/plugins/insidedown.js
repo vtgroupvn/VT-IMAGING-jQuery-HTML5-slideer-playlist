@@ -104,13 +104,13 @@ function fDrawStage(){
 				vHoldHandleObj.yPos += (newY - vHoldHandleObj.yPos)*frict;
 			}else if(vCount==2){
 				//get the two side balls
-				var vX1 = window["ball_"+(i-1)].xPos;
-				var vX2 = window["ball_"+(i+1)].xPos;
+				var vX1 = window["ball_"+(i-1.xPos;
+				var vX2 = window["ball_"+(i+1.xPos;
 				var newX = (vX1+vX2)/2;
 				vHoldHandleObj.xPos += (newX - vHoldHandleObj.xPos)*frict;
 			}
 			//draw
-			var nextObj = window["ball_"+(i-1)];
+			var nextObj = window["ball_"+(i-1;
 			if(nextObj!=undefined && vCount!=0){ 
 				_stageContext.quadraticCurveTo(nextObj.xPos, nextObj.yPos, vHoldHandleObj.xPos,vHoldHandleObj.yPos);
 			}
@@ -119,9 +119,9 @@ function fDrawStage(){
 			vHoldHandleObj.xPos += (newX - vHoldHandleObj.xPos)*frict;
 			//move the two center handles in the same direction
 			if(vCount==1){ 
-				vHoldHandleObj.yPos += (window["ball_"+(i+3)].yPos - vHoldHandleObj.yPos)*frict;
+				vHoldHandleObj.yPos += (window["ball_"+(i+3.yPos - vHoldHandleObj.yPos)*frict;
 			}
-			if(vCount==3) vHoldHandleObj.yPos += (window["ball_"+(i-3)].yPos - vHoldHandleObj.yPos)*frict;			
+			if(vCount==3) vHoldHandleObj.yPos += (window["ball_"+(i-3.yPos - vHoldHandleObj.yPos)*frict;			
 		}
 		_stageContext.stroke();
 	}
@@ -146,7 +146,7 @@ function fClearStage(){_stageContext.clearRect(0,0,_stageWidth,_stageHeight); //
 function vt_imaging_plg_insidedown(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.register('_stage;_stageContext;intervalDraw;_stageWidth;_stageHeight;_ballCountInt;_ballStartYNum;_ballSpacingNum;_FPS;_milliFPS;_angle;_speed;_baseRad;_ranRad;_radius;vSpace;_vFriction;l;m;n;fEnterFrame;insidedown_init;fDrawStage;fCosD;fSinD;fClearStage');
+	_self.registerClearVariables('_stage;_stageContext;clearInterval(intervalDraw);_stageWidth;_stageHeight;_ballCountInt;_ballStartYNum;_ballSpacingNum;_FPS;_milliFPS;_angle;_speed;_baseRad;_ranRad;_radius;vSpace;_vFriction;l;m;n;fEnterFrame;insidedown_init;fDrawStage;fCosD;fSinD;fClearStage');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
