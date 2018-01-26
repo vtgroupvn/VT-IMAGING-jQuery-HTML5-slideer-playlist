@@ -13,7 +13,8 @@ function vt_imaging_plg_zoom_out(_self)
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
 		'background': "url('"+_self.getOldImaging().src+"') no-repeat center",
-		'text-align': 'center;margin':'auto',
+		'text-align': 'center',
+		'margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
 			

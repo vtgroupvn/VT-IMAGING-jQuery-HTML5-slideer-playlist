@@ -99,8 +99,10 @@
 					execute_func = execute_func.replace(']', '');
 					eval(execute_func);
 				}else{
-					if (window[self.registerMethods[k]] != 'undefined'){
+					if (typeof window[self.registerMethods[k]] != 'undefined'){
 						delete(window[self.registerMethods[k]]);
+					}else if(typeof self.registerMethods[k] != 'undefined'){
+						delete(self.registerMethods[k]);
 					}
 				}
 			}
@@ -966,7 +968,7 @@
 		};
 		self.compile = function(){
 			jQuery(window).unbind("resize").resize(function(){		
-				self.resizeForm();
+				//self.resizeForm();
 			});
 			self.createForm();
 			self.createFormList();

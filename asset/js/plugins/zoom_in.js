@@ -13,10 +13,10 @@ function vt_imaging_plg_zoom_in(_self)
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
 		'background': "url('"+_self.getCurrentImaging().src+"') no-repeat center",
-		'text-align': 'center;margin':'auto',
+		'text-align': 'center',
+		'margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
-			
 	});
 	_self.getImagingOverlay().attr('align', 'center');
 	_self.getImaging().find('img').attr('src', _self.getCurrentImaging().src);
