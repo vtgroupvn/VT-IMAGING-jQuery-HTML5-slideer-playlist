@@ -22,7 +22,7 @@ jQuery.fn.vt_animateBottomElement = function(animateTime){
 function vt_imaging_plg_brickhidebottom(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables([window['jQuery']['fn']['vt_animateBottomElement']]);
+	_self.register([window['jQuery']['fn']['vt_animateBottomElement']]);
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

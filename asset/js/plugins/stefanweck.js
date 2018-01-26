@@ -206,7 +206,7 @@ class Circle {
 function vt_imaging_plg_stefanweck(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['TWO_PI','canvas_width','canvas_height','Application','CircleContainer','Circle']);
+	_self.register('TWO_PI;canvas_width;canvas_height;Application;CircleContainer;Circle');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

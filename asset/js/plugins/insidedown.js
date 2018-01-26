@@ -146,7 +146,7 @@ function fClearStage(){_stageContext.clearRect(0,0,_stageWidth,_stageHeight); //
 function vt_imaging_plg_insidedown(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['_stage','_stageContext','intervalDraw','_stageWidth','_stageHeight','_ballCountInt','_ballStartYNum','_ballSpacingNum','_FPS','_milliFPS','_angle','_speed','_baseRad','_ranRad','_radius','vSpace','_vFriction','l','m','n','fEnterFrame','insidedown_init','fDrawStage','fCosD','fSinD','fClearStage']);
+	_self.register('_stage;_stageContext;intervalDraw;_stageWidth;_stageHeight;_ballCountInt;_ballStartYNum;_ballSpacingNum;_FPS;_milliFPS;_angle;_speed;_baseRad;_ranRad;_radius;vSpace;_vFriction;l;m;n;fEnterFrame;insidedown_init;fDrawStage;fCosD;fSinD;fClearStage');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

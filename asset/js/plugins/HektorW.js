@@ -54,7 +54,7 @@ function HektorW_render(t) {
 function vt_imaging_plg_HektorW(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['canvas','ctx','intervalDraw','width','height','HektorW_render']);
+	_self.register('canvas;ctx;intervalDraw;width;height;HektorW_render');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
@@ -65,7 +65,7 @@ function vt_imaging_plg_HektorW(_self)
 		'overflow': 'hidden'
 	});
 	_self.getImagingOverlay().append('<canvas id="HektorW" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
-	canvas = _self.getImagingOverlay().find('canvas#HektorW')[0];
+	canvas = _self.getImagingOverlay().find('canvas#HektorW').get(0);
 	ctx = canvas.getContext('2d');
 	canvas.width = width = _self.getImaging().width();
 	canvas.height = height = _self.getImaging().height();

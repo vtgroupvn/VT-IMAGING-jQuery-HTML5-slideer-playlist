@@ -13,7 +13,7 @@ function randomIn(min,max)
 function vt_imaging_plg_bribbles(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables(['getRandomColor', 'randomIn']);
+	_self.register('getRandomColor', 'randomIn');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

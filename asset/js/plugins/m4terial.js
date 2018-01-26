@@ -1,4 +1,4 @@
-var canvas, ctx, W, H, pixels = [], interValCall;
+var canvas, ctx, W, H, pixels = [], interValCall, requestID;
 function m4terial_render(ts) {
   var imageData = ctx.getImageData(0, 0, W, H),
       len = pixels.length,
@@ -26,15 +26,21 @@ function m4terial_render(ts) {
 }
 
 function m4terial_drawFrame(ts){
-  requestAnimationFrame(m4terial_drawFrame, canvas);
+  requestID = requestAnimationFrame(m4terial_drawFrame, canvas);
   ctx.fillStyle = '#17293a';
   ctx.fillRect(0, 0, W, H);
   m4terial_render(ts);
 }
+function cancelAnimation()
+{
+	if (requestID){
+		window.cancelAnimationFrame(requestID);
+	}
+}
 function vt_imaging_plg_m4terial(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['canvas','ctx','W','H','pixels','interValCall','m4terial_render','m4terial_drawFrame']);
+	_self.register('function[window.cancelAnimation()];canvas;ctx;W;H;pixels;interValCall;m4terial_render;m4terial_drawFrame');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
@@ -57,6 +63,8 @@ function vt_imaging_plg_m4terial(_self)
 		pixels.push({x: x, y: 500, z: z});
 	  }  
 	}
-	m4terial_drawFrame(canvas);
+	if (typeof m4terial_drawFrame == 'function'){
+		m4terial_drawFrame(canvas);
+	}
 	_self.onCompletePlugin("noneimage");
 }

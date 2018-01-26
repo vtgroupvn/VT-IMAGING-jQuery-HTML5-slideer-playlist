@@ -23,7 +23,7 @@ function startYRotate()
 function vt_imaging_plg_transform_yscale(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables(['transform_set', 'transform_y', 'transform_ny', 'transform_rotYINT', 'transform_rotYINT', 'startYRotate']);
+	_self.register('transform_set', 'transform_y', 'transform_ny', 'transform_rotYINT', 'transform_rotYINT', 'startYRotate');
 	transform_ny = 0;
 	/**
 	*

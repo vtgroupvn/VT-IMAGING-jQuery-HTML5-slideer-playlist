@@ -13,7 +13,7 @@ function vt_imaging_plg_zoom_in(_self)
 		'overflow-y': 'hidden',
 		'overflow':'hidden',
 		'background': "url('"+_self.getCurrentImaging().src+"') no-repeat center",
-		'text-align': 'center','margin':'auto',
+		'text-align': 'center;margin':'auto',
 		'vertical-align': 'middle',
 		'background-color':'none'
 			

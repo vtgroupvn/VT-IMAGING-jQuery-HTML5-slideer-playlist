@@ -80,7 +80,7 @@ function increase_brightness(hex, percent){
 function vt_imaging_plg_manifestinteractive(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['wave_height','wave_shift','ball_count','ball_size','base_color','max_brightness','max_blur','period_factor','count','interValCall','manifestinteractive_load','move','increase_brightness']);
+	_self.register('function[clearInterval(interValCall)];wave_height;wave_shift;ball_count;ball_size;base_color;max_brightness;max_blur;period_factor;count;manifestinteractive_load;move;increase_brightness');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

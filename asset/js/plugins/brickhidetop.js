@@ -22,7 +22,7 @@ jQuery.fn.vt_animateElement = function(animateTime){
 function vt_imaging_plg_brickhidetop(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables(window['jQuery']['fn']['vt_animateElement']);
+	_self.register(window['jQuery']['fn']['vt_animateElement');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

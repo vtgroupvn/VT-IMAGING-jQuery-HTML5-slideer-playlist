@@ -5,8 +5,8 @@ function nsharmon_render() {
   ctx.fillStyle = "rgba(255,255,255,.1)";
   ctx.fillRect(0, 0, c.width, c.height);
   
-  for(var i=0; i<22; ++i){
-	  for(var j=0; j<22; ++j){
+  for(var i=0; i<c.width/50; ++i){
+	  for(var j=0; j<c.width/50; ++j){
       var timeVal = (1+Math.sin(i+j+iSawTheSin))*5;
 	  	ctx.beginPath();
 		  ctx.arc(j*50, i*50, j+i+timeVal, 0, 2*Math.PI);
@@ -25,7 +25,7 @@ function nsharmon_render() {
 function vt_imaging_plg_nsharmon(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['iSawTheSin','interValCall','nsharmon_render']);
+	_self.register('iSawTheSin;interValCall;nsharmon_render');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

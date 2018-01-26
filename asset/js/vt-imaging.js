@@ -3,10 +3,6 @@
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 * Donate link: http://vt-group.vn/donate.html
 **/
-function _getName(_from)
-{
-	alert(_from.callee.toString().match(/function ([^\(]+)/)[1]);
-}
 (function($){
 	"use strict"
 	jQuery.fn.vt_imaging = function(fn_options){
@@ -17,7 +13,8 @@ function _getName(_from)
 			jQuery(self).attr('class', 'vt-imaging');
 		}
 		self.constructor = function(fn_options){
-			self.variables = new Array();
+			self.audio_events = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
+			self.registerMethods = new Array();
 			self.print_values ={};
 			self.old_active_imaging = 0;
 			self.currently_active_imaging = 0;
@@ -86,41 +83,39 @@ function _getName(_from)
 				href: self.options.url_plugin_folder+'/'+href
 			});
 		};
-		self.registerVariables = function(variables){			
-			if (typeof variables != 'Array'){
-				var vars = [variables];
-			}else{
-				var vars = variables;
-			}
+		self.register = function(methods){
+			self.registerMethods = new Array();
+			self.registerMethods[self.registerMethods.length] = 'vt_imaging_plg_'+self.options.imaging_list[self.currently_active_imaging].name;
+			methods = String(methods);
+			var vars = methods.split(';');
 			for(var k in vars){
-				self.variables[self.variables.length] = vars[k];
+				self.registerMethods[self.registerMethods.length] = vars[k];
 			}
 		};
-		self.clearVariables = function(){
-			for(var k in self.variables){
-				if (typeof self.variables[k] == 'String'){
-					if (window[self.variables[k]] != undefined){
-						delete(window[self.variables[k]]);
-					}
+		self.clearRegister = function(){
+			for(var k in self.registerMethods){
+				if (self.registerMethods[k].indexOf('function[') != -1){
+					var execute_func = self.registerMethods[k].replace('function[', '');
+					execute_func = execute_func.replace(']', '');
+					eval(execute_func);
 				}else{
-					delete(self.variables[k]);
+					if (window[self.registerMethods[k]] != 'undefined'){
+						delete(window[self.registerMethods[k]]);
+					}
 				}
 			}
 		};
 		self.onStartPlugin = function(condition){
 			if (condition == 'show-loading'){
 				self.createScreenLoading();
-			}
-			self.clearVariables();
-			self.registerVariables([self.options.imaging_list[self.currently_active_imaging].name]);
-			var audio_events = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
-			for(var k in audio_events){
-				self.removeAudioEvent(audio_events[k], function(_this){});
+			}	
+			for(var k in self.audio_events){
+				self.removeAudioEvent(self.audio_events[k], function(_this){});
 			}
 			self.form_imaging_audio.find('source').attr('src', self.getCurrentImaging().audio_src);
 			self.form_imaging_audio.find('source').attr('type', 'audio/mpeg');
-			self.form_imaging_audio[0].load();
-			self.form_imaging_audio[0].play();
+			self.form_imaging_audio.get(0).load();
+			self.form_imaging_audio.get(0).play();
 			self.form_imaging_show.find('img').attr('src', 'none');
 			self.form_imaging_show.find('img').attr('alt', '');
 			if (self.options.skin == 1){
@@ -158,13 +153,14 @@ function _getName(_from)
 			return self.form_imaging_over_display;
 		};
 		self.removeAudioEvent = function(eventName, _callback){
-			self.form_imaging_audio.unbind(eventName, function(){_callback(self.form_imaging_audio[0]);});
+			self.form_imaging_audio.unbind(eventName, function(){_callback(self.form_imaging_audio.get(0));});
 		}
 		self.addAudioEvent = function(eventName, _callback){
 			self.removeAudioEvent(eventName, function(_this){});
-			self.form_imaging_audio.bind(eventName, function(){_callback(self.form_imaging_audio[0]);});
+			self.form_imaging_audio.bind(eventName, function(){_callback(self.form_imaging_audio.get(0));});
 		};
 		self.setActiveImaging = function(index){
+			self.clearRegister();
 			self.old_active_imaging = self.currently_active_imaging;
 			if (index >= self.options.imaging_list.length || index < 0){
 				self.currently_active_imaging = 0;
@@ -245,7 +241,7 @@ function _getName(_from)
 			self.form_imaging_audio_source.attr('src', self.options.imaging_list[self.currently_active_imaging].audio_src);
 			self.form_imaging_audio_source.attr('type', 'audio/mpeg');
 			self.form_imaging_audio.append(self.form_imaging_audio_source);
-			self.form_imaging_audio[0].play();			
+			self.form_imaging_audio.get(0).play();			
 			self.form_imaging.append(self.form_imaging_audio);			
 			self.form_imaging_text = jQuery('<div />');
 			self.form_imaging_text.css({
@@ -506,7 +502,7 @@ function _getName(_from)
 							'display':'none'
 						});
 					}
-					imaging[0].addEventListener("mouseover", function(){
+					imaging.get(0).addEventListener("mouseover", function(){
 						jQuery(self).find('div.imaging-hover').hide();
 						jQuery(this).find('div.imaging-hover').css({
 							'height': '100px'
@@ -674,7 +670,7 @@ function _getName(_from)
 			div_over.append(overlay_img);
 			imaging.append(div_over);
 			imaging.append(imaging_thum);
-			imaging[0].addEventListener("mouseover", function(){
+			imaging.get(0).addEventListener("mouseover", function(){
 				jQuery(self).find('div.imaging-hover').hide();
 				jQuery(this).find('div.imaging-hover').css({
 					'height': '100px'

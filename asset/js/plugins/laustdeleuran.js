@@ -94,7 +94,9 @@ class Particle {
 		var { current, home } = this.position;
 
 		var { velocity } = this;
-		
+		if (typeof getDirectionVector == undefined){
+			return;
+		}
 		// Add velocity in the current direction.
 		const steeringVector = getDirectionVector(this.direction);
 		velocity.x += steeringVector.x * steeringForce;
@@ -330,9 +332,11 @@ function laustdeleuran_run()
 	];
 	// Start animation
 	const animator = new Animator(60);
-	animator.animate(function (frame, fps) {
-		if (typeof context.clearRect == 'function'){
-			context.clearRect(0, 0, canvas.width, canvas.height);
+	animator.animate(function (frame, fps){
+		if (typeof context != 'undefined'){
+			if (typeof context.clearRect == 'function'){
+				context.clearRect(0, 0, canvas.width, canvas.height);
+			}
 		}
 	  waves.forEach(wave => wave.draw(frame / fps))
 	});
@@ -340,7 +344,7 @@ function laustdeleuran_run()
 function vt_imaging_plg_laustdeleuran(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['canvas','context','distance','getAngle','getDirectionVector','getVectorTowards','Particle','Sine','Animator','laustdeleuran_run']);
+	_self.register('canvas;context;distance;getAngle;getDirectionVector;getVectorTowards;Particle;Sine;Animator;laustdeleuran_run');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

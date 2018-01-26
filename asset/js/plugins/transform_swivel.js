@@ -29,7 +29,7 @@ function startRotate()
 function vt_imaging_plg_transform_swivel(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables(['startRotate', 'rotateDIV', 'swivel_x', 'swivel_n', 'swivel_rotINT', 'sub_rotate']);
+	_self.register('startRotate', 'rotateDIV', 'swivel_x', 'swivel_n', 'swivel_rotINT', 'sub_rotate');
 	swivel_n=0;
 	/**
 	*

@@ -44,7 +44,7 @@ jQuery.fn.rotateElement = function(waitTime, width, height){
 function vt_imaging_plg_brick(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables([window['jQuery']['fn']['rotateElement']]);
+	_self.register([window['jQuery']['fn']['rotateElement']]);
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

@@ -56,7 +56,7 @@ for(let i=0; i < arcNumber; i ++) {
 function vt_imaging_plg_nchevobbe(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['createSVGElement','run_nchevobbe']);
+	_self.register('createSVGElement;run_nchevobbe');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

@@ -17,7 +17,7 @@ jQuery.fn.vt_imaging_plg_spiral_hide_loading = function(intervalTime){
 function vt_imaging_plg_broken(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables([window['jQuery']['fn']['vt_imaging_plg_spiral_hide_loading']]);
+	_self.register([window['jQuery']['fn']['vt_imaging_plg_spiral_hide_loading']]);
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}

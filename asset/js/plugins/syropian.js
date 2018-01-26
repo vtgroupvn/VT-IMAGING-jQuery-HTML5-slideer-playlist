@@ -107,21 +107,21 @@ function getLevelVolume(){
 }
 function vt_imaging_plg_syropian(_self)
 {
-	_self.onStartPlugin('vt_imaging_plg_syropian', true);
-	_self.registerVariables(['canvas','ctx','time','interValCall','circles','max','getRandomArbitrary','getRandomInt','circle','createCircles','updateCircles','renderCircles','draw_syropian','analyser','setup_AudioContext','getLevelVolume']);
+	_self.onStartPlugin('show-loading');
+	_self.register('canvas;ctx;time;interValCall;circles;max;getRandomArbitrary;getRandomInt;circle;createCircles;updateCircles;renderCircles;draw_syropian;analyser;setup_AudioContext;getLevelVolume');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
 	_self.getImagingOverlay().css({
-		'display':'block'
+		'display':'block',
 		'background-color':'hsl(195, 100%, 7%)'
 	});
 	_self.getImagingOverlay().append('<canvas id="syropian" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
 	canvas = document.getElementById("syropian");
 	ctx = canvas.getContext("2d");
-	setup_AudioContext(_self.getAudio()[0]);
+	setup_AudioContext(_self.getAudio().get(0));
 	draw_syropian();
-	_self.onCompletePlugin("vt_imaging_plg_syropian", "noneimage");
+	_self.onCompletePlugin("noneimage");
 }

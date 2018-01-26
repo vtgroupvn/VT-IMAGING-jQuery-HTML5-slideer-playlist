@@ -1,6 +1,3 @@
-window.vt_imaging_plg_delete_app = function(){
-	delete window['vt_imaging_plg_lines'];
-}
 function vt_imaging_plg_lines(_self)
 {
 	_self.onStartPlugin();

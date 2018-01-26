@@ -79,14 +79,14 @@ function jackrugile_loader(canvas_width, canvas_height, color) {
 function vt_imaging_plg_jackrugile(_self)
 {
 	_self.onStartPlugin('show-loading');
-	_self.registerVariables(['canvas','interValCall','jackrugile_loader']);
+	_self.register('canvas;interValCall;jackrugile_loader');
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
 	*
 	**/
-	_self.getImagingOverlay().append('<canvas style="margin-top:-'+(_self.getImaging().height()/2)+'px;" id="syropian" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
+	_self.getImagingOverlay().append('<canvas id="syropian" width="'+_self.getImaging().width()+'" height="'+_self.getImaging().height()+'"></canvas>');
 	canvas = _self.getImagingOverlay().find('canvas#syropian')[0];
-	jackrugile_loader(_self.getImaging().width(), _self.getImaging().width(), '#ea80b0');
+	jackrugile_loader(_self.getImaging().width(), _self.getImaging().height(), '#ea80b0');
 	_self.onCompletePlugin("noneimage");
 }

@@ -15,13 +15,10 @@ jQuery.fn.vt_imaging_plg_spiral_show_loading = function(intervalTime){
 	};
 	return self;
 }
-window.vt_imaging_plg_delete_app = function(){
-	delete window['vt_imaging_plg_default'];
-}
 function vt_imaging_plg_default(_self)
 {
 	_self.onStartPlugin();
-	_self.registerVariables([window['jQuery']['fn']['vt_imaging_plg_spiral_show_loading']]);
+	_self.register([window['jQuery']['fn']['vt_imaging_plg_spiral_show_loading']]);
 	/**
 	*
 	* Feel want to make print function _self.print_values.printFunction = function(){}
